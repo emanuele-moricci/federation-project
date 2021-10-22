@@ -1,0 +1,50 @@
+/**
+*
+* Mutation create{{ properCase ModelName }}
+* WRITE A DESCRIPTION HERE
+*
+*/
+import {
+  GraphQLFieldConfig,
+  GraphQLFieldResolver,
+  GraphQLInputObjectType,
+} from 'graphql';
+import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
+
+import { {{ properCase ModelName }} } from '@prisma/client'; // ADD THE PRISMA MODEL AND MIGRATE
+import {{ properCase ModelName }}Type from '@src/graphql/schema/Models/{{ properCase ModelName }}/{{ properCase ModelName }}';
+
+// CREATE THE CORRESPONDING SERVICE => import { getAll{{ properCase ModelName }}s } from '@src/services/{{ properCase ModelName }}Service';
+
+export const create{{ properCase ModelName }}Resolver: GraphQLFieldResolver<
+  unknown,
+  IApolloServerContext
+> = async (
+  _source,
+  { input: { /* ADD YOUR INPUT PROPERTIES HERE */ } },
+  _context,
+  _info
+): Promise<{{ properCase ModelName }}> => {
+  // ADD YOUR LOGIC HERE
+};
+
+export const Create{{ properCase ModelName }}Input: GraphQLInputObjectType = new GraphQLInputObjectType(
+  {
+    name: 'Create{{ properCase ModelName }}Input',
+    description: 'Create {{ properCase ModelName }} input',
+    fields: { /* ADD YOUR INPUT PROPERTIES HERE */ },
+  }
+);
+
+const create{{ properCase ModelName }}Mutation: GraphQLFieldConfig<unknown, IApolloServerContext> = {
+  description: 'Create {{ properCase ModelName }}',
+  type: {{ properCase ModelName }}Type,
+  args: {
+    input: {
+      type: Create{{ properCase ModelName }}Input,
+    },
+  },
+  resolve: create{{ properCase ModelName }}Resolver,
+};
+
+export default create{{ properCase ModelName }}Mutation;

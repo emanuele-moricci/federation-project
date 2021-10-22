@@ -1,0 +1,15 @@
+/**
+*
+* Model {{ properCase ModelName }}
+* WRITE A DESCRIPTION HERE
+*
+*/
+import { GraphQLObjectType } from 'graphql';
+
+const {{ properCase ModelName }}Type: GraphQLObjectType = new GraphQLObjectType({
+  name: '{{ properCase ModelName }}',
+  description: '{{ ModelDescription }}',
+  fields: () => ({ /* ADD YOUR MODEL PROPERTIES HERE */ }),
+});
+
+export default {{ properCase ModelName }}Type;
