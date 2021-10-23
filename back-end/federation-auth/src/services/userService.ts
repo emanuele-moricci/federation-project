@@ -28,5 +28,10 @@ export const createUser = async (input): Promise<User> => {
   const user = await prismaContext.prisma.user.create({
     data: input,
   });
+
+  await prismaContext.prisma.security.create({
+    data: { userId: user.userId },
+  });
+
   return user;
 };
