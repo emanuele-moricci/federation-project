@@ -1,29 +1,29 @@
 import { GraphQLObjectType } from 'graphql';
 
-import createBook, {
-  createBookResolver,
-} from '@src/graphql/schema/Models/Book/mutations/CreateBook';
-import createAuthor, {
-  createAuthorResolver,
-} from '@src/graphql/schema/Models/Author/mutations/CreateAuthor';
+import createUser, {
+  createUserResolver,
+} from '@src/graphql/schema/Models/User/mutations/CreateUser';
+import createSecurity, {
+  createSecurityResolver,
+} from '@src/graphql/schema/Models/Security/mutations/CreateSecurity';
 // [ADD NEW MUTATION IMPORTS ABOVE] < Needed for generating mutations seamlessly
 
 export const mutationType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    createBook: createBook,
-    createAuthor: createAuthor,
+    createUser: createUser,
+    createSecurity: createSecurity,
     // [ADD NEW MUTATION TYPES ABOVE] < Needed for generating mutations seamlessly
 
   },
 });
 
 const mutation = {
-  createBook: {
-    resolve: createBookResolver,
+  createUser: {
+    resolve: createUserResolver,
   },
-  createAuthor: {
-    resolve: createAuthorResolver,
+  createSecurity: {
+    resolve: createSecurityResolver,
   },
   // [ADD NEW MUTATION RESOLVERS ABOVE] < Needed for generating mutations seamlessly
   

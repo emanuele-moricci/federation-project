@@ -1,32 +1,41 @@
 import { GraphQLObjectType } from 'graphql';
 
-import getAllBooks, {
-  getAllBooksResolver,
-} from '@src/graphql/schema/Models/Book/queries/GetAllBooks';
-import getAllAuthors, {
-  getAllAuthorsResolver,
-} from '@src/graphql/schema/Models/Author/queries/GetAllAuthors';
+import getAllUsers, {
+  getAllUsersResolver,
+} from '@src/graphql/schema/Models/User/queries/GetAllUsers';
+import getAllLanguages, {
+  getAllLanguagesResolver,
+} from '@src/graphql/schema/Models/Language/queries/GetAllLanguages';
+import getAllSecurities, {
+  getAllSecuritiesResolver,
+} from '@src/graphql/schema/Models/Security/queries/GetAllSecurities';
 // [ADD NEW QUERY IMPORTS ABOVE] < Needed for generating queries seamlessly
 
 export const queryType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Query',
   fields: {
-    books: getAllBooks,
-    authors: getAllAuthors,
+    User: getAllUsers,
+    Language: getAllLanguages,
+    Security: getAllSecurities,
     // [ADD NEW QUERY TYPES ABOVE] < Needed for generating queries seamlessly
 
   },
 });
 
 const query = {
-  books: {
-    resolve: getAllBooksResolver,
+  User: {
+    resolve: getAllUsersResolver,
   },
-  authors: {
-    resolve: getAllAuthorsResolver,
+
+  Language: {
+    resolve: getAllLanguagesResolver,
+  },
+
+  Security: {
+    resolve: getAllSecuritiesResolver,
   },
   // [ADD NEW QUERY RESOLVERS ABOVE] < Needed for generating queries seamlessly
-
+  
 };
 
 export default query;

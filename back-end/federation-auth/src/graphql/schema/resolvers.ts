@@ -4,21 +4,34 @@ import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 import mutation from '@src/graphql/schema/mutation';
 import query from '@src/graphql/schema/query';
 
-import { Author, Book } from '@prisma/client';
-import { getAuthorById } from '@src/services/authorService';
-import { getBooksByAuthor } from '@src/services/bookService';
+import { User, Language, Security } from '@prisma/client';
+import { getLanguageById } from '@src/services/languageService';
+import { getSecurityByUserId } from '@src/services/securityService';
+import { getUsersByLanguage, getUserById } from '@src/services/userService';
+
+//CUSTOM TYPES
+import DateTimeScalar from '@src/graphql/schema/Custom/DateTimeScalar';
 
 const resolvers: GraphQLResolverMap<IApolloServerContext> = {
   Query: query,
   Mutation: mutation,
-  Book: {
-    author(book: Book): Promise<Author | null> {
-      return getAuthorById(book.authorId);
+  DateTime: DateTimeScalar,
+  User: {
+    language({ languageId }: User): Promise<Language | null> {
+      return getLanguageById(languageId);
+    },
+    security({ userId }: User): Promise<Security | null> {
+      return getSecurityByUserId(userId);
     },
   },
-  Author: {
-    books(author: Author): Promise<Book[]> {
-      return getBooksByAuthor(author.authorId);
+  Language: {
+    users({ languageId }: Language): Promise<User[]> {
+      return getUsersByLanguage(languageId);
+    },
+  },
+  Security: {
+    user({ userId }: Security): Promise<User | null> {
+      return getUserById(userId);
     },
   },
 };
