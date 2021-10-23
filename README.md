@@ -32,6 +32,7 @@ This project was created to study the GraphQL/React ecosystem + several other im
 - Install every dependency in every federation project using `yarn`
 - Go to the .env file and add the DB connection string to the `DATABASE_URL` key
 - Create the **"init"** migration running this command on the project root `yarn generate:migration`
+- Seed the database using the command `yarn generate:seed`
 
 ### Front-End
 
@@ -54,9 +55,11 @@ This project was created to study the GraphQL/React ecosystem + several other im
 ---
 
 ## How to generate
+
 This project comes with a handy micro-generator tool under `utils/federation-generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
 
 The following steps are needed to install the utility:
+
 - open the terminal and go to `cd utils/federation-generator`
 - Install [Plop](https://plopjs.com/) using `yarn global add plop`
 - Install the tool using `npm -i g`
@@ -65,6 +68,6 @@ After succesfully installing the utility, go to the **root** of your federation 
 
 These are the currently available generators
 
-| Backend Gen. |            Description           |
+| Backend Gen. |           Description            |
 | ------------ | :------------------------------: |
 | Model        | Adds a Prisma model w/ resolvers |
