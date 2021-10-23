@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -10,15 +7,68 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Book {
-  bookId   Int    @id @default(autoincrement())
-  title    String
-  author   Author @relation(fields: [authorId], references: [authorId])
-  authorId Int
+model User {
+  userId         Int      @id @default(autoincrement())
+  email          String   @unique
+  password       String
+
+  token          String?
+  active         Boolean  @default(false)
+  role           Role     @default(USER)
+
+  language       Language @relation(fields: [languageId], references: [languageId])
+  security       Security?
+  languageId     Int
+
+  firstname      String
+  lastname       String
+  phone          String?
+  address        String?
+  avatar         String?
+  banner         String?
+
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  deleted        Boolean  @default(false)
 }
 
-model Author {
-  authorId Int    @id @default(autoincrement())
-  username String
-  books    Book[]
+model Language {
+  languageId     Int      @id @default(autoincrement())
+  code           String   @db.VarChar(2)
+  name           String
+  native         String
+
+  users          User[]
+
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  deleted        Boolean  @default(false)
+}
+
+model Security {
+  securityId     Int      @id @default(autoincrement())
+  type           AuthType @default(PASSWORD)
+
+  secret         String?
+  recovery       String?
+  auxiliary      String?
+  metadata       String?
+
+  user           User @relation(fields: [userId], references: [userId])
+  userId         Int
+
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  deleted        Boolean  @default(false)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum AuthType {
+  PASSWORD
+  MFA_CODES
+  WEBAUTHN
 }

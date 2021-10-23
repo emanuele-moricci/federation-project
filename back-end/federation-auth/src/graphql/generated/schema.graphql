@@ -1,57 +1,175 @@
 type Query {
-  """Get all books query"""
-  books: [Book]
+  """Get all Users query"""
+  User: [User]
 
-  """Get all authors query"""
-  authors: [Author]
+  """Get all Languages query"""
+  Language: [Language]
+
+  """Get all Securities query"""
+  Security: [Security]
 }
 
-"""A book"""
-type Book {
-  """id of the book"""
-  bookId: ID!
+"""The Model that represents the User DB Table"""
+type User {
+  """user id"""
+  userId: ID!
 
-  """title of book"""
-  title: String
+  """user email"""
+  email: String!
 
-  """author of book"""
-  author: Author
+  """user password"""
+  password: String!
 
-  """id of the author"""
-  authorId: Int
+  """user auth token"""
+  token: String
+
+  """is user active now?"""
+  active: Boolean!
+
+  """user role"""
+  role: Role!
+
+  """user language"""
+  language: Language
+
+  """id of the language"""
+  languageId: Int!
+
+  """user security settings"""
+  security: Security
+
+  """user firstname"""
+  firstname: String!
+
+  """user lastname"""
+  lastname: String!
+
+  """user phone"""
+  phone: String
+
+  """user address"""
+  address: String
+
+  """user avatar"""
+  avatar: String
+
+  """user banner"""
+  banner: String
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """is user deleted?"""
+  deleted: Boolean!
 }
 
-"""An author"""
-type Author {
-  """id of the author"""
-  authorId: ID!
+enum Role {
+  USER
+  ADMIN
+}
 
-  """authors username"""
-  username: String
+"""The Model that represents the Language DB Table"""
+type Language {
+  """language id"""
+  languageId: ID!
 
-  """list of authors books"""
-  books: [Book]
+  """language code"""
+  code: String!
+
+  """language name"""
+  name: String!
+
+  """language native"""
+  native: String!
+
+  """user security settings"""
+  users: [User]
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """is language deleted?"""
+  deleted: Boolean!
+}
+
+scalar DateTime
+
+"""The Model that represents the Security DB Table"""
+type Security {
+  """security id"""
+  securityId: ID!
+
+  """security auth type"""
+  type: AuthType!
+
+  """security secret"""
+  secret: String!
+
+  """security recovery"""
+  recovery: String!
+
+  """security auxiliary"""
+  auxiliary: String!
+
+  """security metadata"""
+  metadata: String!
+
+  """security user"""
+  user: User
+
+  """id of the user"""
+  userId: Int!
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """is security deleted?"""
+  deleted: Boolean!
+}
+
+enum AuthType {
+  PASSWORD
+  MFA_CODES
+  WEBAUTHN
 }
 
 type Mutation {
-  """Create book"""
-  createBook(input: CreateBookInput): Book
+  """Create User"""
+  createUser(input: CreateUserInput): User
 
-  """create author"""
-  createAuthor(input: CreateAuthorInput): Author
+  """Create Security"""
+  createSecurity(input: CreateSecurityInput): Security
 }
 
-"""Create book input"""
-input CreateBookInput {
-  """The books title."""
-  title: String!
+"""Create User input"""
+input CreateUserInput {
+  """The user email."""
+  email: String!
 
-  """The authors id."""
-  authorId: Int!
+  """The user password."""
+  password: String!
+
+  """The language id."""
+  languageId: Int!
+
+  """The user first name."""
+  firstname: String!
+
+  """The user last name."""
+  lastname: String!
 }
 
-"""Create author input"""
-input CreateAuthorInput {
-  """The authors username"""
-  username: String!
+"""Create Security input"""
+input CreateSecurityInput {
+  """The security user."""
+  userId: Int!
 }
