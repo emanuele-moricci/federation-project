@@ -3,6 +3,15 @@ module.exports = function (plop) {
   let modelGenerator = require("./Back-End/Model/Model.js");
   plop.setGenerator("model", modelGenerator);
 
+  // HELPERS
+  plop.setHelper('capital', function (text) {
+      return text.charAt(0).toUpperCase() + text.slice(1)
+  });
+
+  plop.setHelper('firstLower', function (text) {
+      return text.charAt(0).toLowerCase() + text.slice(1)
+  });
+
   // CUSTOM ACTIONS
   plop.setActionType("prettify", (_, config) => {
     const shell = require("shelljs");
@@ -13,7 +22,6 @@ module.exports = function (plop) {
   });
 
   plop.setActionType("signalSuccess", (_, config) => {
-    console.log(config);
     const chalk = require("chalk");
     const data = config.data.callToAction;
 

@@ -1,9 +1,3 @@
-/**
-*
-* Mutation create{{ properCase ModelName }}
-* WRITE A DESCRIPTION HERE
-*
-*/
 import {
   GraphQLFieldConfig,
   GraphQLFieldResolver,
@@ -14,7 +8,7 @@ import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 import { {{ properCase ModelName }} } from '@prisma/client'; // ADD THE PRISMA MODEL AND MIGRATE
 import {{ properCase ModelName }}Type from '@src/graphql/schema/Models/{{ properCase ModelName }}/{{ properCase ModelName }}';
 
-// CREATE THE CORRESPONDING SERVICE => import { getAll{{ properCase ModelName }}s } from '@src/services/{{ properCase ModelName }}Service';
+import * as service from '@src/services/{{ firstLower ModelName }}Service';
 
 export const create{{ properCase ModelName }}Resolver: GraphQLFieldResolver<
   unknown,
@@ -36,6 +30,11 @@ export const Create{{ properCase ModelName }}Input: GraphQLInputObjectType = new
   }
 );
 
+/**
+*
+* Mutation create{{ properCase ModelName }}
+*
+*/
 const create{{ properCase ModelName }}Mutation: GraphQLFieldConfig<unknown, IApolloServerContext> = {
   description: 'Create {{ properCase ModelName }}',
   type: {{ properCase ModelName }}Type,

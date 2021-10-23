@@ -1,16 +1,10 @@
-/**
-*
-* Query getAll{{ properCase ModelName }}s
-* WRITE A DESCRIPTION HERE
-*
-*/
 import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
 import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 
 import { {{ properCase ModelName }} } from '@prisma/client'; // ADD THE PRISMA MODEL AND MIGRATE
 import {{ properCase ModelName }}Type from '@src/graphql/schema/Models/{{ properCase ModelName }}/{{ properCase ModelName }}';
 
-// CREATE THE CORRESPONDING SERVICE => import { getAll{{ properCase ModelName }}s } from '@src/services/{{ properCase ModelName }}Service';
+import * as service from '@src/services/{{ firstLower ModelName }}Service';
 
 export const getAll{{ properCase ModelName }}sResolver: GraphQLFieldResolver<
   unknown,
@@ -19,6 +13,11 @@ export const getAll{{ properCase ModelName }}sResolver: GraphQLFieldResolver<
   // ADD YOUR LOGIC HERE
 }
 
+/**
+*
+* Query getAll{{ properCase ModelName }}s
+*
+*/
 const getAll{{ properCase ModelName }}sQuery: GraphQLFieldConfig<unknown, IApolloServerContext> = {
   description: 'Get all {{ properCase ModelName }}s query',
   type: GraphQLList({{ properCase ModelName }}Type),

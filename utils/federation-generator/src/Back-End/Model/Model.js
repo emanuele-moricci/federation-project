@@ -1,5 +1,4 @@
 const path = require("path");
-const chalk = require("chalk");
 
 module.exports = {
   description: "Add an empty Model",
@@ -34,6 +33,12 @@ module.exports = {
       default: true,
       message: 'Do you want to add the "create" mutation?',
     },
+    {
+      type: "confirm",
+      name: "wantService",
+      default: true,
+      message: 'Do you want to add a service to interact with the database?',
+    },
   ],
   actions: (data) => {
     const cwd = process.cwd();
@@ -41,6 +46,8 @@ module.exports = {
     const componentPath = `${path.join(cwd, "/src/graphql/schema/Models")}`;
     const capitalizedModelName =
       data.ModelName.charAt(0).toUpperCase() + data.ModelName.slice(1);
+    const firstLowerModelName =
+      data.ModelName.charAt(0).toLowerCase() + data.ModelName.slice(1);
     const modelPath = `${componentPath}/${capitalizedModelName}`;
 
     // Adds the main Model Class, under 'graphql/schema/Models/<MODEL_NAME>.ts'
@@ -119,6 +126,16 @@ module.exports = {
           abortOnFail: true,
         }
       );
+    }
+
+    if (data.wantService) {
+      actions.push(
+        {
+          type: "add",
+          path: `${componentPath}/../../../services/${firstLowerModelName}Service.ts`,
+          templateFile: `${__dirname}/Service.ts.hbs`,
+          abortOnFail: true,
+        });
     }
 
     actions.push({
