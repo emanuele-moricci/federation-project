@@ -1,20 +1,27 @@
-import * as fs from 'fs';
-import * as schemaAstPlugin from '@graphql-codegen/schema-ast';
 import { parse, printSchema } from 'graphql';
+
+import * as schemaAstPlugin from '@graphql-codegen/schema-ast';
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { codegen } from '@graphql-codegen/core';
-import path from 'path';
+
 import schema from '@src/graphql/schema/schema';
 import prismaContext from '@src/lib/prisma/prismaContext';
+
+import * as fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
 
 async function performCodegen(options: Types.GenerateOptions): Promise<void> {
   const output = await codegen(options);
   fs.writeFile(
     path.join(__dirname, '/graphql/generated/', options.filename),
     output,
-    () => {
-      console.log('Outputs generated!');
-    }
+    () =>
+      console.log(
+        `💡 ${chalk.bgCyan('GraphQL > Typescript')} ${chalk.green(
+          'Outputs generated!'
+        )}`
+      )
   );
 }
 

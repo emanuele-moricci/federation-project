@@ -7,7 +7,7 @@ import query from '@src/graphql/schema/query';
 import { User, Language, Security } from '@prisma/client';
 import { getLanguageById } from '@src/services/languageService';
 import { getSecurityByUserId } from '@src/services/securityService';
-import { getUsersByLanguage, getUserById } from '@src/services/userService';
+import { getUsersByLanguageId, getUserById } from '@src/services/userService';
 
 //CUSTOM TYPES
 import DateTimeScalar from '@src/graphql/schema/Custom/DateTimeScalar';
@@ -26,7 +26,7 @@ const resolvers: GraphQLResolverMap<IApolloServerContext> = {
   },
   Language: {
     users({ languageId }: Language): Promise<User[]> {
-      return getUsersByLanguage(languageId);
+      return getUsersByLanguageId(languageId);
     },
   },
   Security: {

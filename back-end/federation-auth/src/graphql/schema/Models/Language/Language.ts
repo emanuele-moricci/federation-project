@@ -1,9 +1,3 @@
-/**
- *
- * Model Language
- * WRITE A DESCRIPTION HERE
- *
- */
 import {
   GraphQLID,
   GraphQLList,
@@ -16,6 +10,13 @@ import UserType from '@src/graphql/schema/Models/User/User';
 
 import getModelAudit from '@src/graphql/schema/Utils/ModelAudit';
 
+/**
+*
+* The Model that maps the Language Database Table
+*
+* @name LanguageType
+* @type {GraphQLObjectType}
+*/
 const LanguageType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Language',
   description: 'The Model that represents the Language DB Table',

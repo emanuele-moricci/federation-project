@@ -1,9 +1,3 @@
-/**
- *
- * Model User
- * WRITE A DESCRIPTION HERE
- *
- */
 import {
   GraphQLBoolean,
   GraphQLEnumType,
@@ -16,21 +10,17 @@ import {
 
 import LanguageType from '@src/graphql/schema/Models/Language/Language';
 import SecurityType from '@src/graphql/schema/Models/Security/Security';
+import RoleEnumType from '@src/graphql/schema/Enums/Role';
 
 import getModelAudit from '@src/graphql/schema/Utils/ModelAudit';
 
-const RoleEnumType = new GraphQLEnumType({
-  name: 'Role',
-  values: {
-    USER: {
-      value: 0,
-    },
-    ADMIN: {
-      value: 1,
-    },
-  },
-});
-
+/**
+*
+* The Model that maps the User Database Table
+*
+* @name UserType
+* @type {GraphQLObjectType}
+*/
 const UserType: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
   description: 'The Model that represents the User DB Table',

@@ -1,8 +1,10 @@
 import { ApolloServer } from 'apollo-server';
-import dotenv from 'dotenv-safe';
-import { performAstCodegen } from '@src/codegen';
 import apolloServerConfig from '@src/lib/config/apolloServerConfig';
 
+import { performAstCodegen } from '@src/codegen';
+
+import chalk from 'chalk';
+import dotenv from 'dotenv-safe';
 dotenv.config();
 
 const startServer = () => {
@@ -13,9 +15,11 @@ const startServer = () => {
   server
     .listen()
     .then(({ url }) => {
-      console.log(`🚀  Server ready at ${url}graphql`);
+      console.log(
+        `🚀 ${chalk.bgCyan('Server ready')} at ${chalk.blue(`${url}graphql`)}`
+      );
     })
-    .catch(err => console.log('Error launching server', err));
+    .catch(err => console.log(chalk.bgRed('Error launching server'), err));
 };
 
 startServer();

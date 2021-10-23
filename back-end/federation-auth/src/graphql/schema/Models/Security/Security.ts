@@ -1,11 +1,4 @@
-/**
- *
- * Model Security
- * WRITE A DESCRIPTION HERE
- *
- */
 import {
-  GraphQLEnumType,
   GraphQLID,
   GraphQLInt,
   GraphQLNonNull,
@@ -14,24 +7,17 @@ import {
 } from 'graphql';
 
 import UserType from '@src/graphql/schema/Models/User/User';
+import AuthEnumType from '@src/graphql/schema/Enums/AuthType';
 
 import getModelAudit from '@src/graphql/schema/Utils/ModelAudit';
 
-const AuthEnumType = new GraphQLEnumType({
-  name: 'AuthType',
-  values: {
-    PASSWORD: {
-      value: 0,
-    },
-    MFA_CODES: {
-      value: 1,
-    },
-    WEBAUTHN: {
-      value: 2,
-    },
-  },
-});
-
+/**
+*
+* The Model that maps the Security Database Table
+*
+* @name SecurityType
+* @type {GraphQLObjectType}
+*/
 const SecurityType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Security',
   description: 'The Model that represents the Security DB Table',
