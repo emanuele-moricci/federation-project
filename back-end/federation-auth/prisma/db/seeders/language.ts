@@ -6,6 +6,7 @@ async function seedLanguages() {
     where: { languageId: 1 },
     update: {},
     create: {
+      languageId: 1,
       code: 'en',
       name: 'English',
       native: 'English',
@@ -16,6 +17,7 @@ async function seedLanguages() {
     where: { languageId: 2 },
     update: {},
     create: {
+      languageId: 2,
       code: 'it',
       name: 'Italian',
       native: 'Italiano',
@@ -26,6 +28,7 @@ async function seedLanguages() {
     where: { languageId: 3 },
     update: {},
     create: {
+      languageId: 3,
       code: 'es',
       name: 'Spanish',
       native: 'Español',
@@ -36,6 +39,7 @@ async function seedLanguages() {
     where: { languageId: 4 },
     update: {},
     create: {
+      languageId: 4,
       code: 'fr',
       name: 'French',
       native: 'Français',
@@ -46,6 +50,7 @@ async function seedLanguages() {
     where: { languageId: 5 },
     update: {},
     create: {
+      languageId: 5,
       code: 'de',
       name: 'German',
       native: 'Deutsch',
