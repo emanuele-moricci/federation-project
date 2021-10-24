@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import prismaContext from '@src/lib/prisma/prismaContext';
 import { User } from '@prisma/client';
 
+const getSecureUser = (user: User): User => ({ ...user, password: '' });
+
 /**
  * Function that returns all of the Users present in the database.
  *
@@ -12,7 +14,7 @@ import { User } from '@prisma/client';
  */
 export const getAllUsers = async (): Promise<User[]> => {
   const users = await prismaContext.prisma.user.findMany();
-  return users.map(u => ({ ...u, password: '' }));
+  return users.map(u => getSecureUser(u));
 };
 
 /**
@@ -25,11 +27,13 @@ export const getAllUsers = async (): Promise<User[]> => {
  * @returns {Promise<User | null>} The found User.
  */
 export const getUserById = async (userId: number): Promise<User | null> => {
-  return prismaContext.prisma.user.findUnique({
+  const user = await prismaContext.prisma.user.findUnique({
     where: {
       userId,
     },
   });
+
+  return user ? getSecureUser(user) : null;
 };
 
 /**
@@ -41,12 +45,21 @@ export const getUserById = async (userId: number): Promise<User | null> => {
  * @function getUserByEmail.
  * @returns {Promise<User | null>} The found User.
  */
-export const getUserByEmail = async (email: string): Promise<User | null> => {
-  return prismaContext.prisma.user.findUnique({
+export const getUserByEmailAndPassword = async (
+  email: string,
+  password: string
+): Promise<User> => {
+  const user = await prismaContext.prisma.user.findUnique({
     where: {
       email,
     },
   });
+  if (!user) throw new Error('[EMAIL] Error');
+
+  if (!(await bcrypt.compare(password, user.password)))
+    throw new Error('[PASSWORD] Error');
+
+  return getSecureUser(user);
 };
 
 /**
@@ -61,11 +74,13 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 export const getUsersByLanguageId = async (
   languageId: number
 ): Promise<User[]> => {
-  return prismaContext.prisma.user.findMany({
+  const users = await prismaContext.prisma.user.findMany({
     where: {
       languageId,
     },
   });
+
+  return users.map(u => getSecureUser(u));
 };
 
 /**
@@ -91,5 +106,5 @@ export const createUser = async (input): Promise<User> => {
     data: { userId: user.userId },
   });
 
-  return user;
+  return getSecureUser(user);
 };

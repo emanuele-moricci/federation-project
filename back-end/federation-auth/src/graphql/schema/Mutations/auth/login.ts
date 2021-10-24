@@ -8,13 +8,12 @@ import {
 } from 'graphql';
 import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
 import { User } from '@prisma/client';
 import UserType from '@src/graphql/schema/Models/User/User';
 
-import { getUserByEmail } from '@src/services/userService';
+import { getUserByEmailAndPassword } from '@src/services/userService';
+
+import { jwtSign } from '@src/graphql/schema/Utils/JWTToken';
 
 /**
  *
@@ -25,23 +24,12 @@ export const loginResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
 > = async (_source, { input }, _context, _info): Promise<LoginPayload> => {
-  const user = await getUserByEmail(input.email);
-  if (!user) throw new Error('[EMAIL] Error');
-
-  if (!(await bcrypt.compare(input.password, user.password)))
-    throw new Error('[PASSWORD] Error');
-
-  const token = jwt.sign(
-    { userId: user.userId },
-    process.env.AUTH_JWT_SECRET ?? ''
-  );
+  const user = await getUserByEmailAndPassword(input.email, input.password);
+  const token = jwtSign(user.userId);
 
   return {
     token,
-    user: {
-      ...user,
-      password: '',
-    },
+    user,
   };
 };
 

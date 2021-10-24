@@ -9,12 +9,12 @@ import {
 } from 'graphql';
 import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 
-import jwt from 'jsonwebtoken';
-
 import { User } from '@prisma/client';
 import UserType from '@src/graphql/schema/Models/User/User';
 
 import { createUser } from '@src/services/userService';
+
+import { jwtSign } from '@src/graphql/schema/Utils/JWTToken';
 
 /**
  *
@@ -26,18 +26,11 @@ export const registerResolver: GraphQLFieldResolver<
   IApolloServerContext
 > = async (_source, { input }, _context, _info): Promise<RegisterPayload> => {
   const user = await createUser(input);
-
-  const token = jwt.sign(
-    { userId: user.userId },
-    process.env.AUTH_JWT_SECRET ?? ''
-  );
+  const token = jwtSign(user.userId);
 
   return {
     token,
-    user: {
-      ...user,
-      password: '',
-    },
+    user,
   };
 };
 
