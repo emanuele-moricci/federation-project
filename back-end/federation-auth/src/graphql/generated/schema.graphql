@@ -4,9 +4,6 @@ type Query {
 
   """Get all Languages query"""
   Language: [Language]
-
-  """Get all Securities query"""
-  Security: [Security]
 }
 
 """The Model that represents the User DB Table"""

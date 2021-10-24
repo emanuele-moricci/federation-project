@@ -1,9 +1,3 @@
-/**
- *
- * Query getAllLanguages
- * WRITE A DESCRIPTION HERE
- *
- */
 import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
 import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 
@@ -12,6 +6,12 @@ import LanguageType from '@src/graphql/schema/Models/Language/Language';
 
 import { getAllLanguages } from '@src/services/languageService';
 
+/**
+ *
+ * Query getAllLanguages
+ * WRITE A DESCRIPTION HERE
+ *
+ */
 export const getAllLanguagesResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext

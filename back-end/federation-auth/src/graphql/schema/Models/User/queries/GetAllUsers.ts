@@ -1,9 +1,3 @@
-/**
- *
- * Query getAllUsers
- * WRITE A DESCRIPTION HERE
- *
- */
 import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
 import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
 
@@ -13,6 +7,12 @@ import UserType from '@src/graphql/schema/Models/User/User';
 import { getAllUsers } from '@src/services/userService';
 import { shieldedMethod } from '@src/graphql/schema/Utils/JWTToken';
 
+/**
+ *
+ * Query getAllUsers
+ * WRITE A DESCRIPTION HERE
+ *
+ */
 export const getAllUsersResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
