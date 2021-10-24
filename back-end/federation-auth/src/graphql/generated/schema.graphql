@@ -143,15 +143,42 @@ enum AuthType {
 }
 
 type Mutation {
-  """Create User"""
-  createUser(input: CreateUserInput): User
+  """login"""
+  login(input: loginInput): loginPayload
 
-  """Create Security"""
-  createSecurity(input: CreateSecurityInput): Security
+  """register"""
+  register(input: registerInput): registerPayload
 }
 
-"""Create User input"""
-input CreateUserInput {
+"""Login payload"""
+type loginPayload {
+  """The user token."""
+  token: String!
+
+  """The user."""
+  user: User!
+}
+
+"""Login input"""
+input loginInput {
+  """The user email."""
+  email: String!
+
+  """The user password."""
+  password: String!
+}
+
+"""Register payload"""
+type registerPayload {
+  """The user token."""
+  token: String!
+
+  """The user."""
+  user: User!
+}
+
+"""Register input"""
+input registerInput {
   """The user email."""
   email: String!
 
@@ -166,10 +193,4 @@ input CreateUserInput {
 
   """The user last name."""
   lastname: String!
-}
-
-"""Create Security input"""
-input CreateSecurityInput {
-  """The security user."""
-  userId: Int!
 }

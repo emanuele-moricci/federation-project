@@ -1,32 +1,35 @@
 import { GraphQLObjectType } from 'graphql';
 
-import createUser, {
-  createUserResolver,
-} from '@src/graphql/schema/Models/User/mutations/CreateUser';
-import createSecurity, {
-  createSecurityResolver,
-} from '@src/graphql/schema/Models/Security/mutations/CreateSecurity';
+import login, { loginResolver } from '@src/graphql/schema/Mutations/auth/login';
+import register, {
+  registerResolver,
+} from '@src/graphql/schema/Mutations/auth/register';
+
+// AUTO-GENERATED MODEL IMPORTS
+
 // [ADD NEW MUTATION IMPORTS ABOVE] < Needed for generating mutations seamlessly
 
 export const mutationType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    createUser: createUser,
-    createSecurity: createSecurity,
-    // [ADD NEW MUTATION TYPES ABOVE] < Needed for generating mutations seamlessly
+    login: login,
+    register: register,
+    // AUTO-GENERATED MODEL TYPES
 
+    // [ADD NEW MUTATION TYPES ABOVE] < Needed for generating mutations seamlessly
   },
 });
 
 const mutation = {
-  createUser: {
-    resolve: createUserResolver,
+  login: {
+    resolve: loginResolver,
   },
-  createSecurity: {
-    resolve: createSecurityResolver,
+  register: {
+    resolve: registerResolver,
   },
+  // AUTO-GENERATED MODEL RESOLVERS
+
   // [ADD NEW MUTATION RESOLVERS ABOVE] < Needed for generating mutations seamlessly
-  
 };
 
 export default mutation;

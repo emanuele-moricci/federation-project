@@ -1,7 +1,16 @@
+import bcrypt from 'bcryptjs';
+
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function seedUsers() {
+  const salt = await bcrypt.genSalt(
+    parseInt(process.env.AUTH_CRYPT_SALT ?? '10')
+  );
+
+  const adminPass = bcrypt.hashSync('Admin!20', salt);
+  const userPass = bcrypt.hashSync('User!120', salt);
+
   await prisma.user.upsert({
     where: { userId: 1 },
     update: {},
@@ -10,7 +19,7 @@ async function seedUsers() {
       email: 'admin@test.com',
       firstname: 'Federation',
       lastname: 'Admin',
-      password: 'Admin!20',
+      password: adminPass,
       languageId: 1,
       role: 'ADMIN',
     },
@@ -24,7 +33,7 @@ async function seedUsers() {
       email: 'user@test.com',
       firstname: 'Federation',
       lastname: 'User',
-      password: 'User?!20',
+      password: userPass,
       languageId: 2,
     },
   });

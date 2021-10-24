@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 import prismaContext from '@src/lib/prisma/prismaContext';
 import { User } from '@prisma/client';
 
@@ -10,7 +12,7 @@ import { User } from '@prisma/client';
  */
 export const getAllUsers = async (): Promise<User[]> => {
   const users = await prismaContext.prisma.user.findMany();
-  return users;
+  return users.map(u => ({ ...u, password: '' }));
 };
 
 /**
@@ -26,6 +28,23 @@ export const getUserById = async (userId: number): Promise<User | null> => {
   return prismaContext.prisma.user.findUnique({
     where: {
       userId,
+    },
+  });
+};
+
+/**
+ * Function that returns a User by its unique email.
+ *
+ * @param {string} email The user email.
+ *
+ * @async
+ * @function getUserByEmail.
+ * @returns {Promise<User | null>} The found User.
+ */
+export const getUserByEmail = async (email: string): Promise<User | null> => {
+  return prismaContext.prisma.user.findUnique({
+    where: {
+      email,
     },
   });
 };
@@ -59,8 +78,13 @@ export const getUsersByLanguageId = async (
  * @returns {Promise<User[]>} The User.
  */
 export const createUser = async (input): Promise<User> => {
+  const salt = await bcrypt.genSalt(
+    parseInt(process.env.AUTH_CRYPT_SALT ?? '10')
+  );
+  const hashedPass = await bcrypt.hash(input.password, salt);
+
   const user = await prismaContext.prisma.user.create({
-    data: input,
+    data: { ...input, password: hashedPass },
   });
 
   await prismaContext.prisma.security.create({

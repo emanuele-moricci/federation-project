@@ -10,6 +10,11 @@ import {{ properCase ModelName }}Type from '@src/graphql/schema/Models/{{ proper
 
 import * as service from '@src/services/{{ firstLower ModelName }}Service';
 
+/**
+*
+* Mutation create{{ properCase ModelName }}
+*
+*/
 export const create{{ properCase ModelName }}Resolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
@@ -30,11 +35,6 @@ export const Create{{ properCase ModelName }}Input: GraphQLInputObjectType = new
   }
 );
 
-/**
-*
-* Mutation create{{ properCase ModelName }}
-*
-*/
 const create{{ properCase ModelName }}Mutation: GraphQLFieldConfig<unknown, IApolloServerContext> = {
   description: 'Create {{ properCase ModelName }}',
   type: {{ properCase ModelName }}Type,
