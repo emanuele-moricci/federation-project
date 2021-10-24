@@ -1,7 +1,9 @@
-import { ApolloServer } from 'apollo-server';
-import apolloServerConfig from '@src/lib/config/apolloServerConfig';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 
 import { performAstCodegen } from '@src/codegen';
+import schema from '@src/graphql/schema/schema';
+import getApolloServerContext from './lib/config/apolloServerContext';
 
 import chalk from 'chalk';
 import dotenv from 'dotenv-safe';
@@ -10,16 +12,20 @@ dotenv.config();
 const startServer = () => {
   performAstCodegen();
 
-  const server = new ApolloServer(apolloServerConfig);
+  const server = new ApolloServer({
+    schema: schema,
+    context: async ({ req }) => await getApolloServerContext(req),
+  });
+  const app = express();
+  server.applyMiddleware({ app });
 
-  server
-    .listen()
-    .then(({ url }) => {
-      console.log(
-        `🚀 ${chalk.bgCyan('Server ready')} at ${chalk.blue(`${url}graphql`)}`
-      );
-    })
-    .catch(err => console.log(chalk.bgRed('Error launching server'), err));
+  app.listen({ port: 4000 }, () => {
+    console.log(
+      `🚀 ${chalk.bgCyan('Server ready')} at ${chalk.blue(
+        `http://localhost:4000${server.graphqlPath}`
+      )}`
+    );
+  });
 };
 
 startServer();
