@@ -74,7 +74,7 @@ type User {
   """updated at"""
   updated_at: DateTime!
 
-  """is user deleted?"""
+  """deleted row"""
   deleted: Boolean!
 }
 
@@ -106,7 +106,7 @@ type Language {
   """updated at"""
   updated_at: DateTime!
 
-  """is language deleted?"""
+  """deleted row"""
   deleted: Boolean!
 }
 
@@ -144,7 +144,7 @@ type Security {
   """updated at"""
   updated_at: DateTime!
 
-  """is security deleted?"""
+  """deleted row"""
   deleted: Boolean!
 }
 

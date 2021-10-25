@@ -1,6 +1,6 @@
 import { GraphQLObjectType } from 'graphql';
 
-import me, { meResolver } from '@schema/Models/User/queries/me';
+import me, { meResolver } from '@src/graphql/schema/Models/User/queries/Me';
 // AUTO-GENERATED MODEL IMPORTS
 import getAllUsers, {
   getAllUsersResolver,

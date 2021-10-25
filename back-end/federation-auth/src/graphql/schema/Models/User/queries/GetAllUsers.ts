@@ -16,7 +16,6 @@ import { paginationArgs } from '@schema/Utils/QueryArgs';
 /**
  *
  * Query getAllUsers
- * WRITE A DESCRIPTION HERE
  *
  */
 export const getAllUsersResolver: GraphQLFieldResolver<

@@ -1,8 +1,11 @@
-import { GraphQLBoolean, GraphQLNonNull } from 'graphql';
+import { GraphQLBoolean, GraphQLFieldConfigMap, GraphQLNonNull } from 'graphql';
 import DateTimeScalar from '@schema/Custom/DateTimeScalar';
 
-const getModelAudit = name => {
+const getModelWithAudit = (
+  fieldsObject: GraphQLFieldConfigMap<any, any>
+): GraphQLFieldConfigMap<any, any> => {
   return {
+    ...fieldsObject,
     created_at: {
       type: GraphQLNonNull(DateTimeScalar),
       description: 'created at',
@@ -13,9 +16,9 @@ const getModelAudit = name => {
     },
     deleted: {
       type: GraphQLNonNull(GraphQLBoolean),
-      description: `is ${name} deleted?`,
+      description: `deleted row`,
     },
   };
 };
 
-export default getModelAudit;
+export default getModelWithAudit;
