@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 
-import { PaginationArgs } from '@schema/Utils/QueryArgs';
-
 import prismaContext from '@config/prisma/prismaContext';
 import { User } from '@prisma/client';
+
+import { PaginationAndSearchArgs } from '@schema/Utils/QueryArgs';
 
 const getSecureUser = (user: User): User => ({ ...user, password: '' });
 
@@ -14,8 +14,14 @@ const getSecureUser = (user: User): User => ({ ...user, password: '' });
  * @function getAllUsers.
  * @returns {Promise<User[]>} The Users List.
  */
-export const getAllUsers = async (args: PaginationArgs): Promise<User[]> => {
-  const users = await prismaContext.prisma.user.findMany({ ...args });
+export const getAllUsers = async ({
+  username,
+  ...args
+}: PaginationAndSearchArgs): Promise<User[]> => {
+  const users = await prismaContext.prisma.user.findMany({
+    ...args,
+    where: { username: { contains: username } },
+  });
   return users.map(u => getSecureUser(u));
 };
 

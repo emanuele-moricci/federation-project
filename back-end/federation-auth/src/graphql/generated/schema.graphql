@@ -9,6 +9,9 @@ type Query {
 
     """Records shown"""
     take: Int
+
+    """username string"""
+    username: String
   ): [User]
 
   """Get all Languages query"""

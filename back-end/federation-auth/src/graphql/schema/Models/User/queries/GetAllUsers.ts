@@ -1,4 +1,9 @@
-import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
+import {
+  GraphQLFieldConfig,
+  GraphQLFieldResolver,
+  GraphQLList,
+  GraphQLString,
+} from 'graphql';
 import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
 
 import { User } from '@prisma/client';
@@ -6,7 +11,7 @@ import UserType from '@schema/Models/User/User';
 
 import { getAllUsers } from '@services/userService';
 
-import { PaginationArgs, paginationArgs } from '@schema/Utils/QueryArgs';
+import { paginationArgs } from '@schema/Utils/QueryArgs';
 
 /**
  *
@@ -18,13 +23,16 @@ export const getAllUsersResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
 > = async (_source, args, _context, _info): Promise<User[]> => {
-  return await getAllUsers(args as PaginationArgs);
+  return await getAllUsers(args);
 };
 
 const getAllUsersQuery: GraphQLFieldConfig<unknown, IApolloServerContext> = {
   description: 'Get all Users query',
   type: GraphQLList(UserType),
-  args: paginationArgs,
+  args: {
+    ...paginationArgs,
+    username: { type: GraphQLString, description: 'username string' },
+  },
   resolve: getAllUsersResolver,
 };
 

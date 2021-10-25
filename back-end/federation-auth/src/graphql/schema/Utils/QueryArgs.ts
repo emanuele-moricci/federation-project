@@ -1,8 +1,9 @@
 import { GraphQLFieldConfigArgumentMap, GraphQLInt } from 'graphql';
 
-export type PaginationArgs = {
-  skip: number;
-  take: number;
+export type PaginationAndSearchArgs = {
+  skip?: number;
+  take?: number;
+  [key: string]: any;
 };
 
 export const paginationArgs: GraphQLFieldConfigArgumentMap = {
