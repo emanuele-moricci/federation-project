@@ -3,7 +3,13 @@ type Query {
   me: User
 
   """Get all Users query"""
-  User: [User]
+  User(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int
+  ): [User]
 
   """Get all Languages query"""
   Language: [Language]

@@ -6,6 +6,8 @@ import UserType from '@schema/Models/User/User';
 
 import { getAllUsers } from '@services/userService';
 
+import { PaginationArgs, paginationArgs } from '@schema/Utils/QueryArgs';
+
 /**
  *
  * Query getAllUsers
@@ -15,13 +17,14 @@ import { getAllUsers } from '@services/userService';
 export const getAllUsersResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
-> = async (_source, _args, _context, _info): Promise<User[]> => {
-  return await getAllUsers();
+> = async (_source, args, _context, _info): Promise<User[]> => {
+  return await getAllUsers(args as PaginationArgs);
 };
 
 const getAllUsersQuery: GraphQLFieldConfig<unknown, IApolloServerContext> = {
   description: 'Get all Users query',
   type: GraphQLList(UserType),
+  args: paginationArgs,
   resolve: getAllUsersResolver,
 };
 
