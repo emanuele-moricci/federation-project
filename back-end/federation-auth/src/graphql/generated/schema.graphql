@@ -50,6 +50,9 @@ type User {
   """user lastname"""
   lastname: String!
 
+  """user handle"""
+  username: String
+
   """user phone"""
   phone: String
 

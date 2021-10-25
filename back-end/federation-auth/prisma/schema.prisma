@@ -21,6 +21,7 @@ model User {
 
   firstname      String
   lastname       String
+  username       String?
   phone          String?
   address        String?
   avatar         String?

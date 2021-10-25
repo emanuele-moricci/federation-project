@@ -69,6 +69,10 @@ const UserType: GraphQLObjectType = new GraphQLObjectType({
       type: GraphQLNonNull(GraphQLString),
       description: 'user lastname',
     },
+    username: {
+      type: GraphQLString,
+      description: 'user handle',
+    },
     phone: {
       type: GraphQLString,
       description: 'user phone',
