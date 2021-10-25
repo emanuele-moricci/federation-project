@@ -6,7 +6,7 @@ import prismaContext from '@src/lib/prisma/prismaContext';
 import { getUserById } from '@src/services/userService';
 
 const getApolloServerContext = async (req): Promise<IApolloServerContext> => {
-  const token = req.headers.authorization
+  const token = req?.headers?.authorization
     ? req.headers.authorization.split(' ')[1]
     : null;
   let user: User | null = null;

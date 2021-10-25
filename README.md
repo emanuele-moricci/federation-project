@@ -8,7 +8,7 @@ This project was created to study the GraphQL/React ecosystem + several other im
 - Apollo Server
 - Prisma ORM
 - PostgresQL
-- Node.js
+- Node.js with Express
 
 ### Front-End
 
@@ -19,7 +19,7 @@ This project was created to study the GraphQL/React ecosystem + several other im
 
 ---
 
-## How to initialize
+## How to INITIALIZE
 
 ### Database
 
@@ -54,7 +54,7 @@ This project was created to study the GraphQL/React ecosystem + several other im
 
 ---
 
-## How to generate
+## How to GENERATE
 
 This project comes with a handy micro-generator tool under `utils/federation-generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
 
@@ -71,3 +71,19 @@ These are the currently available generators
 | Backend Gen. |           Description            |
 | ------------ | :------------------------------: |
 | Model        | Adds a Prisma model w/ resolvers |
+
+---
+
+## How to TEST
+
+### Database
+
+- Install PostgresQL
+- Enter the env with the command `psql`
+- Create a database with the command `create database <DB_NAME>_test;`
+
+### Back-End
+
+- Go into the `env.test` file and change the `DATABASE_URL` connection string
+- Create your test under the folder `__tests__/(integration or unit)` with the pattern `*.test.ts or *.unit.test.ts`
+- Fire the test/s with the following commands: `yarn test:integration`, `yarn test:unit`, or `yarn test` to do both
