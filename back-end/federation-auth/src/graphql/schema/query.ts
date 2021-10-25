@@ -1,5 +1,6 @@
 import { GraphQLObjectType } from 'graphql';
 
+import me, { meResolver } from '@schema/Models/User/queries/me';
 // AUTO-GENERATED MODEL IMPORTS
 import getAllUsers, {
   getAllUsersResolver,
@@ -12,6 +13,7 @@ import getAllLanguages, {
 export const queryType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Query',
   fields: {
+    me: me,
     // AUTO-GENERATED MODEL TYPES
     User: getAllUsers,
     Language: getAllLanguages,
@@ -20,6 +22,9 @@ export const queryType: GraphQLObjectType = new GraphQLObjectType({
 });
 
 const query = {
+  me: {
+    resolve: meResolver,
+  },
   // AUTO-GENERATED MODEL RESOLVERS
   User: {
     resolve: getAllUsersResolver,

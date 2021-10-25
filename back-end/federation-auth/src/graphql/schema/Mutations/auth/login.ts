@@ -8,9 +8,6 @@ import {
 } from 'graphql';
 import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
 
-import { User } from '@prisma/client';
-import UserType from '@src/graphql/schema/Models/User/User';
-
 import { jwtSign } from '@schema/Utils/JWTToken';
 
 import { getUserByEmailAndPassword } from '@services/userService';
@@ -23,14 +20,11 @@ import { getUserByEmailAndPassword } from '@services/userService';
 export const loginResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
-> = async (_source, { input }, _context, _info): Promise<LoginPayload> => {
+> = async (_source, { input }, _context, _info): Promise<{ token: string }> => {
   const user = await getUserByEmailAndPassword(input.email, input.password);
   const token = jwtSign(user.userId);
 
-  return {
-    token,
-    user,
-  };
+  return { token };
 };
 
 export const loginInput: GraphQLInputObjectType = new GraphQLInputObjectType({
@@ -48,11 +42,6 @@ export const loginInput: GraphQLInputObjectType = new GraphQLInputObjectType({
   },
 });
 
-export type LoginPayload = {
-  token: string;
-  user: User;
-};
-
 export const loginPayload: GraphQLObjectType = new GraphQLObjectType({
   name: 'loginPayload',
   description: 'Login payload',
@@ -60,10 +49,6 @@ export const loginPayload: GraphQLObjectType = new GraphQLObjectType({
     token: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'The user token.',
-    },
-    user: {
-      type: new GraphQLNonNull(UserType),
-      description: 'The user.',
     },
   },
 });

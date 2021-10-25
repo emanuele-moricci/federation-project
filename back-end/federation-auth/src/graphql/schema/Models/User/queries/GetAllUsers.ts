@@ -5,7 +5,6 @@ import { User } from '@prisma/client';
 import UserType from '@schema/Models/User/User';
 
 import { getAllUsers } from '@services/userService';
-import { shieldedMethod } from '@schema/Utils/JWTToken';
 
 /**
  *
@@ -16,10 +15,9 @@ import { shieldedMethod } from '@schema/Utils/JWTToken';
 export const getAllUsersResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
-> = async (_source, _args, { token, user }, _info): Promise<User[]> =>
-  shieldedMethod(token, async () => {
-    return await getAllUsers();
-  });
+> = async (_source, _args, _context, _info): Promise<User[]> => {
+  return await getAllUsers();
+};
 
 const getAllUsersQuery: GraphQLFieldConfig<unknown, IApolloServerContext> = {
   description: 'Get all Users query',

@@ -1,4 +1,7 @@
 type Query {
+  """Get me query"""
+  me: User
+
   """Get all Users query"""
   User: [User]
 
@@ -151,9 +154,6 @@ type Mutation {
 type loginPayload {
   """The user token."""
   token: String!
-
-  """The user."""
-  user: User!
 }
 
 """Login input"""

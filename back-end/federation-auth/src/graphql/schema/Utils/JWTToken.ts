@@ -5,9 +5,3 @@ export const jwtSign = (userId: number): string =>
 
 export const jwtVerify = (token: string): string | object =>
   jwt.verify(token, process.env.AUTH_JWT_SECRET ?? '', {});
-
-export const shieldedMethod = (token: string | null, callback: () => any) => {
-  jwtVerify(token ?? '');
-
-  return callback();
-};
