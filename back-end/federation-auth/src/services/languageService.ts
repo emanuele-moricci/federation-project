@@ -1,5 +1,5 @@
 import { Language } from '@prisma/client';
-import prismaContext from '@src/lib/prisma/prismaContext';
+import prismaContext from '@config/prisma/prismaContext';
 
 /**
  * Function that returns all of the Languages present in the database.

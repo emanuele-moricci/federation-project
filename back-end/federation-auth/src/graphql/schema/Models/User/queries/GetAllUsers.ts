@@ -1,11 +1,11 @@
 import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
-import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
+import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
 
 import { User } from '@prisma/client';
-import UserType from '@src/graphql/schema/Models/User/User';
+import UserType from '@schema/Models/User/User';
 
-import { getAllUsers } from '@src/services/userService';
-import { shieldedMethod } from '@src/graphql/schema/Utils/JWTToken';
+import { getAllUsers } from '@services/userService';
+import { shieldedMethod } from '@schema/Utils/JWTToken';
 
 /**
  *

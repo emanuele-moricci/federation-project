@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLNonNull } from 'graphql';
-import DateTimeScalar from '@src/graphql/schema/Custom/DateTimeScalar';
+import DateTimeScalar from '@schema/Custom/DateTimeScalar';
 
 const getModelAudit = name => {
   return {

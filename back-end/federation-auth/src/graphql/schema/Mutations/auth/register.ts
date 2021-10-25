@@ -7,14 +7,14 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
-import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
+import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
 
 import { User } from '@prisma/client';
-import UserType from '@src/graphql/schema/Models/User/User';
+import UserType from '@schema/Models/User/User';
 
-import { createUser } from '@src/services/userService';
+import { jwtSign } from '@schema/Utils/JWTToken';
 
-import { jwtSign } from '@src/graphql/schema/Utils/JWTToken';
+import { createUser } from '@services/userService';
 
 /**
  *

@@ -1,9 +1,9 @@
 import { gql, makeExecutableSchema } from 'apollo-server';
 import { GraphQLSchema, printSchema } from 'graphql';
 
-import { mutationType } from '@src/graphql/schema/mutation';
-import { queryType } from '@src/graphql/schema/query';
-import resolvers from '@src/graphql/schema/resolvers';
+import { mutationType } from '@schema/mutation';
+import { queryType } from '@schema/query';
+import resolvers from '@schema/resolvers';
 
 const schema = makeExecutableSchema({
   typeDefs: gql(

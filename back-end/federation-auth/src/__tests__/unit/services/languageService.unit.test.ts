@@ -1,7 +1,4 @@
-import {
-  getAllLanguages,
-  getLanguageById,
-} from '@src/services/languageService';
+import { getAllLanguages, getLanguageById } from '@services/languageService';
 
 describe('languageService tests', () => {
   it('should get all languages', async () => {

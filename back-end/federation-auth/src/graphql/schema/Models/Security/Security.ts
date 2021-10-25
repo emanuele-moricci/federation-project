@@ -6,18 +6,18 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import UserType from '@src/graphql/schema/Models/User/User';
-import AuthEnumType from '@src/graphql/schema/Enums/AuthType';
+import UserType from '@schema/Models/User/User';
+import AuthEnumType from '@schema/Enums/AuthType';
 
-import getModelAudit from '@src/graphql/schema/Utils/ModelAudit';
+import getModelAudit from '@schema/Utils/ModelAudit';
 
 /**
-*
-* The Model that maps the Security Database Table
-*
-* @name SecurityType
-* @type {GraphQLObjectType}
-*/
+ *
+ * The Model that maps the Security Database Table
+ *
+ * @name SecurityType
+ * @type {GraphQLObjectType}
+ */
 const SecurityType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Security',
   description: 'The Model that represents the Security DB Table',

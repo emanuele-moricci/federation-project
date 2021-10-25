@@ -1,10 +1,10 @@
 import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
-import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
+import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
 
 import { Language } from '@prisma/client';
-import LanguageType from '@src/graphql/schema/Models/Language/Language';
+import LanguageType from '@schema/Models/Language/Language';
 
-import { getAllLanguages } from '@src/services/languageService';
+import { getAllLanguages } from '@services/languageService';
 
 /**
  *

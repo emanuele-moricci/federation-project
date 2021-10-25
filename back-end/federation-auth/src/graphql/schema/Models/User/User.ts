@@ -8,19 +8,19 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import LanguageType from '@src/graphql/schema/Models/Language/Language';
-import SecurityType from '@src/graphql/schema/Models/Security/Security';
-import RoleEnumType from '@src/graphql/schema/Enums/Role';
+import LanguageType from '@schema/Models/Language/Language';
+import SecurityType from '@schema/Models/Security/Security';
+import RoleEnumType from '@schema/Enums/Role';
 
-import getModelAudit from '@src/graphql/schema/Utils/ModelAudit';
+import getModelAudit from '@schema/Utils/ModelAudit';
 
 /**
-*
-* The Model that maps the User Database Table
-*
-* @name UserType
-* @type {GraphQLObjectType}
-*/
+ *
+ * The Model that maps the User Database Table
+ *
+ * @name UserType
+ * @type {GraphQLObjectType}
+ */
 const UserType: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
   description: 'The Model that represents the User DB Table',

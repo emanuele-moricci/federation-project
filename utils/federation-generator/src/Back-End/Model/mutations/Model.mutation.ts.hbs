@@ -3,12 +3,12 @@ import {
   GraphQLFieldResolver,
   GraphQLInputObjectType,
 } from 'graphql';
-import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
+import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
 
 import { {{ properCase ModelName }} } from '@prisma/client'; // ADD THE PRISMA MODEL AND MIGRATE
-import {{ properCase ModelName }}Type from '@src/graphql/schema/Models/{{ properCase ModelName }}/{{ properCase ModelName }}';
+import {{ properCase ModelName }}Type from '@schema/Models/{{ properCase ModelName }}/{{ properCase ModelName }}';
 
-import * as service from '@src/services/{{ firstLower ModelName }}Service';
+import * as service from '@services/{{ firstLower ModelName }}Service';
 
 /**
 *

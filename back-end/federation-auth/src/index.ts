@@ -2,8 +2,8 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
 import { performAstCodegen } from '@src/codegen';
-import schema from '@src/graphql/schema/schema';
-import getApolloServerContext from './lib/config/apolloServerContext';
+import schema from '@schema/schema';
+import getApolloServerContext from '@config/apollo/apolloServerContext';
 
 import chalk from 'chalk';
 import dotenv from 'dotenv-safe';

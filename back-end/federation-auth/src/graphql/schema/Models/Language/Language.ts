@@ -6,17 +6,17 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import UserType from '@src/graphql/schema/Models/User/User';
+import UserType from '@schema/Models/User/User';
 
-import getModelAudit from '@src/graphql/schema/Utils/ModelAudit';
+import getModelAudit from '@schema/Utils/ModelAudit';
 
 /**
-*
-* The Model that maps the Language Database Table
-*
-* @name LanguageType
-* @type {GraphQLObjectType}
-*/
+ *
+ * The Model that maps the Language Database Table
+ *
+ * @name LanguageType
+ * @type {GraphQLObjectType}
+ */
 const LanguageType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Language',
   description: 'The Model that represents the Language DB Table',

@@ -4,8 +4,8 @@ import * as schemaAstPlugin from '@graphql-codegen/schema-ast';
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { codegen } from '@graphql-codegen/core';
 
-import schema from '@src/graphql/schema/schema';
-import prismaContext from '@src/lib/prisma/prismaContext';
+import schema from '@schema/schema';
+import prismaContext from '@config/prisma/prismaContext';
 
 import * as fs from 'fs';
 import path from 'path';

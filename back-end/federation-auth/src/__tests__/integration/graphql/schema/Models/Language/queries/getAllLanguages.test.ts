@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { ApolloServer, gql } from 'apollo-server-express';
 
-import getApolloServerContext from '@src/lib/config/apolloServerContext';
-import prismaContext from '@src/lib/prisma/prismaContext';
-import schema from '@src/graphql/schema/schema';
+import getApolloServerContext from '@config/apollo/apolloServerContext';
+import prismaContext from '@config/prisma/prismaContext';
+import schema from '@schema/schema';
 
 const GETALL_LANGUAGES_QUERY = gql`
   query getAllLanguages {

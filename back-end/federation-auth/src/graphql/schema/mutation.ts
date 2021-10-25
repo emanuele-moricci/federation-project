@@ -1,9 +1,7 @@
 import { GraphQLObjectType } from 'graphql';
 
-import login, { loginResolver } from '@src/graphql/schema/Mutations/auth/login';
-import register, {
-  registerResolver,
-} from '@src/graphql/schema/Mutations/auth/register';
+import login, { loginResolver } from '@schema/Mutations/auth/login';
+import register, { registerResolver } from '@schema/Mutations/auth/register';
 
 // AUTO-GENERATED MODEL IMPORTS
 

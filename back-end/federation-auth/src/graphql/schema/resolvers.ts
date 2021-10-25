@@ -1,16 +1,16 @@
 import { GraphQLResolverMap } from 'apollo-graphql';
-import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
+import { IApolloServerContext } from '@src/config/apollo/IApolloServerContext';
 
-import mutation from '@src/graphql/schema/mutation';
-import query from '@src/graphql/schema/query';
+import mutation from '@schema/mutation';
+import query from '@schema/query';
 
 import { User, Language, Security } from '@prisma/client';
-import { getLanguageById } from '@src/services/languageService';
-import { getSecurityByUserId } from '@src/services/securityService';
-import { getUsersByLanguageId, getUserById } from '@src/services/userService';
+import { getLanguageById } from '@services/languageService';
+import { getSecurityByUserId } from '@services/securityService';
+import { getUsersByLanguageId, getUserById } from '@services/userService';
 
 //CUSTOM TYPES
-import DateTimeScalar from '@src/graphql/schema/Custom/DateTimeScalar';
+import DateTimeScalar from '@schema/Custom/DateTimeScalar';
 
 const resolvers: GraphQLResolverMap<IApolloServerContext> = {
   Query: query,

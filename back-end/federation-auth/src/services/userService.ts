@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-import prismaContext from '@src/lib/prisma/prismaContext';
+import prismaContext from '@config/prisma/prismaContext';
 import { User } from '@prisma/client';
 
 const getSecureUser = (user: User): User => ({ ...user, password: '' });

@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 
-import { IPrismaContext } from '@src/lib/interfaces/IPrismaContext';
+import { IPrismaContext } from '@config/prisma/IPrismaContext';
 
 export interface IApolloServerContext {
   prismaContext: IPrismaContext;

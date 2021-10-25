@@ -1,9 +1,9 @@
 import { User } from '@prisma/client';
-import { jwtVerify } from '@src/graphql/schema/Utils/JWTToken';
+import { jwtVerify } from '@schema/Utils/JWTToken';
 
-import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext';
-import prismaContext from '@src/lib/prisma/prismaContext';
-import { getUserById } from '@src/services/userService';
+import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
+import prismaContext from '@config/prisma/prismaContext';
+import { getUserById } from '@services/userService';
 
 const getApolloServerContext = async (req): Promise<IApolloServerContext> => {
   const token = req?.headers?.authorization
