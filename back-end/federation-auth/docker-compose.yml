@@ -5,8 +5,6 @@ version: '3.9'
 services:
   server:
     container_name: server
-    environment:
-      DATABASE_URL: postgresql://prisma:prisma@db:5432/bookdb?schema=public
     build:
       context: '.'
       target: base
@@ -23,9 +21,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: prisma
-      POSTGRES_PASSWORD: prisma
-      POSTGRES_DB: tests
+      POSTGRES_USER: emanuele
+      POSTGRES_PASSWORD: 12docker_pwd21!
+      POSTGRES_DB: federationdb_test
     networks:
       - test_vm
 networks:

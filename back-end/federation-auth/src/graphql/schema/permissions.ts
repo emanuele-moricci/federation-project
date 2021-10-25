@@ -29,7 +29,6 @@ const permissions = shield({
     register: not(isAuthenticated),
   },
   User: isAuthenticated,
-  Language: not(isAuthenticated),
 });
 
 export default permissions;

@@ -7,5 +7,5 @@ generates:
       - 'typescript'
       - 'typescript-resolvers'
     config:
-      contextType: src/lib/interfaces/IPrismaContext#IPrismaContext
+      contextType: src/config/prisma/IPrismaContext#IPrismaContext
       useIndexSignature: true
