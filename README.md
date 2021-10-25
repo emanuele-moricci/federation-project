@@ -31,6 +31,7 @@ This project was created to study the GraphQL/React ecosystem + several other im
 
 - Install every dependency in every federation project using `yarn`
 - Go to the .env file and add the DB connection string to the `DATABASE_URL` key
+- Fire the command `npx prisma generate` to generate the Prisma client
 - Create the **"init"** migration running this command on the project root `yarn generate:migration`
 - Seed the database using the command `yarn generate:seed`
 
