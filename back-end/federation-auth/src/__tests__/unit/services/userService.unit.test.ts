@@ -37,13 +37,12 @@ describe('userService tests', () => {
   });
 
   it('should create a user', async () => {
-    const email = 'jest@test.com';
-    const password = 'Jest!120';
+    const email = 'jestuser@test.com';
+    const password = 'Jestu!120';
     const languageId = 3;
     const firstname = '';
     const lastname = '';
     const user = await createUser({
-      userId: 3,
       email: email,
       password: password,
       languageId: languageId,
