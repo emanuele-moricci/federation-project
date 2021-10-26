@@ -3,6 +3,8 @@ import { jwtVerify } from './Utils/JWTToken';
 
 const isAuthenticated = rule({ cache: 'contextual' })(
   async (_parent, _args, { token }, _info) => {
+    if (!token) return false;
+
     try {
       const obj = <any>jwtVerify(token);
 

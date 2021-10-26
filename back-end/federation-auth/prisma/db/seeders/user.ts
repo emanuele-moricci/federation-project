@@ -11,11 +11,8 @@ async function seedUsers() {
   const adminPass = bcrypt.hashSync('Admin!20', salt);
   const userPass = bcrypt.hashSync('User!120', salt);
 
-  await prisma.user.upsert({
-    where: { userId: 1 },
-    update: {},
-    create: {
-      userId: 1,
+  await prisma.user.create({
+    data: {
       email: 'admin@test.com',
       firstname: 'Federation',
       lastname: 'Admin',
@@ -26,11 +23,8 @@ async function seedUsers() {
     },
   });
 
-  await prisma.user.upsert({
-    where: { userId: 2 },
-    update: {},
-    create: {
-      userId: 2,
+  await prisma.user.create({
+    data: {
       email: 'user@test.com',
       firstname: 'Federation',
       lastname: 'User',

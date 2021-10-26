@@ -181,9 +181,6 @@ input loginInput {
 type registerPayload {
   """The user token."""
   token: String!
-
-  """The user."""
-  user: User!
 }
 
 """Register input"""

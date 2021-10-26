@@ -24,14 +24,21 @@ import { createUser } from '@services/userService';
 export const registerResolver: GraphQLFieldResolver<
   unknown,
   IApolloServerContext
-> = async (_source, { input }, _context, _info): Promise<RegisterPayload> => {
-  const user = await createUser(input);
-  const token = jwtSign(user.userId);
+> = async (
+  _source,
+  { input },
+  _context,
+  _info
+): Promise<{ token: string | null }> => {
+  try {
+    const user = await createUser(input);
+    const token = jwtSign(user.userId);
 
-  return {
-    token,
-    user,
-  };
+    return { token };
+  } catch (error) {
+    console.log(error);
+    return { token: null };
+  }
 };
 
 export const registerInput: GraphQLInputObjectType = new GraphQLInputObjectType(
@@ -63,11 +70,6 @@ export const registerInput: GraphQLInputObjectType = new GraphQLInputObjectType(
   }
 );
 
-export type RegisterPayload = {
-  token: string;
-  user: User;
-};
-
 export const registerPayload: GraphQLObjectType = new GraphQLObjectType({
   name: 'registerPayload',
   description: 'Register payload',
@@ -75,10 +77,6 @@ export const registerPayload: GraphQLObjectType = new GraphQLObjectType({
     token: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'The user token.',
-    },
-    user: {
-      type: new GraphQLNonNull(UserType),
-      description: 'The user.',
     },
   },
 });
