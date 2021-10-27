@@ -1,9 +1,9 @@
 import { ApolloServer } from "apollo-server";
 import { ApolloGateway } from "@apollo/gateway";
 
-import { bounceAuthToFederation, loadContext } from "./config/request";
+import { bounceAuthToFederation, loadContext } from "./config/GatewayInit";
 
-import chalk from "chalk";
+import { blue, bgCyan } from "chalk";
 import dotenv from "dotenv-safe";
 dotenv.config();
 
@@ -21,7 +21,7 @@ const startServer = () => {
 
   server.listen({ port: 4000 }, () => {
     console.log(
-      `🚀 ${chalk.bgCyan("Server ready")} at ${chalk.blue(
+      `🚀 ${bgCyan("Server ready")} at ${blue(
         `http://localhost:4000${server.graphqlPath}`
       )}`
     );

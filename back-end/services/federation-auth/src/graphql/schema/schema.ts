@@ -1,14 +1,15 @@
-import { buildSubgraphSchema } from '@apollo/subgraph';
-import { GraphQLResolverMap } from 'apollo-graphql';
-
 import { applyMiddleware } from 'graphql-middleware';
-
-import permissions from '@schema/permissions';
+import { GraphQLResolverMap } from 'apollo-graphql';
+import { buildSubgraphSchema } from '@apollo/subgraph';
 
 import { loadFilesSync } from '@graphql-tools/load-files';
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
+
 import path from 'path';
-import customResolvers from './Utils/CustomResolvers';
+
+import permissions from '@schema/permissions';
+
+import customResolvers from '@schema/Utils/CustomResolvers';
 
 // TYPE DEFINITIONS
 const typeDefs = loadFilesSync(path.join(__dirname, '.'), {
