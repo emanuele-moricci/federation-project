@@ -27,20 +27,23 @@ This project was created to study the GraphQL/React ecosystem + several other im
 - Enter the env with the command `psql`
 - Create a database with the command `create database <DB_NAME>;`
 
-### Back-End (do this for every federation-\* minus federation-gateway)
+### Back-End (do this for every federation service under **services/**)
 
 - Install every dependency in every federation project using `yarn`
 - Go to the .env file and add the DB connection string to the `DATABASE_URL` key
 - Fire the command `npx prisma generate` to generate the Prisma client
 - Create the **"init"** migration running this command on the project root `yarn generate:migration`
 - Seed the database using the command `yarn generate:seed`
-- Go to `federation-gateway` in the command line
+
+### Gateway
+
+- Go to the root of the back-end side in the command line
 - Follow the guide to register and run your gateway with all of the services through [Apollo Studio](<[https://link](https://www.apollographql.com/docs/federation/quickstart/)>); Register the API key, the subgraphs through the rover module and create your project in Apollo Studio
 - This is an example command to register a new subgraph
 
 ```console
 rover subgraph publish the-federation@current \
-  --name federation-auth --schema ../federation-auth/src/graphql/generated/schema.graphql \
+  --name federation-auth --schema services/federation-auth/src/graphql/generated/schema.graphql \
   --routing-url http://localhost:4001/graphql
 ```
 
@@ -54,9 +57,9 @@ rover subgraph publish the-federation@current \
 
 ### Back-End
 
-- Fire up the command `yarn prisma:studio` to get the Prisma GUI
+- Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
 - Start the project with `yarn dev`
-- Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/sandbox/explorer)>)
+- Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
 
 ### Front-End
 
@@ -64,7 +67,7 @@ rover subgraph publish the-federation@current \
 
 ---
 
-## How to GENERATE
+## How to GENERATE (TO RE-DO)
 
 This project comes with a handy micro-generator tool under `utils/federation-generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
 

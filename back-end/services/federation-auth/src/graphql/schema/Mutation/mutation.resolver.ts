@@ -8,12 +8,7 @@ import { jwtSign } from '../Utils/JWTToken';
 const resolver = {
   Mutation: {
     login: {
-      resolve: async (
-        _source,
-        { input },
-        _context,
-        _info
-      ): Promise<{ token: string }> => {
+      resolve: async (_source, { input }, _context, _info): Promise<{ token: string }> => {
         const user = await getUserByEmailAndPassword(
           input.email,
           input.password
@@ -24,12 +19,7 @@ const resolver = {
       },
     },
     register: {
-      resolve: async (
-        _source,
-        { input },
-        _context,
-        _info
-      ): Promise<{ token: string | null }> => {
+      resolve: async (_source, { input }, _context, _info): Promise<{ token: string | null }> => {
         try {
           const user = await createUser(input);
           const token = jwtSign(user);

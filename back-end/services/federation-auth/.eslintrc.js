@@ -20,6 +20,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier', 'import'],
   rules: {
+    'code': 120,
     'prettier/prettier': 'error',
     'import/extensions': 'off',
     'import/no-unresolved': 'error',

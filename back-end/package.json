@@ -10,8 +10,7 @@
     "dev": "nodemon",
     "build": "tsc -p tsconfig.prod.json",
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/index.js",
-    "lint:fix": "eslint --fix .",
-    "compose": "rover supergraph compose --log trace --config ./supergraph-config.yaml > ./src/federation.graphql"
+    "lint:fix": "eslint --fix ."
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.5",
