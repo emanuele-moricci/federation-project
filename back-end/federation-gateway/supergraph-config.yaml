@@ -1,0 +1,5 @@
+subgraphs:
+  testing:
+    routing_url: http://localhost:4001/graphql
+    schema:
+      file: ../federation-auth/src/graphql/generated/schema.graphql

@@ -19,10 +19,10 @@ const startServer = () => {
   const app = express();
   server.applyMiddleware({ app });
 
-  app.listen({ port: 4000 }, () => {
+  app.listen({ port: 4001 }, () => {
     console.log(
       `🚀 ${chalk.bgCyan('Server ready')} at ${chalk.blue(
-        `http://localhost:4000${server.graphqlPath}`
+        `http://localhost:4001${server.graphqlPath}`
       )}`
     );
   });

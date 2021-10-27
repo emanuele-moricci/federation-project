@@ -1,0 +1,238 @@
+schema
+  @core(feature: "https://specs.apollo.dev/core/v0.2"),
+  @core(feature: "https://specs.apollo.dev/join/v0.1", for: EXECUTION)
+{
+  query: Query
+  mutation: Mutation
+}
+
+directive @core(as: String, feature: String!, for: core__Purpose) repeatable on SCHEMA
+
+directive @join__field(graph: join__Graph, provides: join__FieldSet, requires: join__FieldSet) on FIELD_DEFINITION
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+directive @join__owner(graph: join__Graph!) on INTERFACE | OBJECT
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet) repeatable on INTERFACE | OBJECT
+
+enum AuthType {
+  MFA_CODES
+  PASSWORD
+  WEBAUTHN
+}
+
+scalar DateTime
+
+"""The Model that represents the Language DB Table"""
+type Language {
+  """language code"""
+  code: String!
+
+  """created at"""
+  created_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+
+  """language id"""
+  languageId: ID!
+
+  """language name"""
+  name: String!
+
+  """language native"""
+  native: String!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """user security settings"""
+  users: [User]
+}
+
+type Mutation {
+  """login"""
+  login(input: loginInput): loginPayload @join__field(graph: TESTING)
+
+  """register"""
+  register(input: registerInput): registerPayload @join__field(graph: TESTING)
+}
+
+type Query {
+  """Get all Languages query"""
+  Language: [Language] @join__field(graph: TESTING)
+
+  """Get all Users query"""
+  User(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int
+
+    """username string"""
+    username: String
+  ): [User] @join__field(graph: TESTING)
+
+  """Get me query"""
+  me: User @join__field(graph: TESTING)
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+"""The Model that represents the Security DB Table"""
+type Security {
+  """security auxiliary"""
+  auxiliary: String!
+
+  """created at"""
+  created_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+
+  """security metadata"""
+  metadata: String!
+
+  """security recovery"""
+  recovery: String!
+
+  """security secret"""
+  secret: String!
+
+  """security id"""
+  securityId: ID!
+
+  """security auth type"""
+  type: AuthType!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """security user"""
+  user: User
+
+  """id of the user"""
+  userId: Int!
+}
+
+"""The Model that represents the User DB Table"""
+type User {
+  """is user active now?"""
+  active: Boolean!
+
+  """user address"""
+  address: String
+
+  """user avatar"""
+  avatar: String
+
+  """user banner"""
+  banner: String
+
+  """created at"""
+  created_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+
+  """user email"""
+  email: String!
+
+  """user firstname"""
+  firstname: String!
+
+  """user language"""
+  language: Language
+
+  """id of the language"""
+  languageId: Int!
+
+  """user lastname"""
+  lastname: String!
+
+  """user password"""
+  password: String!
+
+  """user phone"""
+  phone: String
+
+  """user role"""
+  role: Role!
+
+  """user security settings"""
+  security: Security
+
+  """user auth token"""
+  token: String
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """user id"""
+  userId: ID!
+
+  """user handle"""
+  username: String
+}
+
+enum core__Purpose {
+  """
+  `EXECUTION` features provide metadata necessary to for operation execution.
+  """
+  EXECUTION
+
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+}
+
+scalar join__FieldSet
+
+enum join__Graph {
+  TESTING @join__graph(name: "testing" url: "http://localhost:4001/graphql")
+}
+
+"""Login input"""
+input loginInput {
+  """The user email."""
+  email: String!
+
+  """The user password."""
+  password: String!
+}
+
+"""Login payload"""
+type loginPayload {
+  """The user token."""
+  token: String!
+}
+
+"""Register input"""
+input registerInput {
+  """The user email."""
+  email: String!
+
+  """The user first name."""
+  firstname: String!
+
+  """The language id."""
+  languageId: Int!
+
+  """The user last name."""
+  lastname: String!
+
+  """The user password."""
+  password: String!
+}
+
+"""Register payload"""
+type registerPayload {
+  """The user token."""
+  token: String!
+}
