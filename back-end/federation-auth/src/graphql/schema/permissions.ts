@@ -1,24 +1,16 @@
 import { shield, rule, not } from 'graphql-shield';
-import { jwtVerify } from './Utils/JWTToken';
 
 const isAuthenticated = rule({ cache: 'contextual' })(
-  async (_parent, _args, { token }, _info) => {
-    if (!token) return false;
-
-    try {
-      const obj = <any>jwtVerify(token);
-
-      return obj !== null;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+  async (_parent, _args, { userData }, _info) => {
+    return userData && Object.keys(userData).length > 0
+      ? userData.userId !== null
+      : false;
   }
 );
 
 const isAdmin = rule({ cache: 'contextual' })(
-  async (_parent, _args, { user }, _info) => {
-    return user.role === 'admin';
+  async (_parent, _args, { userData }, _info) => {
+    return userData.role === 'ADMIN';
   }
 );
 

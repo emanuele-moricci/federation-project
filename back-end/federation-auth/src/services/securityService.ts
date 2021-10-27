@@ -19,3 +19,22 @@ export const getSecurityByUserId = async (
     },
   });
 };
+
+/**
+ * Function that returns the Security data by Id.
+ *
+ * @param {number} securityId The user ID.
+ *
+ * @async
+ * @function getSecurityById.
+ * @returns {Promise<Security | null>} The Security data.
+ */
+export const getSecurityById = async (
+  securityId: number
+): Promise<Security | null> => {
+  return prismaContext.prisma.security.findUnique({
+    where: {
+      securityId,
+    },
+  });
+};

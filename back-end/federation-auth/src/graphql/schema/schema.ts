@@ -1,26 +1,36 @@
-import { gql } from 'apollo-server';
 import { buildSubgraphSchema } from '@apollo/subgraph';
-import { GraphQLSchema, printSchema } from 'graphql';
+import { GraphQLResolverMap } from 'apollo-graphql';
 
 import { applyMiddleware } from 'graphql-middleware';
 
-import { mutationType } from '@schema/mutation';
-import { queryType } from '@schema/query';
-import resolvers from '@schema/resolvers';
 import permissions from '@schema/permissions';
 
-let schema = buildSubgraphSchema({
-  typeDefs: gql(
-    printSchema(
-      new GraphQLSchema({
-        query: queryType,
-        mutation: mutationType,
-      })
-    )
-  ),
-  resolvers,
-});
+import { loadFilesSync } from '@graphql-tools/load-files';
+import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
+import path from 'path';
+import customResolvers from './Utils/CustomResolvers';
 
+// TYPE DEFINITIONS
+const typeDefs = loadFilesSync(path.join(__dirname, '.'), {
+  recursive: true,
+  extensions: ['graphql'],
+  ignoreIndex: true,
+});
+const mergedTypeDefs = mergeTypeDefs(typeDefs);
+
+// RESOLVERS
+const resolvers = loadFilesSync(path.join(__dirname, '.'), {
+  recursive: true,
+  extensions: ['resolver.ts'],
+  ignoreIndex: true,
+});
+const mergedResolvers = mergeResolvers([...resolvers, customResolvers]);
+
+// SCHEMA
+let schema = buildSubgraphSchema({
+  typeDefs: mergedTypeDefs,
+  resolvers: mergedResolvers as GraphQLResolverMap<any>,
+});
 schema = applyMiddleware(schema, permissions);
 
 export default schema;

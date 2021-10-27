@@ -1,0 +1,118 @@
+type User @key(fields: "userId") {
+  """
+  user id
+  """
+  userId: ID!
+
+  """
+  user email
+  """
+  email: String!
+
+  """
+  user password
+  """
+  password: String!
+
+  """
+  user auth token
+  """
+  token: String
+
+  """
+  is user active now?
+  """
+  active: Boolean!
+
+  """
+  user role
+  """
+  role: Role!
+
+  """
+  user language
+  """
+  language: Language
+
+  """
+  id of the language
+  """
+  languageId: Int!
+
+  """
+  user security settings
+  """
+  security: Security
+
+  """
+  user firstname
+  """
+  firstname: String!
+
+  """
+  user lastname
+  """
+  lastname: String!
+
+  """
+  user handle
+  """
+  username: String
+
+  """
+  user phone
+  """
+  phone: String
+
+  """
+  user address
+  """
+  address: String
+
+  """
+  user avatar
+  """
+  avatar: String
+
+  """
+  user banner
+  """
+  banner: String
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}
+
+extend type Query {
+  """
+  Get all Users query
+  """
+  User(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int
+
+    """
+    username string
+    """
+    username: String
+  ): [User]
+}

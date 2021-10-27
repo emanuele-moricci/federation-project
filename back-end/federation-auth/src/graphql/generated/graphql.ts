@@ -13,8 +13,8 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
-  _FieldSet: any;
 };
+
 
 
 
@@ -68,6 +68,7 @@ export type MutationRegisterArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  _service: _Service;
   /** Get me query */
   me?: Maybe<User>;
   /** Get all Users query */
@@ -158,6 +159,12 @@ export type User = {
   deleted: Scalars['Boolean'];
 };
 
+export type _Service = {
+  __typename?: '_Service';
+  /** The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied */
+  sdl?: Maybe<Scalars['String']>;
+};
+
 /** Login input */
 export type LoginInput = {
   /** The user email. */
@@ -193,7 +200,6 @@ export type RegisterPayload = {
   /** The user token. */
   token: Scalars['String'];
 };
-
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
@@ -286,6 +292,7 @@ export type ResolversTypes = ResolversObject<{
   Role: Role;
   Security: ResolverTypeWrapper<Security>;
   User: ResolverTypeWrapper<User>;
+  _Service: ResolverTypeWrapper<_Service>;
   loginInput: LoginInput;
   loginPayload: ResolverTypeWrapper<LoginPayload>;
   registerInput: RegisterInput;
@@ -304,11 +311,16 @@ export type ResolversParentTypes = ResolversObject<{
   Int: Scalars['Int'];
   Security: Security;
   User: User;
+  _Service: _Service;
   loginInput: LoginInput;
   loginPayload: LoginPayload;
   registerInput: RegisterInput;
   registerPayload: RegisterPayload;
 }>;
+
+export type ExtendsDirectiveArgs = {  };
+
+export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
@@ -332,6 +344,7 @@ export type MutationResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  _service?: Resolver<ResolversTypes['_Service'], ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   User?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
   Language?: Resolver<Maybe<Array<Maybe<ResolversTypes['Language']>>>, ParentType, ContextType>;
@@ -375,6 +388,11 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
+  sdl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type LoginPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['loginPayload'] = ResolversParentTypes['loginPayload']> = ResolversObject<{
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -392,6 +410,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
   Security?: SecurityResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  _Service?: _ServiceResolvers<ContextType>;
   loginPayload?: LoginPayloadResolvers<ContextType>;
   registerPayload?: RegisterPayloadResolvers<ContextType>;
 }>;
@@ -402,3 +421,13 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
 export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
+export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
+  extends?: ExtendsDirectiveResolver<any, any, ContextType>;
+}>;
+
+
+/**
+ * @deprecated
+ * Use "DirectiveResolvers" root object instead. If you wish to get "IDirectiveResolvers", add "typesPrefix: I" to your config.
+ */
+export type IDirectiveResolvers<ContextType = IPrismaContext> = DirectiveResolvers<ContextType>;

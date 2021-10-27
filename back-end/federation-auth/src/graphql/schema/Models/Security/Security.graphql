@@ -1,0 +1,56 @@
+type Security @key(fields: "securityId") {
+  """
+  security id
+  """
+  securityId: ID!
+
+  """
+  security auth type
+  """
+  type: AuthType!
+
+  """
+  security secret
+  """
+  secret: String!
+
+  """
+  security recovery
+  """
+  recovery: String!
+
+  """
+  security auxiliary
+  """
+  auxiliary: String!
+
+  """
+  security metadata
+  """
+  metadata: String!
+
+  """
+  security user
+  """
+  user: User
+
+  """
+  id of the user
+  """
+  userId: Int!
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}

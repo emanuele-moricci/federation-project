@@ -1,0 +1,10 @@
+enum AuthType {
+  PASSWORD
+  MFA_CODES
+  WEBAUTHN
+}
+
+enum Role {
+  USER
+  ADMIN
+}

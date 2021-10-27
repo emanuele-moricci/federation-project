@@ -8,36 +8,83 @@ directive @requires(fields: String!) on FIELD_DEFINITION
 
 directive @provides(fields: String!) on FIELD_DEFINITION
 
-type Query {
-  _service: _Service!
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
 
-  """Get me query"""
-  me: User
-
-  """Get all Users query"""
-  User(
-    """Starting record"""
-    skip: Int
-
-    """Records shown"""
-    take: Int
-
-    """username string"""
-    username: String
-  ): [User]
-
-  """Get all Languages query"""
-  Language: [Language]
+enum AuthType {
+  PASSWORD
+  MFA_CODES
+  WEBAUTHN
 }
 
-type _Service {
-  """
-  The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
-  """
-  sdl: String
+enum Role {
+  USER
+  ADMIN
 }
 
-"""The Model that represents the User DB Table"""
+type Language {
+  """language id"""
+  languageId: ID!
+
+  """language code"""
+  code: String!
+
+  """language name"""
+  name: String!
+
+  """language native"""
+  native: String!
+
+  """user security settings"""
+  users: [User]
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+}
+
+type Security {
+  """security id"""
+  securityId: ID!
+
+  """security auth type"""
+  type: AuthType!
+
+  """security secret"""
+  secret: String!
+
+  """security recovery"""
+  recovery: String!
+
+  """security auxiliary"""
+  auxiliary: String!
+
+  """security metadata"""
+  metadata: String!
+
+  """security user"""
+  user: User
+
+  """id of the user"""
+  userId: Int!
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+}
+
 type User {
   """user id"""
   userId: ID!
@@ -97,96 +144,6 @@ type User {
   deleted: Boolean!
 }
 
-enum Role {
-  USER
-  ADMIN
-}
-
-"""The Model that represents the Language DB Table"""
-type Language {
-  """language id"""
-  languageId: ID!
-
-  """language code"""
-  code: String!
-
-  """language name"""
-  name: String!
-
-  """language native"""
-  native: String!
-
-  """user security settings"""
-  users: [User]
-
-  """created at"""
-  created_at: DateTime!
-
-  """updated at"""
-  updated_at: DateTime!
-
-  """deleted row"""
-  deleted: Boolean!
-}
-
-scalar DateTime
-
-"""The Model that represents the Security DB Table"""
-type Security {
-  """security id"""
-  securityId: ID!
-
-  """security auth type"""
-  type: AuthType!
-
-  """security secret"""
-  secret: String!
-
-  """security recovery"""
-  recovery: String!
-
-  """security auxiliary"""
-  auxiliary: String!
-
-  """security metadata"""
-  metadata: String!
-
-  """security user"""
-  user: User
-
-  """id of the user"""
-  userId: Int!
-
-  """created at"""
-  created_at: DateTime!
-
-  """updated at"""
-  updated_at: DateTime!
-
-  """deleted row"""
-  deleted: Boolean!
-}
-
-enum AuthType {
-  PASSWORD
-  MFA_CODES
-  WEBAUTHN
-}
-
-type Mutation {
-  """login"""
-  login(input: loginInput): loginPayload
-
-  """register"""
-  register(input: registerInput): registerPayload
-}
-
-"""Login payload"""
-type loginPayload {
-  """The user token."""
-  token: String!
-}
-
 """Login input"""
 input loginInput {
   """The user email."""
@@ -196,8 +153,8 @@ input loginInput {
   password: String!
 }
 
-"""Register payload"""
-type registerPayload {
+"""Login payload"""
+type loginPayload {
   """The user token."""
   token: String!
 }
@@ -218,4 +175,52 @@ input registerInput {
 
   """The user last name."""
   lastname: String!
+}
+
+"""Register payload"""
+type registerPayload {
+  """The user token."""
+  token: String!
+}
+
+type Query {
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+
+  """Get all Languages query"""
+  Language: [Language]
+
+  """Get all Users query"""
+  User(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int
+
+    """username string"""
+    username: String
+  ): [User]
+
+  """Get me query"""
+  me: User
+}
+
+union _Entity = Language | Security | User
+
+scalar _Any
+
+type _Service {
+  """
+  The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
+  """
+  sdl: String
+}
+
+type Mutation {
+  """login"""
+  login(input: loginInput): loginPayload
+
+  """register"""
+  register(input: registerInput): registerPayload
 }
