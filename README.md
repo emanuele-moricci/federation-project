@@ -27,13 +27,22 @@ This project was created to study the GraphQL/React ecosystem + several other im
 - Enter the env with the command `psql`
 - Create a database with the command `create database <DB_NAME>;`
 
-### Back-End
+### Back-End (do this for every federation-\* minus federation-gateway)
 
 - Install every dependency in every federation project using `yarn`
 - Go to the .env file and add the DB connection string to the `DATABASE_URL` key
 - Fire the command `npx prisma generate` to generate the Prisma client
 - Create the **"init"** migration running this command on the project root `yarn generate:migration`
 - Seed the database using the command `yarn generate:seed`
+- Go to `federation-gateway` in the command line
+- Follow the guide to register and run your gateway with all of the services through [Apollo Studio](<[https://link](https://www.apollographql.com/docs/federation/quickstart/)>); Register the API key, the subgraphs through the rover module and create your project in Apollo Studio
+- This is an example command to register a new subgraph
+
+```console
+rover subgraph publish the-federation@current \
+  --name federation-auth --schema ../federation-auth/src/graphql/generated/schema.graphql \
+  --routing-url http://localhost:4001/graphql
+```
 
 ### Front-End
 

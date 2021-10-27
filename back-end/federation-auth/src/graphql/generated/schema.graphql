@@ -1,4 +1,16 @@
+directive @key(fields: String!) on OBJECT | INTERFACE
+
+directive @extends on OBJECT | INTERFACE
+
+directive @external on OBJECT | FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
 type Query {
+  _service: _Service!
+
   """Get me query"""
   me: User
 
@@ -16,6 +28,13 @@ type Query {
 
   """Get all Languages query"""
   Language: [Language]
+}
+
+type _Service {
+  """
+  The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
+  """
+  sdl: String
 }
 
 """The Model that represents the User DB Table"""

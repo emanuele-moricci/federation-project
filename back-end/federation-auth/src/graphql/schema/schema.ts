@@ -1,4 +1,5 @@
-import { gql, makeExecutableSchema } from 'apollo-server';
+import { gql } from 'apollo-server';
+import { buildSubgraphSchema } from '@apollo/subgraph';
 import { GraphQLSchema, printSchema } from 'graphql';
 
 import { applyMiddleware } from 'graphql-middleware';
@@ -8,7 +9,7 @@ import { queryType } from '@schema/query';
 import resolvers from '@schema/resolvers';
 import permissions from '@schema/permissions';
 
-let schema = makeExecutableSchema({
+let schema = buildSubgraphSchema({
   typeDefs: gql(
     printSchema(
       new GraphQLSchema({

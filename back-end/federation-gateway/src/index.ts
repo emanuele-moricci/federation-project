@@ -1,21 +1,12 @@
 import { ApolloServer } from "apollo-server";
 import { ApolloGateway } from "@apollo/gateway";
 
-import { readFileSync } from "fs";
-import path from "path";
 import chalk from "chalk";
 import dotenv from "dotenv-safe";
 dotenv.config();
 
 const startServer = () => {
-  const supergraphSdl = readFileSync(
-    path.join(__dirname, "federation.graphql"),
-    "utf8"
-  ).toString();
-
-  const gateway = new ApolloGateway({
-    supergraphSdl,
-  });
+  const gateway = new ApolloGateway();
 
   const server = new ApolloServer({
     gateway,
