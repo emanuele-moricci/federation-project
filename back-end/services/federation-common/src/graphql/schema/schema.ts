@@ -32,6 +32,6 @@ let schema = buildSubgraphSchema({
   typeDefs: mergedTypeDefs,
   resolvers: mergedResolvers as GraphQLResolverMap<any>,
 });
-schema = applyMiddleware(schema, permissions);
+// schema = applyMiddleware(schema, permissions);
 
 export default schema;

@@ -35,9 +35,10 @@ const resolver = {
     security: async ({ userId }: any): Promise<Security | any> => {
       return getSecurityByUserId(userId);
     },
-    language: async ({ languageId }: IUserRef): Promise<Language> => {
-      return { __typename: 'Language', languageId: languageId };
-    },
+    language: ({ languageId }: IUserRef): Language => ({
+      __typename: 'Language',
+      languageId: languageId,
+    }),
   },
   // EXTENSIONS
   Language: {

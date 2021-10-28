@@ -26,7 +26,7 @@ const resolver = {
     __resolveReference: async ({
       languageId,
     }: ILanguageRef): Promise<Language | null> =>
-      getLanguageById(parseInt(languageId)),
+      await getLanguageById(parseInt(languageId)),
   },
 };
 
