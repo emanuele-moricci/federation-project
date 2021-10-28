@@ -1,4 +1,4 @@
-import { DateTimeResolver } from "graphql-scalars";
+import { DateTimeResolver } from 'graphql-scalars';
 
 const customResolvers = {
   DateTime: DateTimeResolver,

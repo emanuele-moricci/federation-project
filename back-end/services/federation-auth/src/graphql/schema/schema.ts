@@ -7,7 +7,7 @@ import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 
 import path from 'path';
 
-// import permissions from '@schema/permissions';
+import permissions from '@schema/permissions';
 
 import customResolvers from '@schema/Utils/CustomResolvers';
 
