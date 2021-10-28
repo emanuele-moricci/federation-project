@@ -9,7 +9,7 @@ import path from "path";
 
 // import permissions from "@schema/permissions";
 
-import customResolvers from "@schema/Utils/CustomResolvers";
+import customResolvers from "@src/../../utils/customResolvers";
 
 // TYPE DEFINITIONS
 const typeDefs = loadFilesSync(path.join(__dirname, "."), {

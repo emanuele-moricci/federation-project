@@ -8,18 +8,8 @@ import {
 import { getSecurityByUserId } from '@src/services/securityService';
 import { Language } from '@src/graphql/generated/graphql';
 
+import { IUserRef, ILanguageRef } from '@src/../../utils/types/refs';
 import authGuard from '@src/../../utils/permissions';
-
-interface IUserRef {
-  __typename: 'User';
-  userId: string;
-  languageId: string;
-}
-
-interface ILanguageRef {
-  __typename: 'Language';
-  languageId: string;
-}
 
 const resolver = {
   Query: {

@@ -2,10 +2,7 @@ import { Security } from '@prisma/client';
 
 import { getSecurityById } from '@src/services/securityService';
 
-interface ISecurityRef {
-  __typename: 'Security';
-  securityId: string;
-}
+import { ISecurityRef } from '@src/../../utils/types/refs';
 
 const resolver = {
   Security: {
