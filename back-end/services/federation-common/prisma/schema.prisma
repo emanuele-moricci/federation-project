@@ -1,0 +1,19 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Language {
+  languageId     Int      @id @default(autoincrement())
+  code           String   @db.VarChar(2)
+  name           String
+  native         String
+
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  deleted        Boolean  @default(false)
+}

@@ -15,7 +15,6 @@ model User {
   active         Boolean  @default(false)
   role           Role     @default(USER)
 
-  language       Language @relation(fields: [languageId], references: [languageId])
   security       Security?
   languageId     Int
 
@@ -26,19 +25,6 @@ model User {
   address        String?
   avatar         String?
   banner         String?
-
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
-  deleted        Boolean  @default(false)
-}
-
-model Language {
-  languageId     Int      @id @default(autoincrement())
-  code           String   @db.VarChar(2)
-  name           String
-  native         String
-
-  users          User[]
 
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt

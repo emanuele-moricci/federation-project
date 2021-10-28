@@ -12,7 +12,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
+  _Any: any;
 };
 
 
@@ -27,25 +29,10 @@ export enum AuthType {
 }
 
 
-/** The Model that represents the Language DB Table */
 export type Language = {
   __typename?: 'Language';
-  /** language id */
   languageId: Scalars['ID'];
-  /** language code */
-  code: Scalars['String'];
-  /** language name */
-  name: Scalars['String'];
-  /** language native */
-  native: Scalars['String'];
-  /** user security settings */
   users?: Maybe<Array<Maybe<User>>>;
-  /** created at */
-  created_at: Scalars['DateTime'];
-  /** updated at */
-  updated_at: Scalars['DateTime'];
-  /** deleted row */
-  deleted: Scalars['Boolean'];
 };
 
 export type Mutation = {
@@ -68,13 +55,17 @@ export type MutationRegisterArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  _entities: Array<Maybe<_Entity>>;
   _service: _Service;
-  /** Get me query */
-  me?: Maybe<User>;
   /** Get all Users query */
   User?: Maybe<Array<Maybe<User>>>;
-  /** Get all Languages query */
-  Language?: Maybe<Array<Maybe<Language>>>;
+  /** Get me query */
+  me?: Maybe<User>;
+};
+
+
+export type Query_EntitiesArgs = {
+  representations: Array<Scalars['_Any']>;
 };
 
 
@@ -89,7 +80,6 @@ export enum Role {
   Admin = 'ADMIN'
 }
 
-/** The Model that represents the Security DB Table */
 export type Security = {
   __typename?: 'Security';
   /** security id */
@@ -116,7 +106,6 @@ export type Security = {
   deleted: Scalars['Boolean'];
 };
 
-/** The Model that represents the User DB Table */
 export type User = {
   __typename?: 'User';
   /** user id */
@@ -133,8 +122,6 @@ export type User = {
   role: Role;
   /** user language */
   language?: Maybe<Language>;
-  /** id of the language */
-  languageId: Scalars['Int'];
   /** user security settings */
   security?: Maybe<Security>;
   /** user firstname */
@@ -158,6 +145,9 @@ export type User = {
   /** deleted row */
   deleted: Scalars['Boolean'];
 };
+
+
+export type _Entity = Security | User | Language;
 
 export type _Service = {
   __typename?: '_Service';
@@ -284,14 +274,16 @@ export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Language: ResolverTypeWrapper<Language>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Role: Role;
   Security: ResolverTypeWrapper<Security>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
+  _Any: ResolverTypeWrapper<Scalars['_Any']>;
+  _Entity: ResolversTypes['Security'] | ResolversTypes['User'] | ResolversTypes['Language'];
   _Service: ResolverTypeWrapper<_Service>;
   loginInput: LoginInput;
   loginPayload: ResolverTypeWrapper<LoginPayload>;
@@ -304,13 +296,15 @@ export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
   Language: Language;
   ID: Scalars['ID'];
-  String: Scalars['String'];
-  Boolean: Scalars['Boolean'];
   Mutation: {};
   Query: {};
   Int: Scalars['Int'];
+  String: Scalars['String'];
   Security: Security;
+  Boolean: Scalars['Boolean'];
   User: User;
+  _Any: Scalars['_Any'];
+  _Entity: ResolversParentTypes['Security'] | ResolversParentTypes['User'] | ResolversParentTypes['Language'];
   _Service: _Service;
   loginInput: LoginInput;
   loginPayload: LoginPayload;
@@ -328,13 +322,7 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type LanguageResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Language'] = ResolversParentTypes['Language']> = ResolversObject<{
   languageId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  native?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
-  created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -344,10 +332,10 @@ export type MutationResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  _entities?: Resolver<Array<Maybe<ResolversTypes['_Entity']>>, ParentType, ContextType, RequireFields<Query_EntitiesArgs, 'representations'>>;
   _service?: Resolver<ResolversTypes['_Service'], ParentType, ContextType>;
-  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   User?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
-  Language?: Resolver<Maybe<Array<Maybe<ResolversTypes['Language']>>>, ParentType, ContextType>;
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
 }>;
 
 export type SecurityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Security'] = ResolversParentTypes['Security']> = ResolversObject<{
@@ -373,7 +361,6 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
-  languageId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   security?: Resolver<Maybe<ResolversTypes['Security']>, ParentType, ContextType>;
   firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -386,6 +373,14 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_Any'], any> {
+  name: '_Any';
+}
+
+export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Security' | 'User' | 'Language', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -410,6 +405,8 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
   Security?: SecurityResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  _Any?: GraphQLScalarType;
+  _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
   loginPayload?: LoginPayloadResolvers<ContextType>;
   registerPayload?: RegisterPayloadResolvers<ContextType>;

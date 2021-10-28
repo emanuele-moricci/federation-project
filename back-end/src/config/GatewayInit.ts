@@ -5,9 +5,8 @@ export function bounceAuthToFederation(url) {
   return new RemoteGraphQLDataSource({
     url,
     willSendRequest({ request, context }) {
-      if (request.http) {
+      if (request.http)
         request.http.headers.set("Authorization", JSON.stringify(context));
-      }
     },
   });
 }

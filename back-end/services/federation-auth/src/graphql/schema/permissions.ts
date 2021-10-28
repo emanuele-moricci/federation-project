@@ -14,6 +14,10 @@ const isAdmin = rule({ cache: 'contextual' })(
   }
 );
 
+const alwaysAllow = rule({ cache: 'contextual' })(
+  async (_parent, _args, _context, _info) => true
+);
+
 const permissions = shield({
   Query: {
     me: isAuthenticated,
@@ -23,6 +27,7 @@ const permissions = shield({
     register: not(isAuthenticated),
   },
   User: isAuthenticated,
+  Language: alwaysAllow,
 });
 
 export default permissions;

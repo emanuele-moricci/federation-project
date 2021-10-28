@@ -1,13 +1,3 @@
-directive @key(fields: String!) on OBJECT | INTERFACE
-
-directive @extends on OBJECT | INTERFACE
-
-directive @external on OBJECT | FIELD_DEFINITION
-
-directive @requires(fields: String!) on FIELD_DEFINITION
-
-directive @provides(fields: String!) on FIELD_DEFINITION
-
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -24,33 +14,7 @@ enum Role {
   ADMIN
 }
 
-type Language {
-  """language id"""
-  languageId: ID!
-
-  """language code"""
-  code: String!
-
-  """language name"""
-  name: String!
-
-  """language native"""
-  native: String!
-
-  """user security settings"""
-  users: [User]
-
-  """created at"""
-  created_at: DateTime!
-
-  """updated at"""
-  updated_at: DateTime!
-
-  """deleted row"""
-  deleted: Boolean!
-}
-
-type Security {
+type Security @key(fields: "securityId") {
   """security id"""
   securityId: ID!
 
@@ -85,7 +49,7 @@ type Security {
   deleted: Boolean!
 }
 
-type User {
+type User @key(fields: "userId") {
   """user id"""
   userId: ID!
 
@@ -106,9 +70,6 @@ type User {
 
   """user language"""
   language: Language
-
-  """id of the language"""
-  languageId: Int!
 
   """user security settings"""
   security: Security
@@ -183,13 +144,12 @@ type registerPayload {
   token: String!
 }
 
-type Query {
-  _entities(representations: [_Any!]!): [_Entity]!
-  _service: _Service!
+extend type Language @key(fields: "languageId") {
+  languageId: ID! @external
+  users: [User]
+}
 
-  """Get all Languages query"""
-  Language: [Language]
-
+extend type Query {
   """Get all Users query"""
   User(
     """Starting record"""
@@ -206,18 +166,7 @@ type Query {
   me: User
 }
 
-union _Entity = Language | Security | User
-
-scalar _Any
-
-type _Service {
-  """
-  The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
-  """
-  sdl: String
-}
-
-type Mutation {
+extend type Mutation {
   """login"""
   login(input: loginInput): loginPayload
 

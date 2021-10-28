@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_USER: emanuele
       POSTGRES_PASSWORD: 12docker_pwd21!
-      POSTGRES_DB: federationdb_test
+      POSTGRES_DB: federationdb_auth_test
     networks:
       - test_vm
 networks:

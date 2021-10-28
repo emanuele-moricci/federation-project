@@ -35,11 +35,6 @@ type User @key(fields: "userId") {
   language: Language
 
   """
-  id of the language
-  """
-  languageId: Int!
-
-  """
   user security settings
   """
   security: Security

@@ -1,32 +1,48 @@
-// import { User } from '@src/graphql/generated/graphql'; TODO: FIX
+import { User, Security } from '@prisma/client';
 
-import { getAllUsers, getUserById } from '@src/services/userService';
-import { getLanguageById } from '@src/services/languageService';
+import {
+  getAllUsers,
+  getUserById,
+  getUsersByLanguageId,
+} from '@src/services/userService';
 import { getSecurityByUserId } from '@src/services/securityService';
+import { Language } from '@src/graphql/generated/graphql';
 
 interface IUserRef {
   __typename: 'User';
-  userId: number;
+  userId: string;
+  languageId: string;
+}
+
+interface ILanguageRef {
+  __typename: 'Language';
+  languageId: string;
 }
 
 const resolver = {
   Query: {
-    User: async (_source, args, _context, _info): Promise<any[]> => {
+    User: async (_source, args, _context, _info): Promise<User[]> => {
       return await getAllUsers(args);
     },
-    me: async (_source, _args, { userData }, _info): Promise<any> => {
+    me: async (_source, _args, { userData }, _info): Promise<User | null> => {
       return await getUserById(userData?.userId ?? -1);
     },
   },
   User: {
-    _resolveReference: async ({ userId }: IUserRef): Promise<any> => {
-      return getUserById(userId);
+    __resolveReference: async ({ userId }: IUserRef): Promise<User | null> => {
+      return getUserById(parseInt(userId));
     },
-    language({ languageId }: any): Promise<any> {
-      return getLanguageById(languageId);
-    },
-    security({ userId }: any): Promise<any> {
+    security: async ({ userId }: any): Promise<Security | any> => {
       return getSecurityByUserId(userId);
+    },
+    language: async ({ languageId }: IUserRef): Promise<Language> => {
+      return { __typename: 'Language', languageId: languageId };
+    },
+  },
+  // EXTENSIONS
+  Language: {
+    users: async ({ languageId }: ILanguageRef): Promise<User[]> => {
+      return getUsersByLanguageId(parseInt(languageId));
     },
   },
 };

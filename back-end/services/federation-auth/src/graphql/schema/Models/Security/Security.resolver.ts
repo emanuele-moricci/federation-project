@@ -1,22 +1,18 @@
-// import { Security } from '@src/graphql/generated/graphql'; TODO: FIX
+import { Security } from '@prisma/client';
 
-import {
-  getSecurityById,
-  getSecurityByUserId,
-} from '@src/services/securityService';
+import { getSecurityById } from '@src/services/securityService';
 
 interface ISecurityRef {
   __typename: 'Security';
-  securityId: number;
+  securityId: string;
 }
 
 const resolver = {
   Security: {
-    _resolveReference: async ({ securityId }: ISecurityRef): Promise<any> => {
-      return getSecurityById(securityId);
-    },
-    user({ userId }: any): Promise<any> {
-      return getSecurityByUserId(userId);
+    __resolveReference: async ({
+      securityId,
+    }: ISecurityRef): Promise<Security | null> => {
+      return getSecurityById(parseInt(securityId));
     },
   },
 };
