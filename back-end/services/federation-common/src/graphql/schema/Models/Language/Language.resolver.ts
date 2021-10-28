@@ -5,7 +5,16 @@ import {
   getLanguageById,
 } from "@src/services/languageService";
 
-import { ILanguageRef } from "@src/../../utils/types/refs";
+interface ILanguageRef {
+  __typename: "Language";
+  languageId: string;
+}
+
+interface IUserRef {
+  __typename: "User";
+  userId: string;
+  languageId: string;
+}
 
 const resolver = {
   Query: {
