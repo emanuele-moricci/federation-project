@@ -8,31 +8,25 @@ import {
 import { getSecurityByUserId } from '@src/services/securityService';
 import { Language } from '@src/graphql/generated/graphql';
 
-interface IUserRef {
-  __typename: 'User';
-  userId: string;
-  languageId: string;
-}
-
-interface ILanguageRef {
-  __typename: 'Language';
-  languageId: string;
-}
+import { IUserRef, ILanguageRef } from '@src/../../utils/types/refs';
+import authGuard from '@src/../../utils/permissions';
 
 const resolver = {
   Query: {
-    User: async (_source, args, _context, _info): Promise<User[]> => {
-      return await getAllUsers(args);
+    User: async (_source, args, context, _info): Promise<User[]> => {
+      return authGuard(context) ? getAllUsers(args) : [];
     },
-    me: async (_source, _args, { userData }, _info): Promise<User | null> => {
-      return await getUserById(userData?.userId ?? -1);
+    me: async (_source, _args, context, _info): Promise<User | null> => {
+      return authGuard(context)
+        ? getUserById(context?.userData?.userId ?? -1)
+        : null;
     },
   },
   User: {
     __resolveReference: async ({ userId }: IUserRef): Promise<User | null> => {
       return getUserById(parseInt(userId));
     },
-    security: async ({ userId }: any): Promise<Security | any> => {
+    security: async ({ userId }: any): Promise<Security | null> => {
       return getSecurityByUserId(userId);
     },
     language: ({ languageId }: IUserRef): Language => ({
@@ -42,8 +36,14 @@ const resolver = {
   },
   // EXTENSIONS
   Language: {
-    users: async ({ languageId }: ILanguageRef): Promise<User[]> => {
-      return getUsersByLanguageId(parseInt(languageId));
+    users: async (
+      { languageId }: ILanguageRef,
+      _args,
+      context
+    ): Promise<User[]> => {
+      return authGuard(context)
+        ? getUsersByLanguageId(parseInt(languageId))
+        : [];
     },
   },
 };
