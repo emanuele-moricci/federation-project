@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer, gql } from "apollo-server-express";
 
-import getApolloServerContext from '@config/apollo/apolloServerContext';
-import prismaContext from '@config/prisma/prismaContext';
-import schema from '@schema/schema';
+import getApolloServerContext from "@config/apollo/apolloServerTestContext";
+import prismaContext from "@config/prisma/prismaContext";
+import schema from "@schema/schema";
 
 const GETALL_LANGUAGES_QUERY = gql`
   query getAllLanguages {
@@ -17,7 +17,7 @@ const GETALL_LANGUAGES_QUERY = gql`
   }
 `;
 
-describe('getAllLanguages test', () => {
+describe("getAllLanguages test", () => {
   let server: ApolloServer;
 
   beforeAll(() => {
@@ -32,7 +32,7 @@ describe('getAllLanguages test', () => {
     await prismaContext.prisma.$disconnect();
   });
 
-  it('should pass', async () => {
+  it("should pass", async () => {
     const result = await server.executeOperation({
       query: GETALL_LANGUAGES_QUERY,
     });
