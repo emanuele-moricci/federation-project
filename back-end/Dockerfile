@@ -15,8 +15,12 @@ COPY src /app/src
 COPY services /app/services
 RUN rm -rf /app/services/federation-auth/.env; ln -s /other /app/services/federation-auth/.env
 RUN rm -rf /app/services/federation-common/.env; ln -s /other /app/services/federation-common/.env
-RUN mv /app/services/federation-auth/.env.docker.test /app/services/federation-auth/.env
-RUN mv /app/services/federation-common/.env.docker.test /app/services/federation-common/.env
+RUN rm -rf /app/services/federation-auth/.env.test; ln -s /other /app/services/federation-auth/.env.test
+RUN rm -rf /app/services/federation-common/.env.test; ln -s /other /app/services/federation-common/.env.test
+RUN cp /app/services/federation-auth/.env.docker.test /app/services/federation-auth/.env
+RUN cp /app/services/federation-common/.env.docker.test /app/services/federation-common/.env
+RUN mv /app/services/federation-auth/.env.docker.test /app/services/federation-auth/.env.test
+RUN mv /app/services/federation-common/.env.docker.test /app/services/federation-common/.env.test
 # tsconfig and bin
 COPY tsconfig.json /app/tsconfig.json
 COPY tsconfig.json /app/tsconfig.prod.json

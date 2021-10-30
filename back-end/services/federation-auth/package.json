@@ -2,7 +2,7 @@
   "name": "federation-auth",
   "version": "1.0.0",
   "description": "GQL microservice project structure with prisma, codegen, apolloserver and typescript",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "",
   "author": "Emanuele Moricci",
   "license": "MIT",
@@ -22,12 +22,7 @@
     "generate": "graphql-codegen --config codegen.yml && rover subgraph introspect http://localhost:4001/graphql > ./src/graphql/generated/schema.graphql",
     "generate:migration": "npx prisma migrate dev",
     "generate:seed": "npx prisma db seed",
-    "generate:reset": "npx prisma migrate reset --force",
-    "prisma:studio": "npx prisma studio",
-    "docker:up": "docker-compose up -d --build",
-    "docker:down": "docker compose down",
-    "docker:test:run": "docker exec server ./bin/wait-for-it.sh db:5432 -- yarn test",
-    "test:environment:docker": "yarn docker:up && yarn docker:test:run & yarn docker:down"
+    "generate:reset": "npx prisma migrate reset --force"
   },
   "prisma": {
     "seed": "ts-node prisma/db/seeder.ts"
