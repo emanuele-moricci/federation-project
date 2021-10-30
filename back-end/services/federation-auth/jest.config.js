@@ -15,7 +15,7 @@ module.exports = {
   moduleNameMapper: {
     '@src/(.*)': '<rootDir>/src/$1',
     '@config/(.*)': '<rootDir>/src/config/$1',
-    '@schema/(.*)': '<rootDir>/src/graphql/schema/$1',
+    '@fed-schema/(.*)': '<rootDir>/src/graphql/schema/$1',
     '@services/(.*)': '<rootDir>/src/services/$1',
   },
   moduleDirectories: ['src', 'node_modules'],

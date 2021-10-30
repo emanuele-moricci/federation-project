@@ -1,29 +1,33 @@
-# Set the version of docker compose to use
 version: "3.9"
 
-# The containers that compose the project
 services:
   server:
-    container_name: federation-common-service
+    container_name: federation-gateway
     build:
       context: "."
       target: base
     ports:
-      - "4002:4002"
+      - "4000:4000"
     depends_on:
+      - db
+    links:
       - db
     networks:
       - test_vm
   db:
-    container_name: federation-common-db
+    container_name: db
     image: postgres:13
     restart: always
     ports:
       - "5432:5432"
+    # expose:
+    #   - "5434"
+    volumes:
+      - ./bin/create-multiple-postgresql-databases:/docker-entrypoint-initdb.d
     environment:
+      POSTGRES_MULTIPLE_DATABASES: federationdb_auth_test,federationdb_common_test
       POSTGRES_USER: emanuele
       POSTGRES_PASSWORD: 12docker_pwd21!
-      POSTGRES_DB: federationdb_common_test
     networks:
       - test_vm
 networks:

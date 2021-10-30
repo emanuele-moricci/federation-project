@@ -3,7 +3,7 @@ import { ApolloServer, gql } from 'apollo-server-express';
 
 import getApolloServerContext from '@config/apollo/apolloServerTestContext';
 import prismaContext from '@config/prisma/prismaContext';
-import schema from '@schema/schema';
+import schema from '@fed-schema/schema';
 
 const REGISTER_USER = gql`
   mutation register($input: registerInput) {

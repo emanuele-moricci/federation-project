@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import prismaContext from '@config/prisma/prismaContext';
 import { User } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from '@schema/Utils/QueryArgs';
+import { PaginationAndSearchArgs } from '@fed-schema/Utils/QueryArgs';
 
 const getSecureUser = (user: User): User => ({ ...user, password: '' });
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
-import schema from '@schema/schema';
+import schema from '@fed-schema/schema';
 import getApolloServerContext from '@config/apollo/apolloServerContext';
 
 import { bgCyan, blue } from 'chalk';

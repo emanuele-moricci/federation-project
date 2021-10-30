@@ -17,11 +17,11 @@
     "test:watch": "yarn test:prepare && dotenv -e ./.env.test jest --watch",
     "test:coverage": "yarn test:prepare && dotenv -e ./.env.test jest --coverage",
     "lint:fix": "eslint --fix .",
-    "generate": "graphql-codegen --config codegen.yml && rover subgraph introspect http://localhost:4002/graphql > ./src/graphql/generated/schema.graphql",
     "publish:schema": "rover subgraph publish the-federation@current --name federation-common --schema src/graphql/generated/schema.graphql --routing-url http://localhost:4002/graphql",
     "apollo:update": "yarn generate && yarn publish:schema",
-    "generate:seed": "npx prisma db seed",
+    "generate": "graphql-codegen --config codegen.yml && rover subgraph introspect http://localhost:4002/graphql > ./src/graphql/generated/schema.graphql",
     "generate:migration": "npx prisma migrate dev",
+    "generate:seed": "npx prisma db seed",
     "generate:reset": "npx prisma migrate reset --force",
     "prisma:studio": "npx prisma studio",
     "docker:up": "docker-compose up -d --build",
@@ -33,6 +33,7 @@
     "seed": "ts-node prisma/db/seeder.ts"
   },
   "devDependencies": {
+    "@apollo/rover": "^0.3.0",
     "@graphql-codegen/cli": "1.21.5",
     "@graphql-codegen/typescript": "1.22.1",
     "@graphql-codegen/typescript-resolvers": "1.19.2",

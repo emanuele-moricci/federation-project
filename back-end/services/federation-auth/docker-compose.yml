@@ -4,7 +4,7 @@ version: '3.9'
 # The containers that compose the project
 services:
   server:
-    container_name: server
+    container_name: federation-auth-service
     build:
       context: '.'
       target: base
@@ -15,9 +15,9 @@ services:
     networks:
       - test_vm
   db:
+    container_name: federation-auth-db
     image: postgres:13
     restart: always
-    container_name: db
     ports:
       - '5432:5432'
     environment:

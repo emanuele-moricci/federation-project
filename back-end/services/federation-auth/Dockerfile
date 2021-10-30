@@ -28,7 +28,7 @@ COPY codegen.yml /app/codegen.yml
 
 RUN yarn install --frozen-lockfile
 
-RUN yarn generate
+# RUN yarn generate
 RUN yarn prisma generate
 
 RUN yarn build

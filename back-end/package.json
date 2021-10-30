@@ -10,7 +10,15 @@
     "dev": "nodemon",
     "build": "tsc -p tsconfig.prod.json",
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/index.js",
-    "lint:fix": "eslint --fix ."
+    "docker:up": "docker-compose up -d --build",
+    "docker:down": "docker compose down",
+    "auth:prepare": "cd services/federation-auth/ && yarn generate:reset",
+    "common:prepare": "cd services/federation-common/ && yarn generate:reset",
+    "auth:start": "cd services/federation-auth/ && yarn dev",
+    "common:start": "cd services/federation-common/ && yarn dev",
+    "federation": "yarn federation:prepare && yarn federation:start",
+    "federation:prepare": "yarn common:prepare && yarn auth:prepare",
+    "federation:start": "concurrently \"yarn auth:start\" \"yarn common:start\" \"yarn start\""
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.5",
@@ -47,6 +55,7 @@
     "apollo-server-express": "^2",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.2",
+    "concurrently": "^6.3.0",
     "dotenv-cli": "^4.0.0",
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",

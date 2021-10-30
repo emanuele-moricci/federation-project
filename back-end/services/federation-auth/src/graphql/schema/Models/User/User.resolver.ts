@@ -8,7 +8,7 @@ import {
 import { getSecurityByUserId } from '@src/services/securityService';
 import { Language } from '@src/graphql/generated/graphql';
 
-import authGuard from '@schema/permissions';
+import authGuard from '@fed-schema/permissions';
 
 interface IUserRef {
   __typename: 'User';

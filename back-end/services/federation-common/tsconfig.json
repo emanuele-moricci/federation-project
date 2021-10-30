@@ -23,7 +23,7 @@
       /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
       "@src/*": ["src/*"],
       "@config/*": ["src/config/*"],
-      "@schema/*": ["src/graphql/schema/*"],
+      "@fed-schema/*": ["src/graphql/schema/*"],
       "@services/*": ["src/services/*"]
     },
     "sourceMap": true,
