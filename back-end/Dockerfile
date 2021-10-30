@@ -8,8 +8,7 @@ RUN apk update && apk add bash && apk add curl
 # [START] > copy source files
 COPY package*.json yarn.lock /app/
 # environment files
-COPY .env.docker.test /app/.env
-COPY .env.docker.test /app/.env.test
+COPY .env /app/.env
 COPY .env.example /app/.env.example
 # src & services
 COPY src /app/src
@@ -21,7 +20,7 @@ RUN mv /app/services/federation-common/.env.docker.test /app/services/federation
 # tsconfig and bin
 COPY tsconfig.json /app/tsconfig.json
 COPY tsconfig.json /app/tsconfig.prod.json
-# COPY bin/create-multiple-postgresql-databases.sh /app/docker-entrypoint-initdb.d/
+# wait-for-it
 COPY bin /app/bin
 RUN chmod +x /app/bin/wait-for-it.sh
 # [END] > copy source files

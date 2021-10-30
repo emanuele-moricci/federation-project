@@ -1,13 +1,13 @@
-version: "3.9"
+version: '3.9'
 
 services:
   server:
     container_name: federation-gateway
     build:
-      context: "."
+      context: '.'
       target: base
     ports:
-      - "4000:4000"
+      - '4000:4000'
     depends_on:
       - db
     links:
@@ -19,15 +19,13 @@ services:
     image: postgres:13
     restart: always
     ports:
-      - "5432:5432"
-    # expose:
-    #   - "5434"
+      - '5432:5432'
     volumes:
       - ./bin/create-multiple-postgresql-databases:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_MULTIPLE_DATABASES: federationdb_auth_test,federationdb_common_test
-      POSTGRES_USER: emanuele
-      POSTGRES_PASSWORD: 12docker_pwd21!
+      POSTGRES_MULTIPLE_DATABASES: ${POSTGRESQL_DATABASES}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
     networks:
       - test_vm
 networks:
