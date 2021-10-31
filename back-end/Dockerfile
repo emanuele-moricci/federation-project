@@ -8,7 +8,7 @@ RUN apk update && apk add bash && apk add curl
 # [START] > copy source files
 COPY package*.json yarn.lock /app/
 # environment files
-COPY .env /app/.env
+COPY .env.docker.test /app/.env
 COPY .env.example /app/.env.example
 # src & services
 COPY src /app/src
@@ -30,7 +30,6 @@ RUN chmod +x /app/bin/wait-for-it.sh
 # [END] > copy source files
 
 RUN yarn install --frozen-lockfile
-RUN npm rebuild bcrypt --build-from-source
 
 RUN yarn build
 CMD [ "yarn", "federation" ]
