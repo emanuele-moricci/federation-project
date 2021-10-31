@@ -1,4 +1,6 @@
 import bcrypt from 'bcryptjs';
+import { createAvatar } from '@dicebear/avatars';
+import * as style from '@dicebear/avatars-jdenticon-sprites';
 
 import prismaContext from '@config/prisma/prismaContext';
 import { User } from '@prisma/client';
@@ -101,13 +103,21 @@ export const getUsersByLanguageId = async (
  * @returns {Promise<User[]>} The User.
  */
 export const createUser = async (input): Promise<User> => {
+  // Password
   const salt = await bcrypt.genSalt(
     parseInt(process.env.AUTH_CRYPT_SALT ?? '10')
   );
   const hashedPass = await bcrypt.hash(input.password, salt);
 
+  // Random Avatar
+  let imgData = createAvatar(style, {
+    seed: `${input.email}-${input.firstname}-${input.lastname}`,
+    dataUri: true,
+  });
+
+  // True User+Security creation
   const user = await prismaContext.prisma.user.create({
-    data: { ...input, password: hashedPass },
+    data: { ...input, password: hashedPass, avatar: imgData },
   });
 
   await prismaContext.prisma.security.create({

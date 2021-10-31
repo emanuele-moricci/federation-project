@@ -1,4 +1,6 @@
 import bcrypt from 'bcryptjs';
+import { createAvatar } from '@dicebear/avatars';
+import * as style from '@dicebear/avatars-jdenticon-sprites';
 
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
@@ -11,6 +13,15 @@ async function seedUsers() {
   const adminPass = bcrypt.hashSync('Admin!20', salt);
   const userPass = bcrypt.hashSync('User!120', salt);
 
+  let adminAvatar = createAvatar(style, {
+    seed: adminPass,
+    dataUri: true,
+  });
+  let userAvatar = createAvatar(style, {
+    seed: userPass,
+    dataUri: true,
+  });
+
   await prisma.user.create({
     data: {
       email: 'admin@test.com',
@@ -20,6 +31,7 @@ async function seedUsers() {
       password: adminPass,
       languageId: 1,
       role: 'ADMIN',
+      avatar: adminAvatar,
     },
   });
 
@@ -31,6 +43,7 @@ async function seedUsers() {
       username: 'fed_user',
       password: userPass,
       languageId: 2,
+      avatar: userAvatar,
     },
   });
 }
