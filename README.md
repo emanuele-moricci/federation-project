@@ -17,6 +17,12 @@ This project was created to study the GraphQL/React ecosystem + several other im
 - Apollo Client
 - Redux
 
+### Generator
+
+- Plop (Inquirer)
+- Handlebars
+- Exec API
+
 ---
 
 ## How to INITIALIZE
@@ -47,6 +53,8 @@ rover subgraph publish the-federation@current \
   --routing-url http://localhost:4001/graphql
 ```
 
+`P.S. fire up a micro-service and execute the command **yarn generate** to automatically update the Apollo Studio graph ecosystem`
+
 ### Front-End
 
 - WIP
@@ -58,7 +66,7 @@ rover subgraph publish the-federation@current \
 ### Back-End
 
 - Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
-- Start the project with `yarn dev`
+- Go to the root of the project and start the dockerized ecosystem with `yarn docker:up`
 - Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
 
 ### Front-End
@@ -97,6 +105,6 @@ These are the currently available generators
 
 ### Back-End
 
-- Go into the `env.test` file and change the `DATABASE_URL` connection string
-- Create your test under the folder `__tests__/(integration or unit)` with the pattern `*.test.ts or *.unit.test.ts`
-- Fire the test/s with the following commands: `yarn test:integration`, `yarn test:unit`, or `yarn test` to do both
+- Go into the `env.test` and `env.docker.test` file and change the `DATABASE_URL` connection string
+- Create your test under the micro-service folder `__tests__/(integration or unit)` with the pattern `*.test.ts or *.unit.test.ts`
+- Go to the root of the project and fire the testing command: `yarn federation:test` or `yarn federation:test:docker`
