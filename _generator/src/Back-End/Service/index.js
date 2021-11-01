@@ -19,8 +19,23 @@ module.exports = {
     },
     {
       type: "input",
+      name: "ServicePort",
+      message: "On which port will it be served?",
+      default: "4200",
+      validate: (value) => {
+        if (/^\d+$/.test(value)) {
+          return true;
+        }
+
+        return "The port is required and has to be a number";
+      },
+    },
+    {
+      type: "input",
       name: "ServiceDescription",
       message: "Write a small description",
+      default:
+        "GQL microservice project structure with prisma, codegen, apolloserver and typescript",
     },
   ],
   actions: (data) => {
@@ -49,6 +64,23 @@ module.exports = {
         path: `${servicePath}/prisma/db/seeder.ts`,
         templateFile: `${__dirname}/prisma/Service.seeder.ts.hbs`,
         abortOnFail: true,
+      },
+      // Adds a default Typescript configuration file
+      {
+        type: "add",
+        path: `${servicePath}/tsconfig.json`,
+        templateFile: `${__dirname}/main/Service.tsconfig.json.hbs`,
+        abortOnFail: true,
+      },
+      // Adds a default Package configuration file
+      {
+        type: "add",
+        path: `${servicePath}/package.json`,
+        templateFile: `${__dirname}/main/Service.package.json.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
       },
     ];
 
