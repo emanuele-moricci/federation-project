@@ -36,10 +36,18 @@ module.exports = {
     const servicePath = `${rootPath}/${serviceName}`;
 
     const actions = [
+      // Adds the Prisma schema
       {
         type: "add",
         path: `${servicePath}/prisma/schema.prisma`,
         templateFile: `${__dirname}/Service.schema.prisma.hbs`,
+        abortOnFail: true,
+      },
+      // Adds the Prisma DB Seeder
+      {
+        type: "add",
+        path: `${servicePath}/prisma/db/seeder.ts`,
+        templateFile: `${__dirname}/Service.seeder.ts.hbs`,
         abortOnFail: true,
       },
     ];
