@@ -94,6 +94,27 @@ export const getUsersByLanguageId = async (
 };
 
 /**
+ * Function that returns a list of Users with the same country.
+ *
+ * @param {number} countryId The country ID.
+ *
+ * @async
+ * @function getUsersByCountryId.
+ * @returns {Promise<User[]>} The Users list.
+ */
+export const getUsersByCountryId = async (
+  countryId: number
+): Promise<User[]> => {
+  const users = await prismaContext.prisma.user.findMany({
+    where: {
+      countryId,
+    },
+  });
+
+  return users.map(u => getSecureUser(u));
+};
+
+/**
  * Function that created a User with some input data and returns it.
  *
  * @param input The User input data.

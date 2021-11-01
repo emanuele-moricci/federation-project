@@ -10,3 +10,11 @@ extend type Language @key(fields: "languageId") {
   # every user with a given language
   users: [User]
 }
+
+extend type Country @key(fields: "countryId") {
+  # the country id
+  countryId: ID! @external
+
+  # every user with a given country
+  users: [User]
+}

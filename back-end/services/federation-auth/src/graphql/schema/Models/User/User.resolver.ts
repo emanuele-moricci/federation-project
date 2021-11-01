@@ -3,10 +3,11 @@ import { User, Security } from '@prisma/client';
 import {
   getAllUsers,
   getUserById,
+  getUsersByCountryId,
   getUsersByLanguageId,
 } from '@src/services/userService';
 import { getSecurityByUserId } from '@src/services/securityService';
-import { Language } from '@src/graphql/generated/graphql';
+import { Language, Country } from '@src/graphql/generated/graphql';
 
 import authGuard from '@fed-schema/permissions';
 
@@ -19,6 +20,11 @@ interface IUserRef {
 interface ILanguageRef {
   __typename: 'Language';
   languageId: string;
+}
+
+interface ICountryRef {
+  __typename: 'Country';
+  countryId: string;
 }
 
 const resolver = {
@@ -38,6 +44,10 @@ const resolver = {
       __typename: 'Language',
       languageId: languageId,
     }),
+    country: ({ countryId }: ICountryRef): Country => ({
+      __typename: 'Country',
+      countryId: countryId,
+    }),
   },
   // EXTENSIONS
   Language: {
@@ -49,6 +59,15 @@ const resolver = {
       return authGuard(context)
         ? getUsersByLanguageId(parseInt(languageId))
         : [];
+    },
+  },
+  Country: {
+    users: async (
+      { countryId }: ICountryRef,
+      _args,
+      context
+    ): Promise<User[]> => {
+      return authGuard(context) ? getUsersByCountryId(parseInt(countryId)) : [];
     },
   },
 };

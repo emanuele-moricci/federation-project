@@ -47,6 +47,7 @@ describe('register test', () => {
           email: email,
           password: 'Jest!120',
           languageId: 1,
+          countryId: 124,
           firstname: 'Jest',
           lastname: 'Federation',
         },

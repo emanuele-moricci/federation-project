@@ -31,6 +31,7 @@ model User {
 
   security       Security?
   languageId     Int
+  countryId      Int
 
   firstname      String
   lastname       String

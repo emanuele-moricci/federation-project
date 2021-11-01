@@ -71,6 +71,9 @@ type User @key(fields: "userId") {
   """user language"""
   language: Language
 
+  """user country"""
+  country: Country
+
   """user security settings"""
   security: Security
 
@@ -131,6 +134,9 @@ input registerInput {
   """The language id."""
   languageId: Int!
 
+  """The country id."""
+  countryId: Int!
+
   """The user first name."""
   firstname: String!
 
@@ -146,6 +152,11 @@ type registerPayload {
 
 extend type Language @key(fields: "languageId") {
   languageId: ID! @external
+  users: [User]
+}
+
+extend type Country @key(fields: "countryId") {
+  countryId: ID! @external
   users: [User]
 }
 

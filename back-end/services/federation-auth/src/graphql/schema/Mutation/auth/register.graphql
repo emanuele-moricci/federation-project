@@ -25,6 +25,11 @@ input registerInput {
   languageId: Int!
 
   """
+  The country id.
+  """
+  countryId: Int!
+
+  """
   The user first name.
   """
   firstname: String!

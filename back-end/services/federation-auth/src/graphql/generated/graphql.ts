@@ -28,6 +28,12 @@ export enum AuthType {
   Webauthn = 'WEBAUTHN'
 }
 
+export type Country = {
+  __typename?: 'Country';
+  countryId: Scalars['ID'];
+  users?: Maybe<Array<Maybe<User>>>;
+};
+
 
 export type Language = {
   __typename?: 'Language';
@@ -122,6 +128,8 @@ export type User = {
   role: Role;
   /** user language */
   language?: Maybe<Language>;
+  /** user country */
+  country?: Maybe<Country>;
   /** user security settings */
   security?: Maybe<Security>;
   /** user firstname */
@@ -147,7 +155,7 @@ export type User = {
 };
 
 
-export type _Entity = Security | User | Language;
+export type _Entity = Security | User | Language | Country;
 
 export type _Service = {
   __typename?: '_Service';
@@ -178,6 +186,8 @@ export type RegisterInput = {
   password: Scalars['String'];
   /** The language id. */
   languageId: Scalars['Int'];
+  /** The country id. */
+  countryId: Scalars['Int'];
   /** The user first name. */
   firstname: Scalars['String'];
   /** The user last name. */
@@ -271,9 +281,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   AuthType: AuthType;
+  Country: ResolverTypeWrapper<Country>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Language: ResolverTypeWrapper<Language>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -283,7 +294,7 @@ export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Security'] | ResolversTypes['User'] | ResolversTypes['Language'];
+  _Entity: ResolversTypes['Security'] | ResolversTypes['User'] | ResolversTypes['Language'] | ResolversTypes['Country'];
   _Service: ResolverTypeWrapper<_Service>;
   loginInput: LoginInput;
   loginPayload: ResolverTypeWrapper<LoginPayload>;
@@ -293,9 +304,10 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+  Country: Country;
+  ID: Scalars['ID'];
   DateTime: Scalars['DateTime'];
   Language: Language;
-  ID: Scalars['ID'];
   Mutation: {};
   Query: {};
   Int: Scalars['Int'];
@@ -304,7 +316,7 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   User: User;
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Security'] | ResolversParentTypes['User'] | ResolversParentTypes['Language'];
+  _Entity: ResolversParentTypes['Security'] | ResolversParentTypes['User'] | ResolversParentTypes['Language'] | ResolversParentTypes['Country'];
   _Service: _Service;
   loginInput: LoginInput;
   loginPayload: LoginPayload;
@@ -315,6 +327,12 @@ export type ResolversParentTypes = ResolversObject<{
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type CountryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = ResolversObject<{
+  countryId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
@@ -361,6 +379,7 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   security?: Resolver<Maybe<ResolversTypes['Security']>, ParentType, ContextType>;
   firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -380,7 +399,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Security' | 'User' | 'Language', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Security' | 'User' | 'Language' | 'Country', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -399,6 +418,7 @@ export type RegisterPayloadResolvers<ContextType = IPrismaContext, ParentType ex
 }>;
 
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
+  Country?: CountryResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Language?: LanguageResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
