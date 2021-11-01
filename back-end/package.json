@@ -20,7 +20,7 @@
     "federation:test": "cd services/federation-auth/ && yarn test & cd services/federation-common/ && yarn test",
     "docker:up": "docker-compose up -d --build",
     "docker:down": "docker compose down",
-    "docker:test:run": "docker exec federation-gateway ./bin/wait-for-it.sh db:5432 -- yarn federation:test",
+    "docker:test:run": "docker exec federation-gateway ./bin/wait-for-it.sh db:5435 -- yarn federation:test",
     "federation:test:docker": "yarn docker:up && yarn docker:test:run & yarn docker:down"
   },
   "devDependencies": {
