@@ -2,9 +2,11 @@ module.exports = function (plop) {
   // GENERATORS
   let modelGenerator = require("./Back-End/Model/index.js");
   let queryGenerator = require("./Back-End/Query/index.js");
+  let mutationGenerator = require("./Back-End/Query/index.js");
 
   plop.setGenerator("model", modelGenerator);
   plop.setGenerator("query", queryGenerator);
+  plop.setGenerator("mutation", mutationGenerator);
 
   // HELPERS
   plop.setHelper("capital", function (text) {
