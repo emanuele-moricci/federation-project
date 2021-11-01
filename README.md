@@ -67,15 +67,15 @@ rover subgraph publish the-federation@current \
 
 ---
 
-## How to GENERATE (TO RE-DO)
+## How to GENERATE
 
-This project comes with a handy micro-generator tool under `utils/federation-generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
+This project comes with a handy micro-generator tool under `/_generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
 
 The following steps are needed to install the utility:
 
-- open the terminal and go to `cd utils/federation-generator`
+- open the terminal and go to `cd _generator`
 - Install [Plop](https://plopjs.com/) using `yarn global add plop`
-- Install the tool using `npm -i g`
+- Install the tool using `npm i -g`
 
 After succesfully installing the utility, go to the **root** of your federation micro-service and fire up the command `federation-generator` and follow the GUI to choose your code generator of choice.
 

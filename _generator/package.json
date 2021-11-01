@@ -16,7 +16,9 @@
     "federation-generator": "./index.js"
   },
   "dependencies": {
+    "ascii-art": "^2.8.5",
     "chalk": "^4.1.2",
+    "g": "^2.0.1",
     "minimist": "^1.2.5",
     "plop": "^2.7.6"
   }

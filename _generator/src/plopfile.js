@@ -1,15 +1,15 @@
 module.exports = function (plop) {
   // GENERATORS
-  let modelGenerator = require("./Back-End/Model/Model.js");
+  let modelGenerator = require("./Back-End/Model/index.js");
   plop.setGenerator("model", modelGenerator);
 
   // HELPERS
-  plop.setHelper('capital', function (text) {
-      return text.charAt(0).toUpperCase() + text.slice(1)
+  plop.setHelper("capital", function (text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
   });
 
-  plop.setHelper('firstLower', function (text) {
-      return text.charAt(0).toLowerCase() + text.slice(1)
+  plop.setHelper("firstLower", function (text) {
+    return text.charAt(0).toLowerCase() + text.slice(1);
   });
 
   // CUSTOM ACTIONS

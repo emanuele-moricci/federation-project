@@ -18,3 +18,5 @@ model Language {
   updated_at     DateTime @updatedAt
   deleted        Boolean  @default(false)
 }
+
+// [ADD NEW PRISMA TYPES ABOVE] <- DO NOT REMOVE - Needed for the generator to create prisma types seamlessly

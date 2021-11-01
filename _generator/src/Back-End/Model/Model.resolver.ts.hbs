@@ -1,0 +1,24 @@
+import { {{ capital ModelName }} } from '@prisma/client';
+
+// import {} from '@src/services/{{ firstLower ModelName }}Service'; IMPORT YOUR FUNCTION FROM THE SERVICE
+
+interface I{{ capital ModelName }}Ref {
+  __typename: '{{ capital ModelName }}';
+  {{ firstLower ModelName }}Id: string;
+}
+
+const resolver = {
+  Query: {
+    {{ capital ModelName }}: async (_source, _args, _context, _info): Promise<{{ capital ModelName }}[]> => {
+      // RETURN YOUR RESULT HERE
+    },
+  },
+  {{ capital ModelName }}: {
+    __resolveReference: async ({
+      {{ firstLower ModelName }}Id,
+    }: I{{ capital ModelName }}Ref): Promise<{{ capital ModelName }} | null> =>
+      // RETURN YOUR RESULT HERE
+  },
+};
+
+export default resolver;

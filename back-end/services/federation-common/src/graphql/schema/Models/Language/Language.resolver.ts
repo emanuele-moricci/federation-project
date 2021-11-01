@@ -1,17 +1,17 @@
-import { Language } from "@prisma/client";
+import { Language } from '@prisma/client';
 
 import {
   getAllLanguages,
   getLanguageById,
-} from "@src/services/languageService";
+} from '@src/services/languageService';
 
 interface ILanguageRef {
-  __typename: "Language";
+  __typename: 'Language';
   languageId: string;
 }
 
 interface IUserRef {
-  __typename: "User";
+  __typename: 'User';
   userId: string;
   languageId: string;
 }
