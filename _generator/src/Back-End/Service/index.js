@@ -50,6 +50,7 @@ module.exports = {
     const rootPath = `${path.join(cwd, "/services")}`;
     const servicePath = `${rootPath}/${serviceName}`;
     const srcPath = `${servicePath}/src`;
+    const configPath = `${servicePath}/src/config`;
 
     const actions = [
       // Adds the Prisma schema
@@ -123,6 +124,43 @@ module.exports = {
         type: "add",
         path: `${srcPath}/__tests__/__mocks__/prismaMock.ts`,
         templateFile: `${__dirname}/src/tests/Service.prismaMock.ts.hbs`,
+        abortOnFail: true,
+      },
+      // Adds the apollo&prisma config files
+      {
+        type: "add",
+        path: `${configPath}/apollo/apolloServerContext.ts`,
+        templateFile: `${__dirname}/src/config/apollo/Service.apolloServerContext.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${configPath}/apollo/apolloServerTestContext.ts`,
+        templateFile: `${__dirname}/src/config/apollo/Service.apolloServerTestContext.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${configPath}/apollo/IApolloServerContext.ts`,
+        templateFile: `${__dirname}/src/config/apollo/Service.IApolloServerContext.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${configPath}/prisma/IPrismaContext.ts`,
+        templateFile: `${__dirname}/src/config/prisma/Service.IPrismaContext.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${configPath}/prisma/prismaClient.ts`,
+        templateFile: `${__dirname}/src/config/prisma/Service.prismaClient.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${configPath}/prisma/prismaContext.ts`,
+        templateFile: `${__dirname}/src/config/prisma/Service.prismaContext.ts.hbs`,
         abortOnFail: true,
       },
     ];
