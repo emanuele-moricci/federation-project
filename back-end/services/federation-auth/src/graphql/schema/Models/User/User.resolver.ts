@@ -26,11 +26,6 @@ const resolver = {
     User: async (_source, args, context, _info): Promise<User[]> => {
       return authGuard(context) ? getAllUsers(args) : [];
     },
-    me: async (_source, _args, context, _info): Promise<User | null> => {
-      return authGuard(context)
-        ? getUserById(context?.userData?.userId ?? -1)
-        : null;
-    },
   },
   User: {
     __resolveReference: async ({ userId }: IUserRef): Promise<User | null> => {
