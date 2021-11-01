@@ -82,6 +82,34 @@ module.exports = {
           parsedServiceName: serviceName,
         },
       },
+      // Adds a default Nodemon configuration file
+      {
+        type: "add",
+        path: `${servicePath}/nodemon.json`,
+        templateFile: `${__dirname}/main/Service.nodemon.json.hbs`,
+        abortOnFail: true,
+      },
+      // Adds a default Jest configuration file
+      {
+        type: "add",
+        path: `${servicePath}/jest.config.js`,
+        templateFile: `${__dirname}/main/Service.jest.config.js.hbs`,
+        abortOnFail: true,
+      },
+      // Adds a default Env Example configuration file
+      {
+        type: "add",
+        path: `${servicePath}/.env.example`,
+        templateFile: `${__dirname}/main/Service.env.example.hbs`,
+        abortOnFail: true,
+      },
+      // Adds a default Codegen configuration file
+      {
+        type: "add",
+        path: `${servicePath}/codegen.yml`,
+        templateFile: `${__dirname}/main/Service.codegen.yml.hbs`,
+        abortOnFail: true,
+      },
     ];
 
     actions.push({
