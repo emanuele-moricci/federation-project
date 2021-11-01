@@ -84,7 +84,7 @@ module.exports = {
       type: "signalSuccess",
       data: {
         callToAction:
-          "Don't forget to add the Model to the prisma configuration file and migrate!",
+          "Don't forget to update the Model to the prisma configuration file and migrate!",
       },
     });
 
