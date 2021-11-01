@@ -10,12 +10,6 @@ interface ILanguageRef {
   languageId: string;
 }
 
-interface IUserRef {
-  __typename: 'User';
-  userId: string;
-  languageId: string;
-}
-
 const resolver = {
   Query: {
     Language: async (_source, _args, _context, _info): Promise<Language[]> => {
