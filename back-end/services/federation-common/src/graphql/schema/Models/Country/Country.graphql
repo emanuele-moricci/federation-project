@@ -40,7 +40,17 @@ type Country @key(fields: "countryId") {
 
 extend type Query {
   """
-  Get all Countrys query
+  Get all Countries query
   """
-  Country: [Country]
+  Country(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int
+  ): [Country]
 }

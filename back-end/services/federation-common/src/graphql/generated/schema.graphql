@@ -3,57 +3,101 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
-"""The Country Model"""
+"""
+The Country Model
+"""
 type Country @key(fields: "countryId") {
-  """country id"""
+  """
+  country id
+  """
   countryId: ID!
 
-  """name"""
+  """
+  name
+  """
   name: String
 
-  """alpha2"""
+  """
+  alpha2
+  """
   alpha2: String
 
-  """alpha3"""
+  """
+  alpha3
+  """
   alpha3: String
 
-  """created at"""
+  """
+  created at
+  """
   created_at: DateTime!
 
-  """updated at"""
+  """
+  updated at
+  """
   updated_at: DateTime!
 
-  """deleted row"""
+  """
+  deleted row
+  """
   deleted: Boolean!
 }
 
 type Language @key(fields: "languageId") {
-  """language id"""
+  """
+  language id
+  """
   languageId: ID!
 
-  """language code"""
+  """
+  language code
+  """
   code: String!
 
-  """language name"""
+  """
+  language name
+  """
   name: String!
 
-  """language native"""
+  """
+  language native
+  """
   native: String!
 
-  """created at"""
+  """
+  created at
+  """
   created_at: DateTime!
 
-  """updated at"""
+  """
+  updated at
+  """
   updated_at: DateTime!
 
-  """deleted row"""
+  """
+  deleted row
+  """
   deleted: Boolean!
 }
 
 extend type Query {
-  """Get all Countrys query"""
-  Country: [Country]
+  """
+  Get all Countries query
+  """
+  Country(
+    """
+    Starting record
+    """
+    skip: Int
 
-  """Get all Languages query"""
+    """
+    Records shown
+    """
+    take: Int
+  ): [Country]
+
+  """
+  Get all Languages query
+  """
   Language: [Language]
 }

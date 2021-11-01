@@ -1,6 +1,8 @@
 import prismaContext from '@config/prisma/prismaContext';
 import { Country } from '@prisma/client';
 
+import { PaginationAndSearchArgs } from '@fed-schema/Utils/QueryArgs';
+
 /**
  * Function that returns all of the Countries present in the database.
  *
@@ -8,8 +10,11 @@ import { Country } from '@prisma/client';
  * @function getAllCountries.
  * @returns {Promise<Country[]>} The Countries List.
  */
-export const getAllCountries = async (): Promise<Country[]> => {
-  const countries = await prismaContext.prisma.country.findMany();
+export const getAllCountries = async ({
+  skip,
+  take,
+}: PaginationAndSearchArgs): Promise<Country[]> => {
+  const countries = await prismaContext.prisma.country.findMany({ skip, take });
   return countries;
 };
 

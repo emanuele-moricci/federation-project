@@ -9,8 +9,8 @@ interface ICountryRef {
 
 const resolver = {
   Query: {
-    Country: async (_source, _args, _context, _info): Promise<Country[]> => {
-      return await getAllCountries();
+    Country: async (_source, args, _context, _info): Promise<Country[]> => {
+      return await getAllCountries(args);
     },
   },
   Country: {
