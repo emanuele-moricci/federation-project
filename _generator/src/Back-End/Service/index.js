@@ -211,8 +211,15 @@ module.exports = {
     actions.push({
       type: "signalSuccess",
       data: {
-        callToAction:
-          "Your micro-service was created! Remember to create the .env files, generate the yarn packages/prisma context/db migration+seeding and publish the new apollo federation config.",
+        callToAction: `Your micro-service was created! Remember to:
+          - Create the .env, .env.test and .env.docker.test files;
+          - Generate the yarn packages;
+          - Generate the Prisma Context;
+          - Migrate + Seed the Database;
+          - Link the new micro-service with the Gateway commands;
+          - Add a new Model with the 'Model Generator';
+          - Fire it on standalone mode and Publish the new apollo federation config;
+          - Start the whole federated engine to check if everything works;`,
       },
     });
 
