@@ -63,7 +63,7 @@ module.exports = {
         type: "modify",
         path: `${prismaPath}/schema.prisma`,
         pattern: new RegExp(/.*\/\/.*\[ADD NEW PRISMA TYPES ABOVE\].+\n/),
-        templateFile: `${__dirname}/Mode.prisma.hbs`,
+        templateFile: `${__dirname}/Model.prisma.hbs`,
         abortOnFail: true,
       },
     ];

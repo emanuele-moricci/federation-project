@@ -16,8 +16,9 @@ const resolver = {
   {{ capital ModelName }}: {
     __resolveReference: async ({
       {{ firstLower ModelName }}Id,
-    }: I{{ capital ModelName }}Ref): Promise<{{ capital ModelName }} | null> =>
+    }: I{{ capital ModelName }}Ref): Promise<{{ capital ModelName }} | null> => {
       // RETURN YOUR RESULT HERE
+    }
   },
 };
 
