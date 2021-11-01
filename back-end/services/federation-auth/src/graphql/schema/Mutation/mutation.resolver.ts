@@ -1,3 +1,5 @@
+import { LoginPayload, RegisterPayload } from '@src/graphql/generated/graphql';
+
 import {
   createUser,
   getUserByEmailAndPassword,
@@ -8,7 +10,7 @@ import { jwtSign } from '../Utils/JWTToken';
 const resolver = {
   Mutation: {
     login: {
-      resolve: async (_, { input }): Promise<{ token: string }> => {
+      resolve: async (_, { input }): Promise<LoginPayload> => {
         const user = await getUserByEmailAndPassword(
           input.email,
           input.password
@@ -20,7 +22,7 @@ const resolver = {
       },
     },
     register: {
-      resolve: async (_, { input }): Promise<{ token: string | null }> => {
+      resolve: async (_, { input }): Promise<RegisterPayload> => {
         try {
           const user = await createUser(input);
           const token = jwtSign(user);
@@ -28,7 +30,7 @@ const resolver = {
           return { token };
         } catch (error) {
           console.error(error);
-          return { token: null };
+          return { token: '' };
         }
       },
     },
