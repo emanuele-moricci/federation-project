@@ -40,14 +40,14 @@ module.exports = {
       {
         type: "add",
         path: `${servicePath}/prisma/schema.prisma`,
-        templateFile: `${__dirname}/Service.schema.prisma.hbs`,
+        templateFile: `${__dirname}/prisma/Service.schema.prisma.hbs`,
         abortOnFail: true,
       },
       // Adds the Prisma DB Seeder
       {
         type: "add",
         path: `${servicePath}/prisma/db/seeder.ts`,
-        templateFile: `${__dirname}/Service.seeder.ts.hbs`,
+        templateFile: `${__dirname}/prisma/Service.seeder.ts.hbs`,
         abortOnFail: true,
       },
     ];
