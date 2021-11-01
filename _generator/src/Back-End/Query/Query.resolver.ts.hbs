@@ -1,0 +1,9 @@
+const resolver = {
+  Query: {
+    {{ firstLower QueryName }}: async (_source, _args, context, _info): Promise<any> => {
+      // CHANGE THE RETURN TYPE AND ADD THE LOGIC!
+    },
+  },
+};
+
+export default resolver;

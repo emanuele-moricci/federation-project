@@ -1,4 +1,5 @@
 const path = require("path");
+const { firstLower, capital } = require("../../Utils/formatUtils");
 
 module.exports = {
   description: "Add an empty Model",
@@ -25,14 +26,12 @@ module.exports = {
   actions: (data) => {
     const cwd = process.cwd();
 
+    const capitalizedModelName = capital(data.ModelName);
+    const firstLowerModelName = firstLower(data.ModelName);
+
     const componentPath = `${path.join(cwd, "/src/graphql/schema/Models")}`;
     const servicePath = `${path.join(cwd, "/src/services")}`;
     const prismaPath = `${path.join(cwd, "/prisma")}`;
-
-    const capitalizedModelName =
-      data.ModelName.charAt(0).toUpperCase() + data.ModelName.slice(1);
-    const firstLowerModelName =
-      data.ModelName.charAt(0).toLowerCase() + data.ModelName.slice(1);
     const modelPath = `${componentPath}/${capitalizedModelName}`;
 
     /**
