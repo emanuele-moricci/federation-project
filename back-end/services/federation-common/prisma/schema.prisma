@@ -19,4 +19,15 @@ model Language {
   deleted        Boolean  @default(false)
 }
 
+model Country {
+  countryId     Int      @id @default(autoincrement())
+  name          String   
+  alpha2        String   @db.VarChar(2)
+  alpha3        String   @db.VarChar(3)
+
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  deleted       Boolean  @default(false)
+}
+
 // [ADD NEW PRISMA TYPES ABOVE] <- DO NOT REMOVE - Needed for the generator to create prisma types seamlessly

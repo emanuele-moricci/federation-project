@@ -1,0 +1,46 @@
+"""
+The Country Model
+"""
+type Country @key(fields: "countryId") {
+  """
+  country id
+  """
+  countryId: ID!
+
+  """
+  name
+  """
+  name: String
+
+  """
+  alpha2
+  """
+  alpha2: String
+
+  """
+  alpha3
+  """
+  alpha3: String
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}
+
+extend type Query {
+  """
+  Get all Countrys query
+  """
+  Country: [Country]
+}

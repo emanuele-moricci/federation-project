@@ -3,6 +3,30 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+"""The Country Model"""
+type Country @key(fields: "countryId") {
+  """country id"""
+  countryId: ID!
+
+  """name"""
+  name: String
+
+  """alpha2"""
+  alpha2: String
+
+  """alpha3"""
+  alpha3: String
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+}
+
 type Language @key(fields: "languageId") {
   """language id"""
   languageId: ID!
@@ -27,6 +51,9 @@ type Language @key(fields: "languageId") {
 }
 
 extend type Query {
+  """Get all Countrys query"""
+  Country: [Country]
+
   """Get all Languages query"""
   Language: [Language]
 }

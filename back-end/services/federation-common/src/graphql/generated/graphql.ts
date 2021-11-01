@@ -22,6 +22,25 @@ export type Scalars = {
 
 
 
+/** The Country Model */
+export type Country = {
+  __typename?: 'Country';
+  /** country id */
+  countryId: Scalars['ID'];
+  /** name */
+  name?: Maybe<Scalars['String']>;
+  /** alpha2 */
+  alpha2?: Maybe<Scalars['String']>;
+  /** alpha3 */
+  alpha3?: Maybe<Scalars['String']>;
+  /** created at */
+  created_at: Scalars['DateTime'];
+  /** updated at */
+  updated_at: Scalars['DateTime'];
+  /** deleted row */
+  deleted: Scalars['Boolean'];
+};
+
 
 export type Language = {
   __typename?: 'Language';
@@ -45,6 +64,8 @@ export type Query = {
   __typename?: 'Query';
   _entities: Array<Maybe<_Entity>>;
   _service: _Service;
+  /** Get all Countrys query */
+  Country?: Maybe<Array<Maybe<Country>>>;
   /** Get all Languages query */
   Language?: Maybe<Array<Maybe<Language>>>;
 };
@@ -55,7 +76,7 @@ export type Query_EntitiesArgs = {
 };
 
 
-export type _Entity = Language;
+export type _Entity = Country | Language;
 
 export type _Service = {
   __typename?: '_Service';
@@ -142,33 +163,46 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
-  Language: ResolverTypeWrapper<Language>;
+  Country: ResolverTypeWrapper<Country>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  Language: ResolverTypeWrapper<Language>;
   Query: ResolverTypeWrapper<{}>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Language'];
+  _Entity: ResolversTypes['Country'] | ResolversTypes['Language'];
   _Service: ResolverTypeWrapper<_Service>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  DateTime: Scalars['DateTime'];
-  Language: Language;
+  Country: Country;
   ID: Scalars['ID'];
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
+  DateTime: Scalars['DateTime'];
+  Language: Language;
   Query: {};
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Language'];
+  _Entity: ResolversParentTypes['Country'] | ResolversParentTypes['Language'];
   _Service: _Service;
 }>;
 
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type CountryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = ResolversObject<{
+  countryId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  alpha2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  alpha3?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
@@ -188,6 +222,7 @@ export type LanguageResolvers<ContextType = IPrismaContext, ParentType extends R
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   _entities?: Resolver<Array<Maybe<ResolversTypes['_Entity']>>, ParentType, ContextType, RequireFields<Query_EntitiesArgs, 'representations'>>;
   _service?: Resolver<ResolversTypes['_Service'], ParentType, ContextType>;
+  Country?: Resolver<Maybe<Array<Maybe<ResolversTypes['Country']>>>, ParentType, ContextType>;
   Language?: Resolver<Maybe<Array<Maybe<ResolversTypes['Language']>>>, ParentType, ContextType>;
 }>;
 
@@ -196,7 +231,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Language', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Country' | 'Language', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -205,6 +240,7 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
+  Country?: CountryResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Language?: LanguageResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
