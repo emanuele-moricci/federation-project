@@ -51,6 +51,7 @@ module.exports = {
     const servicePath = `${rootPath}/${serviceName}`;
     const srcPath = `${servicePath}/src`;
     const configPath = `${servicePath}/src/config`;
+    const schemaPath = `${servicePath}/src/graphql/schema`;
 
     const actions = [
       // Adds the Prisma schema
@@ -161,6 +162,43 @@ module.exports = {
         type: "add",
         path: `${configPath}/prisma/prismaContext.ts`,
         templateFile: `${__dirname}/src/config/prisma/Service.prismaContext.ts.hbs`,
+        abortOnFail: true,
+      },
+      // Adds the graphql schema&resolver files
+      {
+        type: "add",
+        path: `${schemaPath}/schema.ts`,
+        templateFile: `${__dirname}/src/graphql/Service.schema.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${schemaPath}/Utils/CustomResolvers.ts`,
+        templateFile: `${__dirname}/src/graphql/utils/Service.CustomResolvers.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${schemaPath}/Utils/QueryArgs.ts`,
+        templateFile: `${__dirname}/src/graphql/utils/Service.QueryArgs.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${schemaPath}/Query/query.resolver.ts`,
+        templateFile: `${__dirname}/src/graphql/Service.query.resolver.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${schemaPath}/Mutation/mutation.resolver.ts`,
+        templateFile: `${__dirname}/src/graphql/Service.mutation.resolver.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${schemaPath}/Models/entry.graphql`,
+        templateFile: `${__dirname}/src/graphql/Service.entry.graphql.hbs`,
         abortOnFail: true,
       },
     ];
