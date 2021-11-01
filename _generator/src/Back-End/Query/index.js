@@ -37,13 +37,13 @@ module.exports = {
     const actions = [
       {
         type: "add",
-        path: `${queryPath}/${capitalizedModelName}.graphql`,
+        path: `${queryPath}/${firstLowerQueryName}.graphql`,
         templateFile: `${__dirname}/Query.graphql.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
-        path: `${queryPath}/${capitalizedModelName}.resolver.ts`,
+        path: `${queryPath}/${firstLowerQueryName}.resolver.ts`,
         templateFile: `${__dirname}/Query.resolver.ts.hbs`,
         abortOnFail: true,
       },
