@@ -8,6 +8,19 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
 }
 
+// ENUMS
+enum Role {
+  USER
+  ADMIN
+}
+
+enum AuthType {
+  PASSWORD
+  MFA_CODES
+  WEBAUTHN
+}
+
+// MODELS
 model User {
   userId         Int      @id @default(autoincrement())
   email          String   @unique
@@ -49,13 +62,4 @@ model Security {
   deleted        Boolean  @default(false)
 }
 
-enum Role {
-  USER
-  ADMIN
-}
-
-enum AuthType {
-  PASSWORD
-  MFA_CODES
-  WEBAUTHN
-}
+// [ADD NEW PRISMA TYPES ABOVE] <- DO NOT REMOVE - Needed for the generator to create prisma types seamlessly
