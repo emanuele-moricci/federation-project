@@ -49,6 +49,7 @@ module.exports = {
 
     const rootPath = `${path.join(cwd, "/services")}`;
     const servicePath = `${rootPath}/${serviceName}`;
+    const srcPath = `${servicePath}/src`;
 
     const actions = [
       // Adds the Prisma schema
@@ -108,6 +109,20 @@ module.exports = {
         type: "add",
         path: `${servicePath}/codegen.yml`,
         templateFile: `${__dirname}/main/Service.codegen.yml.hbs`,
+        abortOnFail: true,
+      },
+      // Adds the main micro-service index file
+      {
+        type: "add",
+        path: `${srcPath}/index.ts`,
+        templateFile: `${__dirname}/src/Service.index.ts.hbs`,
+        abortOnFail: true,
+      },
+      // Adds the jest database mocker file
+      {
+        type: "add",
+        path: `${srcPath}/__tests__/__mocks__/prismaMock.ts`,
+        templateFile: `${__dirname}/src/tests/Service.prismaMock.ts.hbs`,
         abortOnFail: true,
       },
     ];
