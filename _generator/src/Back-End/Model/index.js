@@ -38,6 +38,7 @@ module.exports = {
     /**
      * Adds the main Model Class, under 'graphql/schema/Models/<MODEL_NAME>.graphql' and 'graphql/schema/Models/<MODEL_NAME>.resolver.ts'
      * Also adds the Model Service, under 'services/<MODEL_NAME>service.ts'
+     * Also adds the Prisma Model, under 'prisma/schema.prisma' and migrates it automatically
      *
      */
     const actions = [
@@ -62,7 +63,8 @@ module.exports = {
       {
         type: "modify",
         path: `${prismaPath}/schema.prisma`,
-        pattern: new RegExp(/.*\/\/.*\[ADD NEW PRISMA TYPES ABOVE\].+\n/),
+        pattern: /\/\/.*\[ADD NEW PRISMA TYPES ABOVE\].*/gi,
+        transform: (str) => str,
         templateFile: `${__dirname}/Model.prisma.hbs`,
         abortOnFail: true,
       },
@@ -71,6 +73,11 @@ module.exports = {
     actions.push({
       type: "prettify",
       data: { path: `${componentPath}/${capitalizedModelName}/**` },
+    });
+
+    actions.push({
+      type: "execCommand",
+      data: { command: "npx prisma generate" },
     });
 
     actions.push({

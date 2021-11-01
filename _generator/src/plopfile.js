@@ -21,6 +21,21 @@ module.exports = function (plop) {
     return "";
   });
 
+  plop.setActionType("execCommand", async function (_, { data: { command } }) {
+    const chalk = require("chalk");
+    const { exec } = require("child_process");
+
+    await exec(command, (error, _, stderr) => {
+      if (error) throw new Error(`error: ${error.message}`);
+      if (stderr) throw new Error(`stderr: ${stderr}`);
+
+      return;
+    });
+
+    console.log(chalk.green(`🔧 "${command}" executed.`));
+    return "";
+  });
+
   plop.setActionType("signalSuccess", (_, config) => {
     const chalk = require("chalk");
     const data = config.data.callToAction;
