@@ -206,7 +206,7 @@ module.exports = {
       {
         type: "modify",
         path: `${binPath}/start-federation-dev.sh`,
-        pattern: /\/\/.*\[ADD NEW GENERATE COMMANDS ABOVE\].*/gi,
+        pattern: /\#.*\[ADD NEW GENERATE COMMANDS ABOVE\].*/gi,
         templateFile: `${__dirname}/bin/Service.generate.sh.hbs`,
         abortOnFail: true,
         data: {
@@ -216,7 +216,7 @@ module.exports = {
       {
         type: "modify",
         path: `${binPath}/start-federation-dev.sh`,
-        pattern: /\/\/.*\[ADD NEW START COMMANDS ABOVE\].*/gi,
+        pattern: /\#.*\[ADD NEW START COMMANDS ABOVE\].*/gi,
         templateFile: `${__dirname}/bin/Service.start.sh.hbs`,
         abortOnFail: true,
         data: {
