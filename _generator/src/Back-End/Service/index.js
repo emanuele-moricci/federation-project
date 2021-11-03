@@ -52,6 +52,7 @@ module.exports = {
     const srcPath = `${servicePath}/src`;
     const configPath = `${servicePath}/src/config`;
     const schemaPath = `${servicePath}/src/graphql/schema`;
+    const binPath = `${path.join(cwd, "/bin")}`;
 
     const actions = [
       // Adds the Prisma schema
@@ -200,6 +201,27 @@ module.exports = {
         path: `${schemaPath}/Utils/refs.ts`,
         templateFile: `${__dirname}/src/graphql/Service.refs.ts.hbs`,
         abortOnFail: true,
+      },
+      // Adds the federation preparation&starting commands to the gateway bash
+      {
+        type: "modify",
+        path: `${binPath}/start-federation-dev.sh`,
+        pattern: /\/\/.*\[ADD NEW GENERATE COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/bin/Service.generate.sh.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
+      },
+      {
+        type: "modify",
+        path: `${binPath}/start-federation-dev.sh`,
+        pattern: /\/\/.*\[ADD NEW START COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/bin/Service.start.sh.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
       },
     ];
 
