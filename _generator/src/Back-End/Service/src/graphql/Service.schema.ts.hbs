@@ -7,6 +7,8 @@ import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 
 import path from "path";
 
+import permissions from '@fed-schema/permissions';
+
 import { resolvers as customResolvers } from 'federation-utils';
 
 // TYPE DEFINITIONS
@@ -30,6 +32,6 @@ let schema = buildSubgraphSchema({
   typeDefs: mergedTypeDefs,
   resolvers: mergedResolvers as GraphQLResolverMap<any>,
 });
-// schema = applyMiddleware(schema, permissions);
+schema = applyMiddleware(schema, permissions);
 
 export default schema;
