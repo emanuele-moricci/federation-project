@@ -223,6 +223,26 @@ module.exports = {
           parsedServiceName: serviceName,
         },
       },
+      {
+        type: "modify",
+        path: `${binPath}/start-federation-docker.sh`,
+        pattern: /\#.*\[ADD NEW GENERATE COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/bin/Service.generate.sh.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
+      },
+      {
+        type: "modify",
+        path: `${binPath}/start-federation-docker.sh`,
+        pattern: /\#.*\[ADD NEW START COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/bin/Service.start.sh.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
+      },
     ];
 
     actions.push({

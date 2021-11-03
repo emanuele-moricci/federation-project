@@ -11,7 +11,7 @@ fi;
 # Federation Microservices Preparation [END]
 
 # Federation Microservices start-up [START]
-concurrently "yarn dev" \
+concurrently "yarn start" \
 "cd ./services/federation-auth/ && yarn dev" \
 "cd ./services/federation-common/ && yarn dev" \
 # [ADD NEW START COMMANDS ABOVE] <- DO NOT REMOVE - Needed for the generator to create micro-service commands seamlessly

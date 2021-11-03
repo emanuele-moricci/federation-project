@@ -28,5 +28,6 @@ RUN chmod +x /app/bin/wait-for-it.sh
 
 RUN yarn install --frozen-lockfile
 
+RUN chmod +x /app/bin/start-federation-docker.sh
 RUN yarn build
-CMD [ "yarn", "federation" ]
+CMD [ "yarn", "federation:docker" ]
