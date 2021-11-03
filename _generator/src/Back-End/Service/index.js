@@ -243,6 +243,26 @@ module.exports = {
           parsedServiceName: serviceName,
         },
       },
+      {
+        type: "modify",
+        path: `${binPath}/start-federation-test.sh`,
+        pattern: /\#.*\[ADD NEW TEST COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/bin/Service.test.sh.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
+      },
+      {
+        type: "modify",
+        path: `${cwd}/Dockerfile`,
+        pattern: /\#.*\[ADD NEW ENV CLONE COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/Service.dockerfile.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
+      },
     ];
 
     actions.push({

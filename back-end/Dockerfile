@@ -19,6 +19,7 @@ RUN cp /app/services/federation-auth/.env.docker.test /app/services/federation-a
 RUN mv /app/services/federation-auth/.env.docker.test /app/services/federation-auth/.env.test
 RUN cp /app/services/federation-common/.env.docker.test /app/services/federation-common/.env
 RUN mv /app/services/federation-common/.env.docker.test /app/services/federation-common/.env.test
+# [ADD NEW ENV CLONE COMMANDS ABOVE] <- DO NOT REMOVE - Needed for the generator to create micro-service commands seamlessly
 # tsconfig and bin
 COPY tsconfig.json /app/tsconfig.json
 COPY tsconfig.json /app/tsconfig.prod.json
@@ -29,5 +30,6 @@ RUN chmod +x /app/bin/wait-for-it.sh
 RUN yarn install --frozen-lockfile
 
 RUN chmod +x /app/bin/start-federation-docker.sh
+RUN chmod +x /app/bin/start-federation-test.sh
 RUN yarn build
 CMD [ "yarn", "federation:docker" ]

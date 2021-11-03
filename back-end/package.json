@@ -14,7 +14,7 @@
     "docker:down": "docker compose down",
     "federation:dev": "./bin/start-federation-dev.sh",
     "federation:docker": "./bin/start-federation-docker.sh --db-clean",
-    "federation:test": "cd services/federation-auth/ && yarn test & cd services/federation-common/ && yarn test",
+    "federation:test": "./bin/start-federation-test.sh",
     "federation:test:docker": "yarn docker:up && docker exec federation-gateway ./bin/wait-for-it.sh db:5435 -- yarn federation:test & yarn docker:down"
   },
   "devDependencies": {
