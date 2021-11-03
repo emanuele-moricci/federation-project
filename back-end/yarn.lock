@@ -4347,23 +4347,15 @@ fbjs@^3.0.0:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
 
-federation-utils@../_utilities/federation-utils-v1.0.10.tgz:
+federation-utils@./bin/federation-utils/federation-utils-v1.0.10.tgz:
   version "1.0.10"
-  resolved "../_utilities/federation-utils-v1.0.10.tgz#11c676e1b409a1be187c9169d6bc302f2cd25615"
+  resolved "./bin/federation-utils/federation-utils-v1.0.10.tgz#11c676e1b409a1be187c9169d6bc302f2cd25615"
   dependencies:
     dataloader "^2.0.0"
     graphql "^16.0.1"
     graphql-middleware "^6.1.11"
     graphql-scalars "^1.13.1"
     graphql-shield "^7.5.0"
-    jsonwebtoken "^8.5.1"
-
-federation-utils@../_utilities/federation-utils-v1.0.6.tgz:
-  version "1.0.6"
-  resolved "../_utilities/federation-utils-v1.0.6.tgz#55273b893f0b337176dc2c5a2f4a980acf7daaf2"
-  dependencies:
-    graphql "^16.0.1"
-    graphql-scalars "^1.13.1"
     jsonwebtoken "^8.5.1"
 
 figures@^1.7.0:
