@@ -257,7 +257,7 @@ module.exports = {
         type: "modify",
         path: `${cwd}/Dockerfile`,
         pattern: /\#.*\[ADD NEW ENV CLONE COMMANDS ABOVE\].*/gi,
-        templateFile: `${__dirname}/Service.dockerfile.hbs`,
+        templateFile: `${__dirname}/main/Service.dockerfile.hbs`,
         abortOnFail: true,
         data: {
           parsedServiceName: serviceName,
