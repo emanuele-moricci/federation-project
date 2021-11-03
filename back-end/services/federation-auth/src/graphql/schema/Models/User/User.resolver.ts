@@ -10,20 +10,18 @@ import { getSecurityByUserId } from '@src/services/securityService';
 import { Language, Country } from '@src/graphql/generated/graphql';
 import { IUserRef, ILanguageRef, ICountryRef } from '@fed-schema/Utils/refs';
 
-import authGuard from '@fed-schema/permissions';
-
 const resolver = {
   Query: {
-    User: async (_source, args, context, _info): Promise<User[]> => {
-      return authGuard(context) ? getAllUsers(args) : [];
+    User: async (_source, args): Promise<User[]> => {
+      return getAllUsers(args);
     },
   },
   User: {
     __resolveReference: async ({ userId }: IUserRef): Promise<User | null> => {
       return getUserById(parseInt(userId));
     },
-    security: async ({ userId }: any): Promise<Security | null> => {
-      return getSecurityByUserId(userId);
+    security: async ({ userId }: IUserRef): Promise<Security | null> => {
+      return getSecurityByUserId(parseInt(userId));
     },
     language: ({ languageId }: IUserRef): Language => ({
       __typename: 'Language',
@@ -36,23 +34,13 @@ const resolver = {
   },
   // EXTENSIONS
   Language: {
-    users: async (
-      { languageId }: ILanguageRef,
-      _args,
-      context
-    ): Promise<User[]> => {
-      return authGuard(context)
-        ? getUsersByLanguageId(parseInt(languageId))
-        : [];
+    users: async ({ languageId }: ILanguageRef): Promise<User[]> => {
+      return getUsersByLanguageId(parseInt(languageId));
     },
   },
   Country: {
-    users: async (
-      { countryId }: ICountryRef,
-      _args,
-      context
-    ): Promise<User[]> => {
-      return authGuard(context) ? getUsersByCountryId(parseInt(countryId)) : [];
+    users: async ({ countryId }: ICountryRef): Promise<User[]> => {
+      return getUsersByCountryId(parseInt(countryId));
     },
   },
 };
