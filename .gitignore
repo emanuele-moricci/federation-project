@@ -4,3 +4,4 @@ coverage
 .env
 .env.docker.test
 .DS_Store
+.tgz
