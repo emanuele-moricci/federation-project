@@ -42,12 +42,14 @@ describe('userService tests', () => {
     const languageId = 3;
     const firstname = '';
     const lastname = '';
+    const countryId = 124;
     const user = await createUser({
-      email: email,
-      password: password,
-      languageId: languageId,
-      firstname: firstname,
-      lastname: lastname,
+      email,
+      password,
+      languageId,
+      firstname,
+      lastname,
+      countryId,
     });
 
     expect(user.email).toEqual(email);
@@ -55,5 +57,6 @@ describe('userService tests', () => {
     expect(user.languageId).toEqual(languageId);
     expect(user.firstname).toEqual(firstname);
     expect(user.lastname).toEqual(lastname);
+    expect(user.countryId).toEqual(countryId);
   });
 });
