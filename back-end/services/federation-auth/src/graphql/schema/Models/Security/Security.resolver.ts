@@ -2,11 +2,7 @@ import { Security, User } from '@prisma/client';
 
 import { getSecurityById } from '@src/services/securityService';
 import { getUserById } from '@src/services/userService';
-
-interface ISecurityRef {
-  __typename: 'Security';
-  securityId: string;
-}
+import { ISecurityRef } from '@fed-schema/Utils/refs';
 
 const resolver = {
   Security: {

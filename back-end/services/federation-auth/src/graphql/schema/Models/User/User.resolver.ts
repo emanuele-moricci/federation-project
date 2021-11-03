@@ -8,24 +8,9 @@ import {
 } from '@src/services/userService';
 import { getSecurityByUserId } from '@src/services/securityService';
 import { Language, Country } from '@src/graphql/generated/graphql';
+import { IUserRef, ILanguageRef, ICountryRef } from '@fed-schema/Utils/refs';
 
 import authGuard from '@fed-schema/permissions';
-
-interface IUserRef {
-  __typename: 'User';
-  userId: string;
-  languageId: string;
-}
-
-interface ILanguageRef {
-  __typename: 'Language';
-  languageId: string;
-}
-
-interface ICountryRef {
-  __typename: 'Country';
-  countryId: string;
-}
 
 const resolver = {
   Query: {

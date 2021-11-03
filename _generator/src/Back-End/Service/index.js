@@ -189,6 +189,12 @@ module.exports = {
         templateFile: `${__dirname}/src/graphql/Service.entry.graphql.hbs`,
         abortOnFail: true,
       },
+      {
+        type: "add",
+        path: `${schemaPath}/Utils/refs.ts`,
+        templateFile: `${__dirname}/src/graphql/Service.refs.ts.hbs`,
+        abortOnFail: true,
+      },
     ];
 
     actions.push({

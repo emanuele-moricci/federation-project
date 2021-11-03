@@ -4,11 +4,7 @@ import {
   getAllLanguages,
   getLanguageById,
 } from '@src/services/languageService';
-
-interface ILanguageRef {
-  __typename: 'Language';
-  languageId: string;
-}
+import { ILanguageRef } from '@fed-schema/Utils/refs';
 
 const resolver = {
   Query: {

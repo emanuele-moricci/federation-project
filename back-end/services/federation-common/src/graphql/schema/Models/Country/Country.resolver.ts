@@ -1,11 +1,7 @@
 import { Country } from '@prisma/client';
 
 import { getAllCountries, getCountryById } from '@src/services/countryService';
-
-interface ICountryRef {
-  __typename: 'Country';
-  countryId: string;
-}
+import { ICountryRef } from '@fed-schema/Utils/refs';
 
 const resolver = {
   Query: {

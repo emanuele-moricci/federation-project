@@ -29,6 +29,7 @@ module.exports = {
     const capitalizedModelName = capital(data.ModelName);
     const firstLowerModelName = firstLower(data.ModelName);
 
+    const schemaPath = `${path.join(cwd, "/src/graphql/schema/")}`;
     const componentPath = `${path.join(cwd, "/src/graphql/schema/Models")}`;
     const servicePath = `${path.join(cwd, "/src/services")}`;
     const prismaPath = `${path.join(cwd, "/prisma")}`;
@@ -65,6 +66,14 @@ module.exports = {
         pattern: /\/\/.*\[ADD NEW PRISMA TYPES ABOVE\].*/gi,
         transform: (str) => str,
         templateFile: `${__dirname}/Model.prisma.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "modify",
+        path: `${schemaPath}/Utils/refs.ts`,
+        pattern: /\/\/.*\[ADD NEW REFERENCE TYPES ABOVE\].*/gi,
+        transform: (str) => str,
+        templateFile: `${__dirname}/Model.refs.ts.hbs`,
         abortOnFail: true,
       },
     ];
