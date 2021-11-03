@@ -1,7 +1,7 @@
 import { DateTimeResolver } from 'graphql-scalars';
 
-const customResolvers = {
+const resolvers = {
   DateTime: DateTimeResolver,
 };
 
-export default customResolvers;
+export default resolvers;

@@ -9,7 +9,7 @@ import path from 'path';
 
 import permissions from '@fed-schema/permissions';
 
-import customResolvers from '@fed-schema/Utils/CustomResolvers';
+import { resolvers as customResolvers } from 'federation-utils';
 
 // TYPE DEFINITIONS
 const typeDefs = loadFilesSync(path.join(__dirname, '.'), {

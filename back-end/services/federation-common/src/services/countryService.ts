@@ -1,7 +1,7 @@
 import prismaContext from '@config/prisma/prismaContext';
 import { Country } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from '@fed-schema/Utils/QueryArgs';
+import { PaginationAndSearchArgs } from 'federation-utils';
 
 /**
  * Function that returns all of the Countries present in the database.

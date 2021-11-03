@@ -5,7 +5,7 @@ import * as style from '@dicebear/avatars-jdenticon-sprites';
 import prismaContext from '@config/prisma/prismaContext';
 import { User } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from '@fed-schema/Utils/QueryArgs';
+import { PaginationAndSearchArgs } from 'federation-utils';
 
 const getSecureUser = (user: User): User => ({ ...user, password: '' });
 

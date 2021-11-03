@@ -5,18 +5,21 @@ import {
   getUserByEmailAndPassword,
 } from '@src/services/userService';
 
-import { jwtSign } from '../Utils/JWTToken';
+import { signToken } from 'federation-utils';
 
 const resolver = {
   Mutation: {
     login: {
       resolve: async (_, { input }): Promise<LoginPayload> => {
-        const user = await getUserByEmailAndPassword(
+        const { userId, role } = await getUserByEmailAndPassword(
           input.email,
           input.password
         );
 
-        const token = jwtSign(user);
+        const token = signToken(
+          { userId, role },
+          process.env.AUTH_JWT_SECRET ?? ''
+        );
 
         return { token };
       },
@@ -24,8 +27,11 @@ const resolver = {
     register: {
       resolve: async (_, { input }): Promise<RegisterPayload> => {
         try {
-          const user = await createUser(input);
-          const token = jwtSign(user);
+          const { userId, role } = await createUser(input);
+          const token = signToken(
+            { userId, role },
+            process.env.AUTH_JWT_SECRET ?? ''
+          );
 
           return { token };
         } catch (error) {

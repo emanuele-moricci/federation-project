@@ -173,18 +173,6 @@ module.exports = {
       },
       {
         type: "add",
-        path: `${schemaPath}/Utils/CustomResolvers.ts`,
-        templateFile: `${__dirname}/src/graphql/utils/Service.CustomResolvers.ts.hbs`,
-        abortOnFail: true,
-      },
-      {
-        type: "add",
-        path: `${schemaPath}/Utils/QueryArgs.ts`,
-        templateFile: `${__dirname}/src/graphql/utils/Service.QueryArgs.ts.hbs`,
-        abortOnFail: true,
-      },
-      {
-        type: "add",
         path: `${schemaPath}/Query/query.resolver.ts`,
         templateFile: `${__dirname}/src/graphql/Service.query.resolver.ts.hbs`,
         abortOnFail: true,
