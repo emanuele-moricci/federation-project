@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
-    "publish:local": "yarn build && yarn pack"
+    "publish:local": "yarn version --patch && yarn build && yarn pack"
   },
   "files": [
     "lib/**/*"
