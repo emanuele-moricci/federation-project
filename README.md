@@ -95,6 +95,17 @@ These are the currently available generators
 
 ---
 
+## How to RE-USE CODE
+
+This project has a local package called `federation-utils`, under `_utilities`. Shared code can be added there, and a new tarball can be created and updated on every project with the following procedure:
+
+- Edit your **utils** code
+- Updated the `package.json` version
+- Fire up the command `yarn publish:local`
+- In the gateway and every service, fire up the command `yarn add ../../../_utilities/federation-utils-v<PACKAGE_VERSION>.tgz`
+
+---
+
 ## How to TEST
 
 ### Database
