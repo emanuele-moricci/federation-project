@@ -4,8 +4,8 @@ This project was created to study the GraphQL/React ecosystem + several other im
 
 ### Back-End
 
-- GraphQl
-- Apollo Server
+- GraphQL
+- Apollo Federation 1 (V2 in progress)
 - Prisma ORM
 - PostgresQL
 - Node.js with Express
@@ -53,7 +53,7 @@ rover subgraph publish the-federation@current \
   --routing-url http://localhost:4001/graphql
 ```
 
-`P.S. fire up a micro-service and execute the command **yarn generate** to automatically update the Apollo Studio graph ecosystem`
+- In the gateway `package.json` there are several commands powered by bash files that can help you with the setup. Fire up the `yarn federation:dev` command and the `yarn federation:publish` command on another terminal to start and update the entire supergraph on Apollo Studio
 
 ### Front-End
 
@@ -67,6 +67,7 @@ rover subgraph publish the-federation@current \
 
 - Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
 - Go to the root of the project and start the dockerized ecosystem with `yarn docker:up`
+- [OPTIONAL] update the supergraph by running `yarn federation:publish`
 - Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
 
 ### Front-End
@@ -92,6 +93,9 @@ These are the currently available generators
 | Backend Gen. |           Description            |
 | ------------ | :------------------------------: |
 | Model        | Adds a Prisma model w/ resolvers |
+| Mutation     | Adds a Prisma query w/ resolver  |
+| Query        |  Adds a Prisma mutation w/ res.  |
+| Service      |  Adds a new configured service   |
 
 ---
 
@@ -102,7 +106,8 @@ This project has a local package called `federation-utils`, under `_utilities`. 
 - Edit your **utils** code
 - Updated the `package.json` version
 - Fire up the command `yarn publish:local`
-- In the gateway and every service, fire up the command `yarn add ../../../_utilities/federation-utils.tgz`
+- [OPTIONAL] if the config doesn't have it yet, add the package with `yarn add ../../bin/federation-utils/federation-utils.tgz`
+- In the gateway and every service, fire up the command `yarn install`
 
 ---
 
