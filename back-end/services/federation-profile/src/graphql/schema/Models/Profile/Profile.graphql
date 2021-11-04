@@ -1,0 +1,31 @@
+"""
+The Profile Model: stores every secondary detail of a user
+"""
+type Profile @key(fields: "profileId") {
+  """
+  profile id
+  """
+  profileId: ID!
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}
+
+extend type Query {
+  """
+  Get all Profiles query
+  """
+  Profile: [Profile]
+}

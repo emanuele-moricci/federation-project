@@ -19,6 +19,8 @@ RUN cp /app/services/federation-auth/.env.docker.test /app/services/federation-a
 RUN mv /app/services/federation-auth/.env.docker.test /app/services/federation-auth/.env.test
 RUN cp /app/services/federation-common/.env.docker.test /app/services/federation-common/.env
 RUN mv /app/services/federation-common/.env.docker.test /app/services/federation-common/.env.test
+RUN cp /app/services/federation-profile/.env.docker.test /app/services/federation-profile/.env
+RUN mv /app/services/federation-profile/.env.docker.test /app/services/federation-profile/.env.test
 # [ADD NEW ENV CLONE COMMANDS ABOVE] <- DO NOT REMOVE - Needed for the generator to create micro-service commands seamlessly
 # tsconfig and bin
 COPY tsconfig.json /app/tsconfig.json
