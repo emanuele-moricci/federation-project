@@ -83,6 +83,9 @@ type User @key(fields: "userId") {
   """user security settings"""
   security: Security
 
+  """user profile"""
+  profile: Profile
+
   """user firstname"""
   firstname: String!
 
@@ -164,6 +167,11 @@ extend type Language @key(fields: "languageId") {
 extend type Country @key(fields: "countryId") {
   countryId: ID! @external
   users: [User]
+}
+
+extend type Profile @key(fields: "profileId") {
+  profileId: ID! @external
+  user: User
 }
 
 extend type Query {

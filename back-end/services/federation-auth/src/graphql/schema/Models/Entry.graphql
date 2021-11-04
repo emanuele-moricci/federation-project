@@ -18,3 +18,11 @@ extend type Country @key(fields: "countryId") {
   # every user with a given country
   users: [User]
 }
+
+extend type Profile @key(fields: "profileId") {
+  # the profile id
+  profileId: ID! @external
+
+  # the associated user
+  user: User
+}

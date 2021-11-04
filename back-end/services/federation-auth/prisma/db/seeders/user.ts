@@ -31,6 +31,7 @@ async function seedUsers() {
       password: adminPass,
       languageId: 1,
       countryId: 124,
+      profileId: 1,
       role: 'ADMIN',
       avatar: adminAvatar,
     },
@@ -45,6 +46,7 @@ async function seedUsers() {
       password: userPass,
       languageId: 2,
       countryId: 124,
+      profileId: 2,
       avatar: userAvatar,
     },
   });

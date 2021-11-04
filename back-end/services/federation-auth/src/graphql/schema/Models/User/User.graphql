@@ -48,6 +48,11 @@ type User @key(fields: "userId") {
   security: Security
 
   """
+  user profile
+  """
+  profile: Profile
+
+  """
   user firstname
   """
   firstname: String!

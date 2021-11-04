@@ -115,6 +115,29 @@ export const getUsersByCountryId = async (
 };
 
 /**
+ * Function that returns a User with their profile ID.
+ *
+ * @param {number} profileId The profile ID.
+ *
+ * @async
+ * @function getUserByProfileId.
+ * @returns {Promise<User | null>} The Users list.
+ */
+export const getUserByProfileId = async (
+  profileId: number
+): Promise<User | null> => {
+  const user = await prismaContext.prisma.user.findFirst({
+    where: {
+      profileId,
+    },
+  });
+
+  if (!user) throw new Error('[PROFILE] Error');
+
+  return getSecureUser(user);
+};
+
+/**
  * Function that created a User with some input data and returns it.
  *
  * @param input The User input data.

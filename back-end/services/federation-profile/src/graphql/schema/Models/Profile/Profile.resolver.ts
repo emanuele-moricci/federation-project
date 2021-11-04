@@ -1,6 +1,6 @@
 import { Profile } from '@prisma/client';
 
-import { getAllProfiles, getProfileById } from '@src/services/profileService';
+import { getProfileById } from '@src/services/profileService';
 
 interface IProfileRef {
   __typename: 'Profile';
@@ -8,11 +8,7 @@ interface IProfileRef {
 }
 
 const resolver = {
-  Query: {
-    Profile: async (_source, _args, _context, _info): Promise<Profile[]> => {
-      return await getAllProfiles();
-    },
-  },
+  Query: {},
   Profile: {
     __resolveReference: async ({
       profileId,

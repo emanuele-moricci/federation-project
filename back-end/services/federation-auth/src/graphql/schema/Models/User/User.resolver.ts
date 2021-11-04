@@ -5,10 +5,16 @@ import {
   getUserById,
   getUsersByCountryId,
   getUsersByLanguageId,
+  getUserByProfileId,
 } from '@src/services/userService';
 import { getSecurityByUserId } from '@src/services/securityService';
-import { Language, Country } from '@src/graphql/generated/graphql';
-import { IUserRef, ILanguageRef, ICountryRef } from '@fed-schema/Utils/refs';
+import { Language, Country, Profile } from '@src/graphql/generated/graphql';
+import {
+  IUserRef,
+  ILanguageRef,
+  ICountryRef,
+  IProfileRef,
+} from '@fed-schema/Utils/refs';
 
 const resolver = {
   Query: {
@@ -31,6 +37,10 @@ const resolver = {
       __typename: 'Country',
       countryId: countryId,
     }),
+    profile: ({ profileId }: IProfileRef): Profile => ({
+      __typename: 'Profile',
+      profileId: profileId,
+    }),
   },
   // EXTENSIONS
   Language: {
@@ -41,6 +51,11 @@ const resolver = {
   Country: {
     users: async ({ countryId }: ICountryRef): Promise<User[]> => {
       return getUsersByCountryId(parseInt(countryId));
+    },
+  },
+  Profile: {
+    user: async ({ profileId }: IProfileRef): Promise<User | null> => {
+      return getUserByProfileId(parseInt(profileId));
     },
   },
 };

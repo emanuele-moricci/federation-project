@@ -20,8 +20,3 @@ type Profile @key(fields: "profileId") {
   """deleted row"""
   deleted: Boolean!
 }
-
-extend type Query {
-  """Get all Profiles query"""
-  Profile: [Profile]
-}
