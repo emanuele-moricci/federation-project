@@ -30,6 +30,16 @@ export type Profile = {
   profileId: Scalars['ID'];
   /** profile bio */
   bio?: Maybe<Scalars['String']>;
+  /** profile handle */
+  username?: Maybe<Scalars['String']>;
+  /** profile phone */
+  phone?: Maybe<Scalars['String']>;
+  /** profile address */
+  address?: Maybe<Scalars['String']>;
+  /** profile avatar */
+  avatar?: Maybe<Scalars['String']>;
+  /** profile banner */
+  banner?: Maybe<Scalars['String']>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -172,6 +182,11 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  banner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;

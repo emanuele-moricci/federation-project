@@ -63,31 +63,6 @@ type User @key(fields: "userId") {
   lastname: String!
 
   """
-  user handle
-  """
-  username: String
-
-  """
-  user phone
-  """
-  phone: String
-
-  """
-  user address
-  """
-  address: String
-
-  """
-  user avatar
-  """
-  avatar: String
-
-  """
-  user banner
-  """
-  banner: String
-
-  """
   created at
   """
   created_at: DateTime!
@@ -117,10 +92,5 @@ extend type Query {
     Records shown
     """
     take: Int
-
-    """
-    username string
-    """
-    username: String
   ): [User]
 }

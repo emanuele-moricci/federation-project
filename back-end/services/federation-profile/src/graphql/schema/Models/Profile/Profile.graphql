@@ -13,6 +13,31 @@ type Profile @key(fields: "profileId") {
   bio: String
 
   """
+  profile handle
+  """
+  username: String
+
+  """
+  profile phone
+  """
+  phone: String
+
+  """
+  profile address
+  """
+  address: String
+
+  """
+  profile avatar
+  """
+  avatar: String
+
+  """
+  profile banner
+  """
+  banner: String
+
+  """
   created at
   """
   created_at: DateTime!

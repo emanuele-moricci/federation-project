@@ -1,6 +1,4 @@
 import bcrypt from 'bcryptjs';
-import { createAvatar } from '@dicebear/avatars';
-import * as style from '@dicebear/avatars-jdenticon-sprites';
 
 import prismaContext from '@config/prisma/prismaContext';
 import { User } from '@prisma/client';
@@ -17,13 +15,10 @@ const getSecureUser = (user: User): User => ({ ...user, password: '' });
  * @returns {Promise<User[]>} The Users List.
  */
 export const getAllUsers = async ({
-  username,
-  ...args
+  take,
+  skip,
 }: PaginationAndSearchArgs): Promise<User[]> => {
-  const users = await prismaContext.prisma.user.findMany({
-    ...args,
-    where: { username: { contains: username } },
-  });
+  const users = await prismaContext.prisma.user.findMany({ take, skip });
   return users.map(u => getSecureUser(u));
 };
 
@@ -144,7 +139,7 @@ export const getUserByProfileId = async (
  *
  * @async
  * @function createUser.
- * @returns {Promise<User[]>} The User.
+ * @returns {Promise<User>} The User.
  */
 export const createUser = async (input): Promise<User> => {
   // Password
@@ -153,15 +148,9 @@ export const createUser = async (input): Promise<User> => {
   );
   const hashedPass = await bcrypt.hash(input.password, salt);
 
-  // Random Avatar
-  let imgData = createAvatar(style, {
-    seed: `${input.email}-${input.firstname}-${input.lastname}`,
-    dataUri: true,
-  });
-
   // True User+Security creation
   const user = await prismaContext.prisma.user.create({
-    data: { ...input, password: hashedPass, avatar: imgData },
+    data: { ...input, password: hashedPass },
   });
 
   await prismaContext.prisma.security.create({

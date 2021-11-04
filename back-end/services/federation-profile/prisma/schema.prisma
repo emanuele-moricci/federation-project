@@ -12,6 +12,11 @@ model Profile {
   profileId     Int      @id @default(autoincrement())
 
   bio           String?
+  username       String?
+  phone          String?
+  address        String?
+  avatar         String?
+  banner         String?
 
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt

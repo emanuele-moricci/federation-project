@@ -85,7 +85,6 @@ export type Query_EntitiesArgs = {
 export type QueryUserArgs = {
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
-  username?: Maybe<Scalars['String']>;
 };
 
 /** A list of all the available roles that a user can have */
@@ -148,16 +147,6 @@ export type User = {
   firstname: Scalars['String'];
   /** user lastname */
   lastname: Scalars['String'];
-  /** user handle */
-  username?: Maybe<Scalars['String']>;
-  /** user phone */
-  phone?: Maybe<Scalars['String']>;
-  /** user address */
-  address?: Maybe<Scalars['String']>;
-  /** user avatar */
-  avatar?: Maybe<Scalars['String']>;
-  /** user banner */
-  banner?: Maybe<Scalars['String']>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -301,9 +290,9 @@ export type ResolversTypes = ResolversObject<{
   Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Role: Role;
   Security: ResolverTypeWrapper<Security>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
@@ -325,8 +314,8 @@ export type ResolversParentTypes = ResolversObject<{
   Profile: Profile;
   Query: {};
   Int: Scalars['Int'];
-  String: Scalars['String'];
   Security: Security;
+  String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   User: User;
   _Any: Scalars['_Any'];
@@ -404,11 +393,6 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  banner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
