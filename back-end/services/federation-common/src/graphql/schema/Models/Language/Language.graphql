@@ -1,3 +1,6 @@
+"""
+The Language Model: stores all of the configured languages for the platform
+"""
 type Language @key(fields: "languageId") {
   """
   language id

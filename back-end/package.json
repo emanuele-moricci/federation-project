@@ -15,7 +15,8 @@
     "federation:dev": "./bin/start-federation-dev.sh",
     "federation:docker": "./bin/start-federation-docker.sh --db-clean",
     "federation:test": "./bin/start-federation-test.sh",
-    "federation:test:docker": "yarn docker:up && docker exec federation-gateway ./bin/wait-for-it.sh db:5435 -- yarn federation:test & yarn docker:down"
+    "federation:test:docker": "yarn docker:up && docker exec federation-gateway ./bin/wait-for-it.sh db:5435 -- yarn federation:test & yarn docker:down",
+    "federation:publish": "./bin/publish-federation.sh"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.5",

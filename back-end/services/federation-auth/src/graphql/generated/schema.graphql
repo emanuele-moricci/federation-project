@@ -3,17 +3,22 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+"""A list of all the available authentication methods for the platform"""
 enum AuthType {
   PASSWORD
   MFA_CODES
   WEBAUTHN
 }
 
+"""A list of all the available roles that a user can have"""
 enum Role {
   USER
   ADMIN
 }
 
+"""
+The Security Model: stores every detail about a user's security methods and data.
+"""
 type Security @key(fields: "securityId") {
   """security id"""
   securityId: ID!
@@ -49,6 +54,7 @@ type Security @key(fields: "securityId") {
   deleted: Boolean!
 }
 
+"""The User Model: stores a user's most important data."""
 type User @key(fields: "userId") {
   """user id"""
   userId: ID!

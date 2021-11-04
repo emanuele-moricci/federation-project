@@ -22,6 +22,7 @@ export type Scalars = {
 
 
 
+/** A list of all the available authentication methods for the platform */
 export enum AuthType {
   Password = 'PASSWORD',
   MfaCodes = 'MFA_CODES',
@@ -81,11 +82,13 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
+/** A list of all the available roles that a user can have */
 export enum Role {
   User = 'USER',
   Admin = 'ADMIN'
 }
 
+/** The Security Model: stores every detail about a user's security methods and data. */
 export type Security = {
   __typename?: 'Security';
   /** security id */
@@ -112,6 +115,7 @@ export type Security = {
   deleted: Scalars['Boolean'];
 };
 
+/** The User Model: stores a user's most important data. */
 export type User = {
   __typename?: 'User';
   /** user id */

@@ -1,9 +1,15 @@
+"""
+A list of all the available authentication methods for the platform
+"""
 enum AuthType {
   PASSWORD
   MFA_CODES
   WEBAUTHN
 }
 
+"""
+A list of all the available roles that a user can have
+"""
 enum Role {
   USER
   ADMIN

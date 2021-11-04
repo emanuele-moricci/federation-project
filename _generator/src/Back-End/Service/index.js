@@ -255,6 +255,16 @@ module.exports = {
       },
       {
         type: "modify",
+        path: `${binPath}/publish-federation.sh`,
+        pattern: /\#.*\[ADD NEW APOLLO COMMANDS ABOVE\].*/gi,
+        templateFile: `${__dirname}/bin/Service.publish.sh.hbs`,
+        abortOnFail: true,
+        data: {
+          parsedServiceName: serviceName,
+        },
+      },
+      {
+        type: "modify",
         path: `${cwd}/Dockerfile`,
         pattern: /\#.*\[ADD NEW ENV CLONE COMMANDS ABOVE\].*/gi,
         templateFile: `${__dirname}/main/Service.dockerfile.hbs`,

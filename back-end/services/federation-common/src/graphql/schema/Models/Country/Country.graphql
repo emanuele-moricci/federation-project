@@ -1,5 +1,5 @@
 """
-The Country Model
+The Country Model: stores the most important countries.
 """
 type Country @key(fields: "countryId") {
   """

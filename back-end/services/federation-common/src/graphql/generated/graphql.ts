@@ -22,7 +22,7 @@ export type Scalars = {
 
 
 
-/** The Country Model */
+/** The Country Model: stores the most important countries. */
 export type Country = {
   __typename?: 'Country';
   /** country id */
@@ -42,6 +42,7 @@ export type Country = {
 };
 
 
+/** The Language Model: stores all of the configured languages for the platform */
 export type Language = {
   __typename?: 'Language';
   /** language id */

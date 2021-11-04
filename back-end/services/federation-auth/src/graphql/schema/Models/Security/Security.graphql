@@ -1,3 +1,6 @@
+"""
+The Security Model: stores every detail about a user's security methods and data.
+"""
 type Security @key(fields: "securityId") {
   """
   security id
