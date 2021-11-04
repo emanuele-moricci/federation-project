@@ -102,7 +102,7 @@ This project has a local package called `federation-utils`, under `_utilities`. 
 - Edit your **utils** code
 - Updated the `package.json` version
 - Fire up the command `yarn publish:local`
-- In the gateway and every service, fire up the command `yarn add ../../../_utilities/federation-utils-v<PACKAGE_VERSION>.tgz`
+- In the gateway and every service, fire up the command `yarn add ../../../_utilities/federation-utils.tgz`
 
 ---
 

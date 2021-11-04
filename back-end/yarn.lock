@@ -4347,9 +4347,9 @@ fbjs@^3.0.0:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
 
-federation-utils@./bin/federation-utils/federation-utils-v1.0.10.tgz:
-  version "1.0.10"
-  resolved "./bin/federation-utils/federation-utils-v1.0.10.tgz#11c676e1b409a1be187c9169d6bc302f2cd25615"
+federation-utils@./bin/federation-utils/federation-utils.tgz:
+  version "1.0.11"
+  resolved "./bin/federation-utils/federation-utils.tgz#f2e254390bf2c8fa0d7cc8607703bf7ff25bad3a"
   dependencies:
     dataloader "^2.0.0"
     graphql "^16.0.1"
