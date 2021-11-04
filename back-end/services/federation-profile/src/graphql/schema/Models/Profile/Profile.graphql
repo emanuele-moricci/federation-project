@@ -8,6 +8,11 @@ type Profile @key(fields: "profileId") {
   profileId: ID!
 
   """
+  profile bio
+  """
+  bio: String
+
+  """
   created at
   """
   created_at: DateTime!

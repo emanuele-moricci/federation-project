@@ -11,6 +11,8 @@ generator client {
 model Profile {
   profileId     Int      @id @default(autoincrement())
 
+  bio           String?
+
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
   deleted       Boolean  @default(false)

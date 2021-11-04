@@ -28,6 +28,8 @@ export type Profile = {
   __typename?: 'Profile';
   /** profile id */
   profileId: Scalars['ID'];
+  /** profile bio */
+  bio?: Maybe<Scalars['String']>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -140,12 +142,12 @@ export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Profile: ResolverTypeWrapper<Profile>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Query: ResolverTypeWrapper<{}>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
-  String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -153,12 +155,12 @@ export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
   Profile: Profile;
   ID: Scalars['ID'];
+  String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   Query: {};
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Profile'];
   _Service: _Service;
-  String: Scalars['String'];
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -171,6 +173,7 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
