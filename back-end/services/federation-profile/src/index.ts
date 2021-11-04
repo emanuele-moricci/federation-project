@@ -1,11 +1,11 @@
-import express from "express";
-import { ApolloServer } from "apollo-server-express";
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 
-import schema from "@fed-schema/schema";
-import getApolloServerContext from "@config/apollo/apolloServerContext";
+import schema from '@fed-schema/schema';
+import getApolloServerContext from '@config/apollo/apolloServerContext';
 
-import { bgCyan, blue } from "chalk";
-import dotenv from "dotenv-safe";
+import { bgCyan, blue } from 'chalk';
+import dotenv from 'dotenv-safe';
 dotenv.config();
 
 const startServer = () => {
@@ -19,7 +19,7 @@ const startServer = () => {
 
   app.listen({ port: 4003 }, () => {
     console.log(
-      `🚀 ${bgCyan("Server ready")} at ${blue(
+      `🚀 ${bgCyan('Server ready')} at ${blue(
         `http://localhost:4003${server.graphqlPath}`
       )}`
     );
