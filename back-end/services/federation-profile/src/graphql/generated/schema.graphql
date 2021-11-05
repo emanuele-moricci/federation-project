@@ -63,6 +63,11 @@ type createProfilePayload {
   profileId: Int
 }
 
+extend type Group @key(fields: "groupId") {
+  groupId: ID! @external
+  members: [Profile]
+}
+
 extend type Mutation {
   """Creates a Profile"""
   createProfile(input: createProfileInput): createProfilePayload

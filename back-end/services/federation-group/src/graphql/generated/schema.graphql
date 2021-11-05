@@ -30,6 +30,11 @@ type Group @key(fields: "groupId") {
   deleted: Boolean!
 }
 
+extend type Profile @key(fields: "profileId") {
+  profileId: ID! @external
+  groups: [Group]
+}
+
 extend type Query {
   """Get all Groups query"""
   Group: [Group]

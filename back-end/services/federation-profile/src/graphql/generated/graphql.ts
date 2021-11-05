@@ -23,6 +23,12 @@ export type Scalars = {
 
 
 
+export type Group = {
+  __typename?: 'Group';
+  groupId: Scalars['ID'];
+  members?: Maybe<Array<Maybe<Profile>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Creates a Profile */
@@ -71,7 +77,7 @@ export type Query_EntitiesArgs = {
 };
 
 
-export type _Entity = Profile;
+export type _Entity = Profile | Group;
 
 export type _Service = {
   __typename?: '_Service';
@@ -182,14 +188,15 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  Group: ResolverTypeWrapper<Group>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Mutation: ResolverTypeWrapper<{}>;
   Profile: ResolverTypeWrapper<Profile>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Query: ResolverTypeWrapper<{}>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Profile'];
+  _Entity: ResolversTypes['Profile'] | ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
   createProfileInput: CreateProfileInput;
   createProfilePayload: ResolverTypeWrapper<CreateProfilePayload>;
@@ -199,14 +206,15 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
+  Group: Group;
+  ID: Scalars['ID'];
   Mutation: {};
   Profile: Profile;
-  ID: Scalars['ID'];
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   Query: {};
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Profile'];
+  _Entity: ResolversParentTypes['Profile'] | ResolversParentTypes['Group'];
   _Service: _Service;
   createProfileInput: CreateProfileInput;
   createProfilePayload: CreateProfilePayload;
@@ -220,6 +228,12 @@ export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContex
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
 }
+
+export type GroupResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Group'] = ResolversParentTypes['Group']> = ResolversObject<{
+  groupId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  members?: Resolver<Maybe<Array<Maybe<ResolversTypes['Profile']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
 
 export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createProfile?: Resolver<Maybe<ResolversTypes['createProfilePayload']>, ParentType, ContextType, RequireFields<MutationCreateProfileArgs, never>>;
@@ -249,7 +263,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Profile', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Profile' | 'Group', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -264,6 +278,7 @@ export type CreateProfilePayloadResolvers<ContextType = IPrismaContext, ParentTy
 
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
+  Group?: GroupResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

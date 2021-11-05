@@ -44,6 +44,12 @@ export type Group = {
   deleted: Scalars['Boolean'];
 };
 
+export type Profile = {
+  __typename?: 'Profile';
+  profileId: Scalars['ID'];
+  groups?: Maybe<Array<Maybe<Group>>>;
+};
+
 export type Query = {
   __typename?: 'Query';
   _entities: Array<Maybe<_Entity>>;
@@ -58,7 +64,7 @@ export type Query_EntitiesArgs = {
 };
 
 
-export type _Entity = Group;
+export type _Entity = Group | Profile;
 
 export type _Service = {
   __typename?: '_Service';
@@ -150,9 +156,10 @@ export type ResolversTypes = ResolversObject<{
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Group'];
+  _Entity: ResolversTypes['Group'] | ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
 }>;
 
@@ -163,9 +170,10 @@ export type ResolversParentTypes = ResolversObject<{
   ID: Scalars['ID'];
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
+  Profile: Profile;
   Query: {};
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Group'];
+  _Entity: ResolversParentTypes['Group'] | ResolversParentTypes['Profile'];
   _Service: _Service;
 }>;
 
@@ -189,6 +197,12 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
+  profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  groups?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   _entities?: Resolver<Array<Maybe<ResolversTypes['_Entity']>>, ParentType, ContextType, RequireFields<Query_EntitiesArgs, 'representations'>>;
   _service?: Resolver<ResolversTypes['_Service'], ParentType, ContextType>;
@@ -200,7 +214,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Group', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Group' | 'Profile', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -211,6 +225,7 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
   Group?: GroupResolvers<ContextType>;
+  Profile?: ProfileResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;

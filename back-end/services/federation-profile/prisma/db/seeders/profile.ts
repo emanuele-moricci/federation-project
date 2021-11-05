@@ -36,7 +36,7 @@ async function seedProfiles() {
       phone: '+39 123 456 789',
       avatar: userAvatar,
       banner: defaultBanner,
-      groups: [1],
+      groups: [2],
     },
   });
 }

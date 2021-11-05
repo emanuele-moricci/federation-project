@@ -11,7 +11,7 @@ const resolver = {
     }: ISecurityRef): Promise<Security | null> => {
       return getSecurityById(parseInt(securityId));
     },
-    user: async ({ userId }: any): Promise<User | null> => {
+    user: async ({ userId }: { userId: number }): Promise<User | null> => {
       return getUserById(userId);
     },
   },

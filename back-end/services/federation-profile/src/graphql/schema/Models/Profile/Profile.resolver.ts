@@ -22,8 +22,7 @@ const resolver = {
   },
   // EXTENSIONS
   Group: {
-    members: async ({ groupId }: IGroupRef): Promise<any> => {
-      // TODO: CHANGE
+    members: async ({ groupId }: IGroupRef): Promise<Profile[]> => {
       return getMembersOfGroup(parseInt(groupId));
     },
   },

@@ -8,11 +8,6 @@ type Group @key(fields: "groupId") {
   groupId: ID!
 
   """
-  group members
-  """
-  members: [Profile]
-
-  """
   name
   """
   name: String!
