@@ -30,6 +30,24 @@ type Group @key(fields: "groupId") {
   deleted: Boolean!
 }
 
+"""createGroup input"""
+input createGroupInput {
+  """The group name."""
+  name: String!
+
+  """The group bio."""
+  bio: String
+
+  """The group banner."""
+  banner: String
+}
+
+"""createGroup payload"""
+type createGroupPayload {
+  """The group id."""
+  groupId: Int
+}
+
 extend type Profile @key(fields: "profileId") {
   profileId: ID! @external
 }
@@ -43,4 +61,9 @@ extend type Query {
     """Records shown"""
     take: Int = 25
   ): [Group]
+}
+
+extend type Mutation {
+  """Creates a Group"""
+  createGroup(input: createGroupInput): createGroupPayload
 }

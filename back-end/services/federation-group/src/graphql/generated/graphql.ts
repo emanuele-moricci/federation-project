@@ -44,6 +44,17 @@ export type Group = {
   deleted: Scalars['Boolean'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Creates a Group */
+  createGroup?: Maybe<CreateGroupPayload>;
+};
+
+
+export type MutationCreateGroupArgs = {
+  input?: Maybe<CreateGroupInput>;
+};
+
 export type Profile = {
   __typename?: 'Profile';
   profileId: Scalars['ID'];
@@ -75,6 +86,23 @@ export type _Service = {
   __typename?: '_Service';
   /** The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied */
   sdl?: Maybe<Scalars['String']>;
+};
+
+/** createGroup input */
+export type CreateGroupInput = {
+  /** The group name. */
+  name: Scalars['String'];
+  /** The group bio. */
+  bio?: Maybe<Scalars['String']>;
+  /** The group banner. */
+  banner?: Maybe<Scalars['String']>;
+};
+
+/** createGroup payload */
+export type CreateGroupPayload = {
+  __typename?: 'createGroupPayload';
+  /** The group id. */
+  groupId?: Maybe<Scalars['Int']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -161,12 +189,15 @@ export type ResolversTypes = ResolversObject<{
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Group'] | ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
+  createGroupInput: CreateGroupInput;
+  createGroupPayload: ResolverTypeWrapper<CreateGroupPayload>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -176,12 +207,15 @@ export type ResolversParentTypes = ResolversObject<{
   ID: Scalars['ID'];
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
+  Mutation: {};
   Profile: Profile;
   Query: {};
   Int: Scalars['Int'];
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Group'] | ResolversParentTypes['Profile'];
   _Service: _Service;
+  createGroupInput: CreateGroupInput;
+  createGroupPayload: CreateGroupPayload;
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -202,6 +236,10 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createGroup?: Resolver<Maybe<ResolversTypes['createGroupPayload']>, ParentType, ContextType, RequireFields<MutationCreateGroupArgs, never>>;
 }>;
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
@@ -228,14 +266,21 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type CreateGroupPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['createGroupPayload'] = ResolversParentTypes['createGroupPayload']> = ResolversObject<{
+  groupId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
   Group?: GroupResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
+  createGroupPayload?: CreateGroupPayloadResolvers<ContextType>;
 }>;
 
 
