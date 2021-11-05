@@ -33,11 +33,18 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Creates a Profile */
   createProfile?: Maybe<CreateProfilePayload>;
+  /** Allows a Profile into a group */
+  joinGroup?: Maybe<JoinGroupPayload>;
 };
 
 
 export type MutationCreateProfileArgs = {
   input?: Maybe<CreateProfileInput>;
+};
+
+
+export type MutationJoinGroupArgs = {
+  input?: Maybe<JoinGroupInput>;
 };
 
 /** The Profile Model: stores every secondary detail of a user */
@@ -108,6 +115,23 @@ export type CreateProfilePayload = {
   __typename?: 'createProfilePayload';
   /** The profile id. */
   profileId?: Maybe<Scalars['Int']>;
+};
+
+/** joinGroup input */
+export type JoinGroupInput = {
+  /** The profile ID. */
+  profileId: Scalars['Int'];
+  /** The group ID. */
+  groupId: Scalars['Int'];
+};
+
+/** joinGroup payload */
+export type JoinGroupPayload = {
+  __typename?: 'joinGroupPayload';
+  /** The profile ID. */
+  profileId: Scalars['Int'];
+  /** The group ID. */
+  groupId: Scalars['Int'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -203,6 +227,8 @@ export type ResolversTypes = ResolversObject<{
   createProfileInput: CreateProfileInput;
   createProfilePayload: ResolverTypeWrapper<CreateProfilePayload>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  joinGroupInput: JoinGroupInput;
+  joinGroupPayload: ResolverTypeWrapper<JoinGroupPayload>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -221,6 +247,8 @@ export type ResolversParentTypes = ResolversObject<{
   createProfileInput: CreateProfileInput;
   createProfilePayload: CreateProfilePayload;
   Int: Scalars['Int'];
+  joinGroupInput: JoinGroupInput;
+  joinGroupPayload: JoinGroupPayload;
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -239,6 +267,7 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
 
 export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createProfile?: Resolver<Maybe<ResolversTypes['createProfilePayload']>, ParentType, ContextType, RequireFields<MutationCreateProfileArgs, never>>;
+  joinGroup?: Resolver<Maybe<ResolversTypes['joinGroupPayload']>, ParentType, ContextType, RequireFields<MutationJoinGroupArgs, never>>;
 }>;
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
@@ -279,6 +308,12 @@ export type CreateProfilePayloadResolvers<ContextType = IPrismaContext, ParentTy
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type JoinGroupPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['joinGroupPayload'] = ResolversParentTypes['joinGroupPayload']> = ResolversObject<{
+  profileId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  groupId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
   Group?: GroupResolvers<ContextType>;
@@ -289,6 +324,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
   createProfilePayload?: CreateProfilePayloadResolvers<ContextType>;
+  joinGroupPayload?: JoinGroupPayloadResolvers<ContextType>;
 }>;
 
 

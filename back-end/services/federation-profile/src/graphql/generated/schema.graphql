@@ -66,6 +66,24 @@ type createProfilePayload {
   profileId: Int
 }
 
+"""joinGroup input"""
+input joinGroupInput {
+  """The profile ID."""
+  profileId: Int!
+
+  """The group ID."""
+  groupId: Int!
+}
+
+"""joinGroup payload"""
+type joinGroupPayload {
+  """The profile ID."""
+  profileId: Int!
+
+  """The group ID."""
+  groupId: Int!
+}
+
 extend type Group @key(fields: "groupId") {
   groupId: ID! @external
   members: [Profile]
@@ -74,4 +92,7 @@ extend type Group @key(fields: "groupId") {
 extend type Mutation {
   """Creates a Profile"""
   createProfile(input: createProfileInput): createProfilePayload
+
+  """Allows a Profile into a group"""
+  joinGroup(input: joinGroupInput): joinGroupPayload
 }

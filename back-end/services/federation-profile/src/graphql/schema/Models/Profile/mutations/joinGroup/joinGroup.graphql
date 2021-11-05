@@ -1,0 +1,36 @@
+extend type Mutation {
+  """
+  Allows a Profile into a group
+  """
+  joinGroup(input: joinGroupInput): joinGroupPayload
+}
+
+"""
+joinGroup input
+"""
+input joinGroupInput {
+  """
+  The profile ID.
+  """
+  profileId: Int!
+
+  """
+  The group ID.
+  """
+  groupId: Int!
+}
+
+"""
+joinGroup payload
+"""
+type joinGroupPayload {
+  """
+  The profile ID.
+  """
+  profileId: Int!
+
+  """
+  The group ID.
+  """
+  groupId: Int!
+}

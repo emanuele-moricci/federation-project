@@ -63,3 +63,38 @@ export const createProfile = async (input): Promise<Profile> => {
     data: { ...input, avatar: imgData },
   });
 };
+
+/**
+ * Function that allows a Profile to join a Group.
+ *
+ * @param input The Profile&Group input data.
+ *
+ * @async
+ * @function joinGroup.
+ * @returns {Promise<{ profileId: number, groupId: number}>} The Profile&Group data.
+ */
+export const joinGroup = async (
+  profileId: number,
+  groupId: number
+): Promise<Profile> => {
+  const profile = await prismaContext.prisma.profile.findUnique({
+    where: {
+      profileId,
+    },
+  });
+
+  if (!profile) throw Error('Profile not found');
+  else if (profile.groups.some(g => g === groupId))
+    throw Error('Profile already in group');
+
+  return prismaContext.prisma.profile.update({
+    where: {
+      profileId,
+    },
+    data: {
+      groups: {
+        push: groupId,
+      },
+    },
+  });
+};
