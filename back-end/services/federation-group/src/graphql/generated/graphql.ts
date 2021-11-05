@@ -28,6 +28,14 @@ export type Group = {
   __typename?: 'Group';
   /** group id */
   groupId: Scalars['ID'];
+  /** name */
+  name: Scalars['String'];
+  /** bio */
+  bio?: Maybe<Scalars['String']>;
+  /** avatar */
+  avatar: Scalars['String'];
+  /** banner */
+  banner?: Maybe<Scalars['String']>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -140,12 +148,12 @@ export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Group: ResolverTypeWrapper<Group>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Query: ResolverTypeWrapper<{}>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
-  String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -153,12 +161,12 @@ export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
   Group: Group;
   ID: Scalars['ID'];
+  String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   Query: {};
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Group'];
   _Service: _Service;
-  String: Scalars['String'];
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -171,6 +179,10 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type GroupResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Group'] = ResolversParentTypes['Group']> = ResolversObject<{
   groupId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  avatar?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  banner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;

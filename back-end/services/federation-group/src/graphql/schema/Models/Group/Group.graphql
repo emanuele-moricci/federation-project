@@ -8,6 +8,26 @@ type Group @key(fields: "groupId") {
   groupId: ID!
 
   """
+  name
+  """
+  name: String!
+
+  """
+  bio
+  """
+  bio: String
+
+  """
+  avatar
+  """
+  avatar: String!
+
+  """
+  banner
+  """
+  banner: String
+
+  """
   created at
   """
   created_at: DateTime!
