@@ -24,6 +24,27 @@ export const getProfileById = async (
 };
 
 /**
+ * Function that returns a list of Profiles that are members of a group.
+ *
+ * @param {number} groupId The group ID.
+ *
+ * @async
+ * @function getProfileById.
+ * @returns {Promise<Profile[]>} The found Members.
+ */
+export const getMembersOfGroup = async (
+  groupId: number
+): Promise<Profile[]> => {
+  return prismaContext.prisma.profile.findMany({
+    where: {
+      groups: {
+        has: groupId,
+      },
+    },
+  });
+};
+
+/**
  * Function that created a Profile with some input data and returns it.
  *
  * @param input The Profile input data.

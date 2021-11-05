@@ -1,6 +1,10 @@
 import { Profile } from '@prisma/client';
 
-import { getProfileById } from '@src/services/profileService';
+import {
+  getMembersOfGroup,
+  getProfileById,
+} from '@src/services/profileService';
+import { IGroupRef } from '../../Utils/refs';
 
 interface IProfileRef {
   __typename: 'Profile';
@@ -14,6 +18,13 @@ const resolver = {
       profileId,
     }: IProfileRef): Promise<Profile | null> => {
       return await getProfileById(parseInt(profileId));
+    },
+  },
+  // EXTENSIONS
+  Group: {
+    members: async ({ groupId }: IGroupRef): Promise<any> => {
+      // TODO: CHANGE
+      return getMembersOfGroup(parseInt(groupId));
     },
   },
 };

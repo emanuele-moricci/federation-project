@@ -18,6 +18,7 @@ async function seedGroups() {
       bio: 'This is a group for amazing people',
       avatar,
       banner: defaultBanner,
+      members: [2],
     },
   });
 }

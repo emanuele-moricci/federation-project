@@ -1,6 +1,11 @@
 import { Group } from '@prisma/client';
 
-import { getAllGroups, getGroupById } from '@src/services/groupService';
+import {
+  getAllGroups,
+  getGroupById,
+  getGroupsByProfileId,
+} from '@src/services/groupService';
+import { IProfileRef } from '@fed-schema/Utils/refs';
 
 interface IGroupRef {
   __typename: 'Group';
@@ -18,6 +23,13 @@ const resolver = {
       groupId,
     }: IGroupRef): Promise<Group | null> => {
       return await getGroupById(parseInt(groupId));
+    },
+  },
+  // EXTENSIONS
+  Profile: {
+    groups: async ({ profileId }: IProfileRef): Promise<any> => {
+      // TODO: CHANGE
+      return getGroupsByProfileId(parseInt(profileId));
     },
   },
 };
