@@ -10,11 +10,13 @@
 
 ### Back-End (do this for every federation service under **services/**)
 
-- Install every dependency in every federation project using `yarn`
+- Install every dependency in every federation project using `yarn` (sometimes you may need to manually add the rover module with `yarn add @apollo/rover`)
 - Go to the .env file and add the DB connection string to the `DATABASE_URL` key
+- Create a model with the `federation-generator` command
 - Fire the command `npx prisma generate` to generate the Prisma client
 - Create the **"init"** migration running this command on the project root `yarn generate:migration`
-- Seed the database using the command `yarn generate:seed`
+- Create a seeder function under `./prisma/db/` and seed the database using the command `yarn generate:seed`
+- Create the necessary resolvers for the model in its Model/ folder and service
 
 ### Gateway
 

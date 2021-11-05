@@ -1,0 +1,31 @@
+"""
+The Group Model: Stores every group present in the project
+"""
+type Group @key(fields: "groupId") {
+  """
+  group id
+  """
+  groupId: ID!
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}
+
+extend type Query {
+  """
+  Get all Groups query
+  """
+  Group: [Group]
+}
