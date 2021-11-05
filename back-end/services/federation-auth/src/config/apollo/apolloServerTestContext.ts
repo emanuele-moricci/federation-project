@@ -1,6 +1,7 @@
-import { verifyToken } from 'federation-utils';
-
 import { IApolloServerContext } from '@config/apollo/IApolloServerContext';
+import prismaContext from '@config/prisma/prismaContext';
+
+import { verifyToken } from 'federation-utils';
 
 const getApolloServerContext = async (
   req
@@ -9,7 +10,12 @@ const getApolloServerContext = async (
     ? req.headers.authorization.split(' ')[1]
     : null;
 
-  return token ? verifyToken(token, process.env.AUTH_JWT_SECRET ?? '') : {};
+  if (!token) return { prismaContext, userData: null };
+
+  return {
+    userData: verifyToken(token, process.env.AUTH_JWT_SECRET ?? ''),
+    prismaContext,
+  };
 };
 
 export default getApolloServerContext;
