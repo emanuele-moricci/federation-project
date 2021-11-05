@@ -57,6 +57,8 @@ export type Profile = {
   avatar?: Maybe<Scalars['String']>;
   /** profile banner */
   banner?: Maybe<Scalars['String']>;
+  /** profile groups */
+  groups?: Maybe<Array<Maybe<Group>>>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -247,6 +249,7 @@ export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends Re
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   banner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  groups?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;

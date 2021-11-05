@@ -47,7 +47,6 @@ export type Group = {
 export type Profile = {
   __typename?: 'Profile';
   profileId: Scalars['ID'];
-  groups?: Maybe<Array<Maybe<Group>>>;
 };
 
 export type Query = {
@@ -207,7 +206,6 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  groups?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

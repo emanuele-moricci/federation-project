@@ -23,7 +23,6 @@ async function seedGroups() {
       bio: 'This is a group for amazing people',
       avatar: avatar1,
       banner: defaultBanner,
-      members: [2],
     },
   });
 
@@ -33,7 +32,6 @@ async function seedGroups() {
       bio: 'This is a group for even more amazing people',
       avatar: avatar2,
       banner: defaultBanner,
-      members: [1],
     },
   });
 }

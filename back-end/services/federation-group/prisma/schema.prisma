@@ -11,8 +11,6 @@ generator client {
 model Group {
   groupId     Int      @id @default(autoincrement())
 
-  members     Int[]
-
   name        String   @unique
   bio         String?
   avatar      String

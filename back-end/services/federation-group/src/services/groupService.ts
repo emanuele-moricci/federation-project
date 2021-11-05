@@ -18,27 +18,6 @@ export const getAllGroups = async ({
 };
 
 /**
- * Function that returns a list of Groups that a profile is subscribed to.
- *
- * @param {number} profileId The profile ID.
- *
- * @async
- * @function getGroupsByProfileId.
- * @returns {Promise<Group[]>} The found Groups.
- */
-export const getGroupsByProfileId = async (
-  profileId: number
-): Promise<Group[]> => {
-  return await prismaContext.prisma.group.findMany({
-    where: {
-      members: {
-        has: profileId,
-      },
-    },
-  });
-};
-
-/**
  * Function that returns a Group by its ID.
  *
  * @param {number} groupId The group ID.

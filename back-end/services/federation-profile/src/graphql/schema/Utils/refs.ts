@@ -1,6 +1,7 @@
 export interface IProfileRef {
   __typename: 'Profile';
   profileId: string;
+  groups: string[];
 }
 
 export interface IGroupRef {

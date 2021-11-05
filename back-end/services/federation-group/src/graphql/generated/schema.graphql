@@ -32,7 +32,6 @@ type Group @key(fields: "groupId") {
 
 extend type Profile @key(fields: "profileId") {
   profileId: ID! @external
-  groups: [Group]
 }
 
 extend type Query {

@@ -166,7 +166,7 @@ extend type Query {
     skip: Int
 
     """Records shown"""
-    take: Int
+    take: Int = 100
   ): [User]
 
   """Get me query"""
