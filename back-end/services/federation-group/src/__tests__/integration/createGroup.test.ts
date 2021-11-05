@@ -5,15 +5,15 @@ import getApolloServerContext from '@config/apollo/apolloServerTestContext';
 import prismaContext from '@config/prisma/prismaContext';
 import schema from '@fed-schema/schema';
 
-const CREATE_PROFILE = gql`
-  mutation createProfile($input: createProfileInput) {
-    createProfile(input: $input) {
-      profileId
+const CREATE_GROUP = gql`
+  mutation createGroup($input: createGroupInput) {
+    createGroup(input: $input) {
+      groupId
     }
   }
 `;
 
-describe('createProfile test', () => {
+describe('createGroup test', () => {
   let server: ApolloServer;
 
   beforeAll(() => {
@@ -24,21 +24,24 @@ describe('createProfile test', () => {
   });
 
   afterAll(async () => {
-    prismaContext.prisma.profile.deleteMany();
+    prismaContext.prisma.group.deleteMany();
     await prismaContext.prisma.$disconnect();
   });
 
   it('should pass', async () => {
+    const name = 'test name';
+    const bio = 'test bio';
+
     const result = await server.executeOperation({
-      query: CREATE_PROFILE,
+      query: CREATE_GROUP,
       variables: {
-        input: { bio: 'test bio' },
+        input: { name, bio },
       },
     });
 
-    expect(result.data?.createProfile).toBeDefined();
-    const profileId = result.data?.createProfile.profileId;
-    expect(profileId).toBeDefined();
-    expect(profileId).not.toBeNull();
+    expect(result.data?.createGroup).toBeDefined();
+    const group = result.data?.createGroup;
+    expect(group).toBeDefined();
+    expect(group).not.toBeNull();
   });
 });

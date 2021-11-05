@@ -1,4 +1,8 @@
-import { createProfile, getProfileById } from '@services/profileService';
+import {
+  createProfile,
+  getProfileById,
+  joinGroup,
+} from '@services/profileService';
 
 describe('profileService tests', () => {
   it('should return a profile', async () => {
@@ -26,5 +30,13 @@ describe('profileService tests', () => {
     expect(profile.phone).toEqual(phone);
     expect(profile.address).toEqual(address);
     expect(profile.banner).toEqual(banner);
+  });
+
+  it('should join a group', async () => {
+    const profileId = 1;
+    const groupId = 5;
+    const profile = await joinGroup(profileId, groupId);
+
+    expect(profile.profileId).toEqual(profileId);
   });
 });

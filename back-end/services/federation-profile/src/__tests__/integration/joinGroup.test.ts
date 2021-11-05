@@ -5,15 +5,16 @@ import getApolloServerContext from '@config/apollo/apolloServerTestContext';
 import prismaContext from '@config/prisma/prismaContext';
 import schema from '@fed-schema/schema';
 
-const CREATE_PROFILE = gql`
-  mutation createProfile($input: createProfileInput) {
-    createProfile(input: $input) {
+const JOIN_GROUP = gql`
+  mutation joinGroup($input: joinGroupInput) {
+    joinGroup(input: $input) {
       profileId
+      groupId
     }
   }
 `;
 
-describe('createProfile test', () => {
+describe('joinGroup test', () => {
   let server: ApolloServer;
 
   beforeAll(() => {
@@ -29,16 +30,17 @@ describe('createProfile test', () => {
   });
 
   it('should pass', async () => {
+    const profileId = 1;
     const result = await server.executeOperation({
-      query: CREATE_PROFILE,
+      query: JOIN_GROUP,
       variables: {
-        input: { bio: 'test bio' },
+        input: { profileId, groupId: 5 },
       },
     });
 
-    expect(result.data?.createProfile).toBeDefined();
-    const profileId = result.data?.createProfile.profileId;
+    expect(result.data?.joinGroup).toBeDefined();
+    const foundProfileId = result.data?.joinGroup.profileId;
     expect(profileId).toBeDefined();
-    expect(profileId).not.toBeNull();
+    expect(foundProfileId).toEqual(profileId);
   });
 });

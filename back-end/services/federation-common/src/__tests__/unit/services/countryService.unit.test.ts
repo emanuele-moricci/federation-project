@@ -10,6 +10,6 @@ describe('countryService tests', () => {
   it('should get the italian country', async () => {
     const country = await getCountryById(2);
 
-    expect(country?.alpha2).toEqual('AC');
+    expect(country?.alpha2).toEqual('AD');
   });
 });
