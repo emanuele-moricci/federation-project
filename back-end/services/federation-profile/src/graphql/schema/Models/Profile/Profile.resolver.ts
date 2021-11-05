@@ -4,12 +4,7 @@ import {
   getMembersOfGroup,
   getProfileById,
 } from '@src/services/profileService';
-import { IGroupRef } from '../../Utils/refs';
-
-interface IProfileRef {
-  __typename: 'Profile';
-  profileId: string;
-}
+import { IProfileRef, IGroupRef } from '../../Utils/refs';
 
 const resolver = {
   Query: {},
