@@ -23,6 +23,17 @@ export type Scalars = {
 
 
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Creates a Profile */
+  createProfile?: Maybe<CreateProfilePayload>;
+};
+
+
+export type MutationCreateProfileArgs = {
+  input?: Maybe<CreateProfileInput>;
+};
+
 /** The Profile Model: stores every secondary detail of a user */
 export type Profile = {
   __typename?: 'Profile';
@@ -66,6 +77,29 @@ export type _Service = {
   __typename?: '_Service';
   /** The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied */
   sdl?: Maybe<Scalars['String']>;
+};
+
+/** createProfile input */
+export type CreateProfileInput = {
+  /** The profile bio. */
+  bio?: Maybe<Scalars['String']>;
+  /** The profile username. */
+  username?: Maybe<Scalars['String']>;
+  /** The profile phone. */
+  phone?: Maybe<Scalars['String']>;
+  /** The profile address. */
+  address?: Maybe<Scalars['String']>;
+  /** The profile avatar. */
+  avatar?: Maybe<Scalars['String']>;
+  /** The profile banner. */
+  banner?: Maybe<Scalars['String']>;
+};
+
+/** createProfile payload */
+export type CreateProfilePayload = {
+  __typename?: 'createProfilePayload';
+  /** The profile id. */
+  profileId?: Maybe<Scalars['Int']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -148,6 +182,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Profile: ResolverTypeWrapper<Profile>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -156,11 +191,15 @@ export type ResolversTypes = ResolversObject<{
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
+  createProfileInput: CreateProfileInput;
+  createProfilePayload: ResolverTypeWrapper<CreateProfilePayload>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
+  Mutation: {};
   Profile: Profile;
   ID: Scalars['ID'];
   String: Scalars['String'];
@@ -169,6 +208,9 @@ export type ResolversParentTypes = ResolversObject<{
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Profile'];
   _Service: _Service;
+  createProfileInput: CreateProfileInput;
+  createProfilePayload: CreateProfilePayload;
+  Int: Scalars['Int'];
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -178,6 +220,10 @@ export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContex
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
 }
+
+export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createProfile?: Resolver<Maybe<ResolversTypes['createProfilePayload']>, ParentType, ContextType, RequireFields<MutationCreateProfileArgs, never>>;
+}>;
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -211,13 +257,20 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type CreateProfilePayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['createProfilePayload'] = ResolversParentTypes['createProfilePayload']> = ResolversObject<{
+  profileId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
+  Mutation?: MutationResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
+  createProfilePayload?: CreateProfilePayloadResolvers<ContextType>;
 }>;
 
 
