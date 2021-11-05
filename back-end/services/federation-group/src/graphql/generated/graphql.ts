@@ -64,6 +64,12 @@ export type Query_EntitiesArgs = {
 };
 
 
+export type QueryGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
 export type _Entity = Group | Profile;
 
 export type _Service = {
@@ -158,6 +164,7 @@ export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Group'] | ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
@@ -172,6 +179,7 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   Profile: Profile;
   Query: {};
+  Int: Scalars['Int'];
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Group'] | ResolversParentTypes['Profile'];
   _Service: _Service;
@@ -206,7 +214,7 @@ export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends Re
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   _entities?: Resolver<Array<Maybe<ResolversTypes['_Entity']>>, ParentType, ContextType, RequireFields<Query_EntitiesArgs, 'representations'>>;
   _service?: Resolver<ResolversTypes['_Service'], ParentType, ContextType>;
-  Group?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType>;
+  Group?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType, RequireFields<QueryGroupArgs, 'take'>>;
 }>;
 
 export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_Any'], any> {

@@ -37,5 +37,11 @@ extend type Profile @key(fields: "profileId") {
 
 extend type Query {
   """Get all Groups query"""
-  Group: [Group]
+  Group(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int = 25
+  ): [Group]
 }

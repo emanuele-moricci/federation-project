@@ -1,6 +1,8 @@
 import prismaContext from '@config/prisma/prismaContext';
 import { Group } from '@prisma/client';
 
+import { PaginationAndSearchArgs } from 'federation-utils';
+
 /**
  * Function that returns all of the Groups present in the database.
  *
@@ -8,8 +10,11 @@ import { Group } from '@prisma/client';
  * @function getAllGroups.
  * @returns {Promise<Group[]>} The Groups List.
  */
-export const getAllGroups = async (): Promise<Group[]> => {
-  return await prismaContext.prisma.group.findMany();
+export const getAllGroups = async ({
+  take,
+  skip,
+}: PaginationAndSearchArgs): Promise<Group[]> => {
+  return await prismaContext.prisma.group.findMany({ take, skip });
 };
 
 /**

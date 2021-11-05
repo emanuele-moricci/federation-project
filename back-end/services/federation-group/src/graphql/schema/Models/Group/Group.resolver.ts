@@ -14,8 +14,8 @@ interface IGroupRef {
 
 const resolver = {
   Query: {
-    Group: async (_source, _args, _context, _info): Promise<Group[]> => {
-      return await getAllGroups();
+    Group: async (_source, args): Promise<Group[]> => {
+      return await getAllGroups(args);
     },
   },
   Group: {

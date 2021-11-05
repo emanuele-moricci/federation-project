@@ -51,6 +51,6 @@ extend type Query {
     """
     Records shown
     """
-    take: Int
+    take: Int = 50
   ): [Country]
 }

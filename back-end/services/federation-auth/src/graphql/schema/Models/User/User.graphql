@@ -91,6 +91,6 @@ extend type Query {
     """
     Records shown
     """
-    take: Int
+    take: Int = 100
   ): [User]
 }
