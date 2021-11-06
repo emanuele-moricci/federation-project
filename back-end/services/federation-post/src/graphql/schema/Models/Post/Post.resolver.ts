@@ -2,10 +2,7 @@ import { Post } from '@prisma/client';
 
 import { getAllPosts, getPostById } from '@src/services/postService';
 
-interface IPostRef {
-  __typename: 'Post';
-  postId: string;
-}
+import { IPostRef, IProfileRef, IGroupRef } from '@fed-schema/Utils/refs';
 
 const resolver = {
   Query: {
@@ -17,6 +14,14 @@ const resolver = {
     __resolveReference: async ({ postId }: IPostRef): Promise<Post | null> => {
       return await getPostById(parseInt(postId));
     },
+    profile: ({ profileId }: IProfileRef): any => ({ // TO CHANGE
+      __typename: 'Profile',
+      profileId: profileId,
+    }),
+    group: ({ groupId }: IGroupRef): any => ({
+      __typename: 'Group',
+      groupId: groupId,
+    }),
   },
 };
 

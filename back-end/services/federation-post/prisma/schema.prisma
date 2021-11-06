@@ -9,7 +9,15 @@ generator client {
 }
 
 model Post {
-  postId     Int      @id @default(autoincrement())
+  postId                           Int      @id @default(autoincrement())
+
+  profileId                        Int
+  groupId                          Int
+
+  title                            String
+  description                      String
+  image                            String?
+  edited                           Boolean  @default(false)
 
   created_at                       DateTime @default(now())
   updated_at                       DateTime @updatedAt

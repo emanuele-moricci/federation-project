@@ -23,17 +23,41 @@ export type Scalars = {
 
 
 
+export type Group = {
+  __typename?: 'Group';
+  groupId: Scalars['ID'];
+  posts?: Maybe<Array<Maybe<Post>>>;
+};
+
 /** The Post Model: stores every post in the database */
 export type Post = {
   __typename?: 'Post';
   /** post id */
   postId: Scalars['ID'];
+  /** author of the post */
+  profile?: Maybe<Profile>;
+  /** group of the post */
+  group?: Maybe<Group>;
+  /** post title */
+  title: Scalars['String'];
+  /** post description */
+  description: Scalars['String'];
+  /** post image */
+  image?: Maybe<Scalars['String']>;
+  /** was the post edited */
+  edited?: Maybe<Scalars['Boolean']>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
   updated_at: Scalars['DateTime'];
   /** deleted row */
   deleted: Scalars['Boolean'];
+};
+
+export type Profile = {
+  __typename?: 'Profile';
+  profileId: Scalars['ID'];
+  posts?: Maybe<Array<Maybe<Post>>>;
 };
 
 export type Query = {
@@ -56,7 +80,7 @@ export type QueryPostArgs = {
 };
 
 
-export type _Entity = Post;
+export type _Entity = Post | Profile | Group;
 
 export type _Service = {
   __typename?: '_Service';
@@ -144,29 +168,33 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
-  Post: ResolverTypeWrapper<Post>;
+  Group: ResolverTypeWrapper<Group>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Post: ResolverTypeWrapper<Post>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Post'];
+  _Entity: ResolversTypes['Post'] | ResolversTypes['Profile'] | ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
-  String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
-  Post: Post;
+  Group: Group;
   ID: Scalars['ID'];
+  Post: Post;
+  String: Scalars['String'];
   Boolean: Scalars['Boolean'];
+  Profile: Profile;
   Query: {};
   Int: Scalars['Int'];
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Post'];
+  _Entity: ResolversParentTypes['Post'] | ResolversParentTypes['Profile'] | ResolversParentTypes['Group'];
   _Service: _Service;
-  String: Scalars['String'];
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -177,11 +205,29 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
   name: 'DateTime';
 }
 
+export type GroupResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Group'] = ResolversParentTypes['Group']> = ResolversObject<{
+  groupId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type PostResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
   postId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  group?: Resolver<Maybe<ResolversTypes['Group']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  edited?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
+  profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -196,7 +242,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Post', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Post' | 'Profile' | 'Group', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -206,7 +252,9 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
 
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
+  Group?: GroupResolvers<ContextType>;
   Post?: PostResolvers<ContextType>;
+  Profile?: ProfileResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;

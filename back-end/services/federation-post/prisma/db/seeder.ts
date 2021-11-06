@@ -1,11 +1,13 @@
 import { PrismaClient } from '@prisma/client';
+
 import seedPosts from './seeders/post';
+// [ADD NEW SEEDER IMPORTS ABOVE] <- DO NOT REMOVE - Needed for the generator to create seeders seamlessly
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // ADD YOUR MODEL SEEDERS HERE
   await seedPosts();
+  // [ADD NEW SEEDERS ABOVE] <- DO NOT REMOVE - Needed for the generator to create seeders seamlessly
 }
 
 main()

@@ -8,6 +8,36 @@ type Post @key(fields: "postId") {
   postId: ID!
 
   """
+  author of the post
+  """
+  profile: Profile
+
+  """
+  group of the post
+  """
+  group: Group
+
+  """
+  post title
+  """
+  title: String!
+
+  """
+  post description
+  """
+  description: String!
+
+  """
+  post image
+  """
+  image: String
+
+  """
+  was the post edited
+  """
+  edited: Boolean
+
+  """
   created at
   """
   created_at: DateTime!
