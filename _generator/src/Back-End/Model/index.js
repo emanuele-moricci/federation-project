@@ -113,7 +113,7 @@ module.exports = {
       {
         type: "add",
         path: `${testPath}/integration/getAll${pluralizedCapitalModelName}.test.ts`,
-        templateFile: `${__dirname}/Model.unit.test.ts.hbs`,
+        templateFile: `${__dirname}/Model.integration.test.ts.hbs`,
         abortOnFail: true,
       },
     ];

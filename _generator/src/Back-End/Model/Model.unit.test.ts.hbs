@@ -2,7 +2,7 @@ import { getAll{{ capitalPlural ModelName }} } from '@services/{{ firstLower Mod
 
 describe('{{ firstLower ModelName }}Service tests', () => {
   it('should return every {{ firstLower ModelName }}', async () => {
-    const posts = await getAll{{ capitalPlural ModelName }}({});
+    const {{ firstLowerPlural ModelName }} = await getAll{{ capitalPlural ModelName }}();
     expect({{ firstLowerPlural ModelName }}).toBeDefined();
     expect({{ firstLowerPlural ModelName }}.length).toBeGreaterThan(0);
   });
