@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "ansi-regex": "^5.0.1",
+    "browserslist": "^4.16.5",
+    "cli": "^1.0.0",
     "dataloader": "^2.0.0",
     "graphql": "^16.0.1",
     "graphql-middleware": "^6.1.11",
