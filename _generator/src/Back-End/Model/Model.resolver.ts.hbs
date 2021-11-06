@@ -1,6 +1,6 @@
 import { {{ capital ModelName }} } from '@prisma/client';
 
-// import {} from '@src/services/{{ firstLower ModelName }}Service'; IMPORT YOUR FUNCTION FROM THE SERVICE
+import { getAll{{ capital ModelName }}s, get{{capital ModelName}}ById } from '@src/services/{{ firstLower ModelName }}Service'; IMPORT YOUR FUNCTION FROM THE SERVICE
 
 interface I{{ capital ModelName }}Ref {
   __typename: '{{ capital ModelName }}';
@@ -10,14 +10,14 @@ interface I{{ capital ModelName }}Ref {
 const resolver = {
   Query: {
     {{ capital ModelName }}: async (_source, _args, _context, _info): Promise<{{ capital ModelName }}[]> => {
-      // RETURN YOUR RESULT HERE
+      return await getAll{{ capital ModelName }}s();
     },
   },
   {{ capital ModelName }}: {
     __resolveReference: async ({
       {{ firstLower ModelName }}Id,
     }: I{{ capital ModelName }}Ref): Promise<{{ capital ModelName }} | null> => {
-      // RETURN YOUR RESULT HERE
+      return await get{{capital ModelName}}ById(parseInt({{ firstLower ModelName }}Id));
     }
   },
 };
