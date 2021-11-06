@@ -109,14 +109,16 @@ module.exports = {
 
     actions.push({
       type: "execCommand",
-      data: { command: "npx prisma generate" },
+      data: {
+        command: `npx prisma migrate reset --force --skip-seed && npx prisma generate && npx prisma migrate dev --name init_${firstLowerModelName}_model && npx prisma db seed`,
+      },
     });
 
     actions.push({
       type: "signalSuccess",
       data: {
         callToAction:
-          "Don't forget to update the Model to the prisma configuration file and migrate!",
+          "🚦 Wait for the command to finish, your model is being generated, migrated and seeded!",
       },
     });
 
