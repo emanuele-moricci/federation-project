@@ -1,6 +1,11 @@
 import { Post } from '@prisma/client';
 
-import { getAllPosts, getPostById } from '@src/services/postService';
+import {
+  getAllPosts,
+  getPostById,
+  getPostsByGroupId,
+  getPostsByProfileId,
+} from '@src/services/postService';
 
 import { IPostRef, IProfileRef, IGroupRef } from '@fed-schema/Utils/refs';
 
@@ -14,7 +19,8 @@ const resolver = {
     __resolveReference: async ({ postId }: IPostRef): Promise<Post | null> => {
       return await getPostById(parseInt(postId));
     },
-    profile: ({ profileId }: IProfileRef): any => ({ // TO CHANGE
+    profile: ({ profileId }: IProfileRef): any => ({
+      // TO CHANGE
       __typename: 'Profile',
       profileId: profileId,
     }),
@@ -22,6 +28,17 @@ const resolver = {
       __typename: 'Group',
       groupId: groupId,
     }),
+  },
+  // EXTENSIONS
+  Profile: {
+    posts: async ({ profileId }: IProfileRef): Promise<Post[]> => {
+      return getPostsByProfileId(parseInt(profileId));
+    },
+  },
+  Group: {
+    posts: async ({ groupId }: IGroupRef): Promise<Post[]> => {
+      return getPostsByGroupId(parseInt(groupId));
+    },
   },
 };
 
