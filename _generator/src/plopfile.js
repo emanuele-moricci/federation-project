@@ -31,6 +31,12 @@ module.exports = function (plop) {
     return pluarlized.charAt(0).toLowerCase() + pluarlized.slice(1);
   });
 
+  plop.setHelper("allCapsPlural", function (text) {
+    const pluralize = require("pluralize");
+    const pluarlized = pluralize(text);
+    return pluarlized.toUpperCase();
+  });
+
   // CUSTOM ACTIONS
   plop.setActionType("prettify", (_, config) => {
     const shell = require("shelljs");

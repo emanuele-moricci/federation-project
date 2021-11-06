@@ -1,4 +1,5 @@
 const path = require("path");
+const pluralize = require("pluralize");
 const { firstLower, capital } = require("../../Utils/formatUtils");
 
 module.exports = {
@@ -28,7 +29,9 @@ module.exports = {
 
     const capitalizedModelName = capital(data.ModelName);
     const firstLowerModelName = firstLower(data.ModelName);
+    const pluralizedCapitalModelName = pluralize(capital(data.ModelName));
 
+    const testPath = `${path.join(cwd, "/src/__tests__/")}`;
     const schemaPath = `${path.join(cwd, "/src/graphql/schema/")}`;
     const componentPath = `${path.join(cwd, "/src/graphql/schema/Models")}`;
     const servicePath = `${path.join(cwd, "/src/services")}`;
@@ -98,6 +101,19 @@ module.exports = {
         pattern: /\/\/.*\[ADD NEW SEEDERS ABOVE\].*/gi,
         transform: (str) => str,
         templateFile: `${__dirname}/Model.seederFunction.ts.hbs`,
+        abortOnFail: true,
+      },
+      // JEST Testing
+      {
+        type: "add",
+        path: `${testPath}/unit/services/${firstLowerModelName}Service.unit.test.ts`,
+        templateFile: `${__dirname}/Model.unit.test.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "add",
+        path: `${testPath}/integration/getAll${pluralizedCapitalModelName}.test.ts`,
+        templateFile: `${__dirname}/Model.unit.test.ts.hbs`,
         abortOnFail: true,
       },
     ];
