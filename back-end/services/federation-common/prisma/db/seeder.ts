@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 async function main() {
   await seedLanguages();
   await seedCountries();
+  // [ADD NEW SEEDERS ABOVE] <- DO NOT REMOVE - Needed for the generator to create seeders seamlessly
 }
 
 main()

@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   await seedProfiles();
+  // [ADD NEW SEEDERS ABOVE] <- DO NOT REMOVE - Needed for the generator to create seeders seamlessly
 }
 
 main()

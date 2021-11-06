@@ -62,6 +62,14 @@ module.exports = {
       },
       {
         type: "modify",
+        path: `${schemaPath}/Utils/refs.ts`,
+        pattern: /\/\/.*\[ADD NEW REFERENCE TYPES ABOVE\].*/gi,
+        transform: (str) => str,
+        templateFile: `${__dirname}/Model.refs.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "modify",
         path: `${prismaPath}/schema.prisma`,
         pattern: /\/\/.*\[ADD NEW PRISMA TYPES ABOVE\].*/gi,
         transform: (str) => str,
@@ -69,11 +77,17 @@ module.exports = {
         abortOnFail: true,
       },
       {
+        type: "add",
+        path: `${prismaPath}/db/seeders${firstLowerModelName}.ts`,
+        templateFile: `${__dirname}/Model.seederModel.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
         type: "modify",
-        path: `${schemaPath}/Utils/refs.ts`,
-        pattern: /\/\/.*\[ADD NEW REFERENCE TYPES ABOVE\].*/gi,
+        path: `${prismaPath}/db/seeder.ts`,
+        pattern: /\/\/.*\[ADD NEW SEEDERS ABOVE\].*/gi,
         transform: (str) => str,
-        templateFile: `${__dirname}/Model.refs.ts.hbs`,
+        templateFile: `${__dirname}/Model.seeder.ts.hbs`,
         abortOnFail: true,
       },
     ];
