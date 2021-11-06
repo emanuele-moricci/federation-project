@@ -35,6 +35,17 @@ export type GroupPostsArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Creates a Post */
+  createPost?: Maybe<CreatePostPayload>;
+};
+
+
+export type MutationCreatePostArgs = {
+  input?: Maybe<CreatePostInput>;
+};
+
 /** The Post Model: stores every post in the database */
 export type Post = {
   __typename?: 'Post';
@@ -98,6 +109,27 @@ export type _Service = {
   __typename?: '_Service';
   /** The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied */
   sdl?: Maybe<Scalars['String']>;
+};
+
+/** createPost input */
+export type CreatePostInput = {
+  /** The profile id. */
+  profileId: Scalars['Int'];
+  /** The group id. */
+  groupId: Scalars['Int'];
+  /** The post bio. */
+  title: Scalars['String'];
+  /** The post username. */
+  description: Scalars['String'];
+  /** The post phone. */
+  image?: Maybe<Scalars['String']>;
+};
+
+/** createPost payload */
+export type CreatePostPayload = {
+  __typename?: 'createPostPayload';
+  /** The post id. */
+  postId?: Maybe<Scalars['Int']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -183,6 +215,7 @@ export type ResolversTypes = ResolversObject<{
   Group: ResolverTypeWrapper<Group>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Post: ResolverTypeWrapper<Post>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -191,6 +224,8 @@ export type ResolversTypes = ResolversObject<{
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Post'] | ResolversTypes['Profile'] | ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
+  createPostInput: CreatePostInput;
+  createPostPayload: ResolverTypeWrapper<CreatePostPayload>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -199,6 +234,7 @@ export type ResolversParentTypes = ResolversObject<{
   Group: Group;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  Mutation: {};
   Post: Post;
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
@@ -207,6 +243,8 @@ export type ResolversParentTypes = ResolversObject<{
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Post'] | ResolversParentTypes['Profile'] | ResolversParentTypes['Group'];
   _Service: _Service;
+  createPostInput: CreatePostInput;
+  createPostPayload: CreatePostPayload;
 }>;
 
 export type ExtendsDirectiveArgs = {  };
@@ -221,6 +259,10 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
   groupId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType, RequireFields<GroupPostsArgs, 'take'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createPost?: Resolver<Maybe<ResolversTypes['createPostPayload']>, ParentType, ContextType, RequireFields<MutationCreatePostArgs, never>>;
 }>;
 
 export type PostResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
@@ -262,15 +304,22 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type CreatePostPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['createPostPayload'] = ResolversParentTypes['createPostPayload']> = ResolversObject<{
+  postId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
   Group?: GroupResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Post?: PostResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
+  createPostPayload?: CreatePostPayloadResolvers<ContextType>;
 }>;
 
 

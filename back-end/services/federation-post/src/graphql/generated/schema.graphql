@@ -36,6 +36,30 @@ type Post @key(fields: "postId") {
   deleted: Boolean!
 }
 
+"""createPost input"""
+input createPostInput {
+  """The profile id."""
+  profileId: Int!
+
+  """The group id."""
+  groupId: Int!
+
+  """The post bio."""
+  title: String!
+
+  """The post username."""
+  description: String!
+
+  """The post phone."""
+  image: String
+}
+
+"""createPost payload"""
+type createPostPayload {
+  """The post id."""
+  postId: Int
+}
+
 extend type Profile @key(fields: "profileId") {
   profileId: ID! @external
   posts(
@@ -67,4 +91,9 @@ extend type Query {
     """Records shown"""
     take: Int = 100
   ): [Post]
+}
+
+extend type Mutation {
+  """Creates a Post"""
+  createPost(input: createPostInput): createPostPayload
 }

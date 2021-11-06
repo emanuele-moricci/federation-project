@@ -70,3 +70,18 @@ export const getPostsByGroupId = async (
     skip,
   });
 };
+
+/**
+ * Function that created a Post with some input data and returns it.
+ *
+ * @param input The Post input data.
+ *
+ * @async
+ * @function createPost.
+ * @returns {Promise<Post>} The Post.
+ */
+export const createPost = async (input): Promise<Post> => {
+  return prismaContext.prisma.post.create({
+    data: input,
+  });
+};
