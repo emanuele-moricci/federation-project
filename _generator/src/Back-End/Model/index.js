@@ -49,19 +49,19 @@ module.exports = {
       {
         type: "add",
         path: `${modelPath}/${capitalizedModelName}.graphql`,
-        templateFile: `${__dirname}/component/Model.graphql.hbs`,
+        templateFile: `${__dirname}/components/Model.graphql.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
         path: `${modelPath}/${capitalizedModelName}.resolver.ts`,
-        templateFile: `${__dirname}/component/Model.resolver.ts.hbs`,
+        templateFile: `${__dirname}/components/Model.resolver.ts.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
         path: `${servicePath}/${firstLowerModelName}Service.ts`,
-        templateFile: `${__dirname}/component/Model.service.ts.hbs`,
+        templateFile: `${__dirname}/components/Model.service.ts.hbs`,
         abortOnFail: true,
       },
       {
