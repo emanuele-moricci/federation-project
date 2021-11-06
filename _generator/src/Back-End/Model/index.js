@@ -42,6 +42,7 @@ module.exports = {
      *
      */
     const actions = [
+      // GraphQL/TS resolvers&Types
       {
         type: "add",
         path: `${modelPath}/${capitalizedModelName}.graphql`,
@@ -68,6 +69,7 @@ module.exports = {
         templateFile: `${__dirname}/Model.refs.ts.hbs`,
         abortOnFail: true,
       },
+      // Prisma migration&seeding
       {
         type: "modify",
         path: `${prismaPath}/schema.prisma`,
@@ -78,8 +80,16 @@ module.exports = {
       },
       {
         type: "add",
-        path: `${prismaPath}/db/seeders${firstLowerModelName}.ts`,
+        path: `${prismaPath}/db/seeders/${capitalizedModelName}.ts`,
         templateFile: `${__dirname}/Model.seederModel.ts.hbs`,
+        abortOnFail: true,
+      },
+      {
+        type: "modify",
+        path: `${prismaPath}/db/seeder.ts`,
+        pattern: /\/\/.*\[ADD NEW SEEDER IMPORTS ABOVE\].*/gi,
+        transform: (str) => str,
+        templateFile: `${__dirname}/Model.seederImport.ts.hbs`,
         abortOnFail: true,
       },
       {
@@ -87,7 +97,7 @@ module.exports = {
         path: `${prismaPath}/db/seeder.ts`,
         pattern: /\/\/.*\[ADD NEW SEEDERS ABOVE\].*/gi,
         transform: (str) => str,
-        templateFile: `${__dirname}/Model.seeder.ts.hbs`,
+        templateFile: `${__dirname}/Model.seederFunction.ts.hbs`,
         abortOnFail: true,
       },
     ];

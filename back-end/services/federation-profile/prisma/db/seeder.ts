@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 import seedProfiles from './seeders/profile';
+// [ADD NEW SEEDER IMPORTS ABOVE] <- DO NOT REMOVE - Needed for the generator to create seeders seamlessly
 
 const prisma = new PrismaClient();
 
