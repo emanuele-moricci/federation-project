@@ -29,15 +29,6 @@ rover subgraph publish the-federation@current \
 
 ---
 
-## How to START
-
-- Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
-- Go to the root of the project and start the dockerized ecosystem with `yarn docker:up` or the normal one with `yarn federation:dev`
-- [OPTIONAL] update the supergraph by running `yarn federation:publish`
-- Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
-
----
-
 ## How to GENERATE
 
 This project comes with a handy micro-generator tool under `/_generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
@@ -52,12 +43,12 @@ After succesfully installing the utility, go to the **root** of your federation 
 
 These are the currently available generators
 
-| Backend Gen. |           Description            |
-| ------------ | :------------------------------: |
-| Model        | Adds a Prisma model w/ resolvers |
-| Mutation     | Adds a Prisma query w/ resolver  |
-| Query        |  Adds a Prisma mutation w/ res.  |
-| Service      |  Adds a new configured service   |
+| Name     |           Description            | Root          |
+| -------- | :------------------------------: | ------------- |
+| Model    | Adds a Prisma model w/ resolvers | Micro-service |
+| Mutation | Adds a Prisma query w/ resolver  | Micro-service |
+| Query    |  Adds a Prisma mutation w/ res.  | Micro-service |
+| Service  |  Adds a new configured service   | Gateway       |
 
 ---
 
@@ -81,6 +72,23 @@ This project has a local package called `federation-utils`, under `_utilities`. 
 - Fire up the command `yarn publish:local`
 - [OPTIONAL] if the config doesn't have it yet, add the package with `yarn add ../../bin/federation-utils/federation-utils.tgz`
 - In the gateway and every service, fire up the command `yarn install`
+
+---
+
+## How to START WITHOUT DOCKER
+
+- Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
+- Go to the root of the project and start the federation ecosystem with `yarn federation:dev`
+
+## How to START WITH DOCKER
+
+- Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
+- Go to the root of the project and start the dockerized ecosystem with `yarn docker:up` (for the docker version, check the `POSTGRESQL_DATABASES` url in your .env files and make sure that every database you need is correctly written there)
+
+## OPTIONAL
+
+- update the supergraph by running `yarn federation:publish`
+- Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
 
 ---
 
