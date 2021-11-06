@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
+import faker from 'faker';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function seedUsers() {
@@ -9,31 +10,32 @@ async function seedUsers() {
   );
 
   const adminPass = bcrypt.hashSync('Admin!20', salt);
-  const userPass = bcrypt.hashSync('User!120', salt);
 
-  await prisma.user.create({
-    data: {
-      email: 'admin@test.com',
-      firstname: 'Federation',
-      lastname: 'Admin',
-      password: adminPass,
-      languageId: 1,
-      countryId: 124,
-      profileId: 1,
-      role: 'ADMIN',
-    },
+  const userArray = Array.from({ length: 25 }, (_, i) => {
+    const isAdmin = i === 0;
+    const userPass = bcrypt.hashSync(faker.internet.password(), salt);
+
+    return {
+      userId: i + 1,
+      email: isAdmin ? 'admin@federation.com' : faker.internet.email(),
+      firstname: isAdmin ? 'Federation' : faker.name.firstName(),
+      lastname: isAdmin ? 'Admin' : faker.name.lastName(),
+      password: isAdmin ? adminPass : userPass,
+      languageId: faker.datatype.number({
+        min: 1,
+        max: 5,
+      }),
+      countryId: faker.datatype.number({
+        min: 1,
+        max: 120,
+      }),
+      profileId: i + 1,
+      role: isAdmin ? Role.ADMIN : Role.USER,
+    };
   });
 
-  await prisma.user.create({
-    data: {
-      email: 'user@test.com',
-      firstname: 'Federation',
-      lastname: 'User',
-      password: userPass,
-      languageId: 2,
-      countryId: 124,
-      profileId: 2,
-    },
+  await prisma.user.createMany({
+    data: userArray,
   });
 }
 

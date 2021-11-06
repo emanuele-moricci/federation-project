@@ -2,16 +2,14 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function seedSecurities() {
-  await prisma.security.create({
-    data: {
-      userId: 1,
-    },
+  const securityArray = Array.from({ length: 25 }, (_, i) => {
+    return {
+      userId: i + 1,
+    };
   });
 
-  await prisma.security.create({
-    data: {
-      userId: 2,
-    },
+  await prisma.security.createMany({
+    data: securityArray,
   });
 }
 

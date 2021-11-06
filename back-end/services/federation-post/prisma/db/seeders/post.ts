@@ -1,23 +1,27 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
+import faker from 'faker';
+
 async function seedPosts() {
-  await prisma.post.create({
-    data: {
-      title: 'Awesome Post 1',
-      description: 'This is the first post',
-      profileId: 1,
-      groupId: 1,
-    },
+  const postArray = Array.from({ length: 25 }, (_, i) => {
+    return {
+      title: faker.company.catchPhrase(),
+      description: faker.lorem.paragraph(),
+      profileId: faker.datatype.number({
+        min: 1,
+        max: 25,
+      }),
+      groupId: faker.datatype.number({
+        min: 1,
+        max: 10,
+      }),
+      image: faker.image.imageUrl(),
+    };
   });
 
-  await prisma.post.create({
-    data: {
-      title: 'Awesome Post 2',
-      description: 'This is the second post',
-      profileId: 2,
-      groupId: 2,
-    },
+  await prisma.post.createMany({
+    data: postArray,
   });
 }
 
