@@ -49,6 +49,7 @@
     "@graphql-codegen/plugin-helpers": "^1.18.7",
     "@graphql-codegen/schema-ast": "^1.18.3",
     "@types/toobusy-js": "^0.5.2",
+    "ansi-regex": "^5.0.1",
     "apollo-graphql": "^0.9.3",
     "apollo-server": "^3.4.0",
     "apollo-server-express": "^3.4.0",
@@ -65,6 +66,8 @@
     "graphql-shield": "^7.5.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
-    "toobusy-js": "^0.5.1"
+    "set-value": "^4.0.1",
+    "toobusy-js": "^0.5.1",
+    "ws": "^7.4.6"
   }
 }

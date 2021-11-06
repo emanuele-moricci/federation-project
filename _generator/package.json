@@ -16,11 +16,14 @@
     "federation-generator": "./index.js"
   },
   "dependencies": {
+    "ansi-regex": "^5.0.1",
     "ascii-art": "^2.8.5",
     "chalk": "^4.1.2",
     "g": "^2.0.1",
     "minimist": "^1.2.5",
     "plop": "^2.7.6",
-    "pluralize": "^8.0.0"
+    "pluralize": "^8.0.0",
+    "set-value": "^4.0.1",
+    "ws": "^7.4.6"
   }
 }
