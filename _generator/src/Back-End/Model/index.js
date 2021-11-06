@@ -49,19 +49,19 @@ module.exports = {
       {
         type: "add",
         path: `${modelPath}/${capitalizedModelName}.graphql`,
-        templateFile: `${__dirname}/Model.graphql.hbs`,
+        templateFile: `${__dirname}/component/Model.graphql.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
         path: `${modelPath}/${capitalizedModelName}.resolver.ts`,
-        templateFile: `${__dirname}/Model.resolver.ts.hbs`,
+        templateFile: `${__dirname}/component/Model.resolver.ts.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
         path: `${servicePath}/${firstLowerModelName}Service.ts`,
-        templateFile: `${__dirname}/Model.service.ts.hbs`,
+        templateFile: `${__dirname}/component/Model.service.ts.hbs`,
         abortOnFail: true,
       },
       {
@@ -69,7 +69,7 @@ module.exports = {
         path: `${schemaPath}/Utils/refs.ts`,
         pattern: /\/\/.*\[ADD NEW REFERENCE TYPES ABOVE\].*/gi,
         transform: (str) => str,
-        templateFile: `${__dirname}/Model.refs.ts.hbs`,
+        templateFile: `${__dirname}/utils/Model.refs.ts.hbs`,
         abortOnFail: true,
       },
       // Prisma migration&seeding
@@ -78,13 +78,13 @@ module.exports = {
         path: `${prismaPath}/schema.prisma`,
         pattern: /\/\/.*\[ADD NEW PRISMA TYPES ABOVE\].*/gi,
         transform: (str) => str,
-        templateFile: `${__dirname}/Model.prisma.hbs`,
+        templateFile: `${__dirname}/database/Model.prisma.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
         path: `${prismaPath}/db/seeders/${capitalizedModelName}.ts`,
-        templateFile: `${__dirname}/Model.seederModel.ts.hbs`,
+        templateFile: `${__dirname}/database/Model.seederModel.ts.hbs`,
         abortOnFail: true,
       },
       {
@@ -92,7 +92,7 @@ module.exports = {
         path: `${prismaPath}/db/seeder.ts`,
         pattern: /\/\/.*\[ADD NEW SEEDER IMPORTS ABOVE\].*/gi,
         transform: (str) => str,
-        templateFile: `${__dirname}/Model.seederImport.ts.hbs`,
+        templateFile: `${__dirname}/database/Model.seederImport.ts.hbs`,
         abortOnFail: true,
       },
       {
@@ -100,20 +100,20 @@ module.exports = {
         path: `${prismaPath}/db/seeder.ts`,
         pattern: /\/\/.*\[ADD NEW SEEDERS ABOVE\].*/gi,
         transform: (str) => str,
-        templateFile: `${__dirname}/Model.seederFunction.ts.hbs`,
+        templateFile: `${__dirname}/database/Model.seederFunction.ts.hbs`,
         abortOnFail: true,
       },
       // JEST Testing
       {
         type: "add",
         path: `${testPath}/unit/services/${firstLowerModelName}Service.unit.test.ts`,
-        templateFile: `${__dirname}/Model.unit.test.ts.hbs`,
+        templateFile: `${__dirname}/tests/Model.unit.test.ts.hbs`,
         abortOnFail: true,
       },
       {
         type: "add",
         path: `${testPath}/integration/getAll${pluralizedCapitalModelName}.test.ts`,
-        templateFile: `${__dirname}/Model.integration.test.ts.hbs`,
+        templateFile: `${__dirname}/tests/Model.integration.test.ts.hbs`,
         abortOnFail: true,
       },
     ];
