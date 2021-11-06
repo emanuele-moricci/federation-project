@@ -7,12 +7,32 @@ extend type Profile @key(fields: "profileId") {
   # the profile id
   profileId: ID! @external
   # every profile post
-  posts: [Post]
+  posts(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int = 20
+  ): [Post]
 }
 
 extend type Group @key(fields: "groupId") {
   # the group id
   groupId: ID! @external
   # every group post
-  posts: [Post]
+  posts(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int = 20
+  ): [Post]
 }

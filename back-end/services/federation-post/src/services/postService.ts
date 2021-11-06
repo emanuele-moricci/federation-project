@@ -41,9 +41,14 @@ export const getPostById = async (postId: number): Promise<Post | null> => {
  * @returns {Promise<Post[]>} The found Posts.
  */
 export const getPostsByProfileId = async (
-  profileId: number
+  profileId: number,
+  { take, skip }: PaginationAndSearchArgs
 ): Promise<Post[]> => {
-  return await prismaContext.prisma.post.findMany({ where: { profileId } });
+  return await prismaContext.prisma.post.findMany({
+    where: { profileId },
+    take,
+    skip,
+  });
 };
 
 /**
@@ -55,6 +60,13 @@ export const getPostsByProfileId = async (
  * @function getPostsByGroupId.
  * @returns {Promise<Post[]>} The found Posts.
  */
-export const getPostsByGroupId = async (groupId: number): Promise<Post[]> => {
-  return await prismaContext.prisma.post.findMany({ where: { groupId } });
+export const getPostsByGroupId = async (
+  groupId: number,
+  { take, skip }: PaginationAndSearchArgs
+): Promise<Post[]> => {
+  return await prismaContext.prisma.post.findMany({
+    where: { groupId },
+    take,
+    skip,
+  });
 };

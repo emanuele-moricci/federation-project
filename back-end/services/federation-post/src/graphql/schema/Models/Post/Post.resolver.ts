@@ -8,6 +8,7 @@ import {
 } from '@src/services/postService';
 
 import { IPostRef, IProfileRef, IGroupRef } from '@fed-schema/Utils/refs';
+import { PaginationAndSearchArgs } from 'federation-utils';
 
 const resolver = {
   Query: {
@@ -31,13 +32,19 @@ const resolver = {
   },
   // EXTENSIONS
   Profile: {
-    posts: async ({ profileId }: IProfileRef): Promise<Post[]> => {
-      return getPostsByProfileId(parseInt(profileId));
+    posts: async (
+      { profileId }: IProfileRef,
+      args: PaginationAndSearchArgs
+    ): Promise<Post[]> => {
+      return getPostsByProfileId(parseInt(profileId), args);
     },
   },
   Group: {
-    posts: async ({ groupId }: IGroupRef): Promise<Post[]> => {
-      return getPostsByGroupId(parseInt(groupId));
+    posts: async (
+      { groupId }: IGroupRef,
+      args: PaginationAndSearchArgs
+    ): Promise<Post[]> => {
+      return getPostsByGroupId(parseInt(groupId), args);
     },
   },
 };

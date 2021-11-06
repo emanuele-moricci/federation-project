@@ -29,6 +29,12 @@ export type Group = {
   posts?: Maybe<Array<Maybe<Post>>>;
 };
 
+
+export type GroupPostsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
 /** The Post Model: stores every post in the database */
 export type Post = {
   __typename?: 'Post';
@@ -58,6 +64,12 @@ export type Profile = {
   __typename?: 'Profile';
   profileId: Scalars['ID'];
   posts?: Maybe<Array<Maybe<Post>>>;
+};
+
+
+export type ProfilePostsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 export type Query = {
@@ -170,12 +182,12 @@ export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Group: ResolverTypeWrapper<Group>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Post: ResolverTypeWrapper<Post>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
   _Entity: ResolversTypes['Post'] | ResolversTypes['Profile'] | ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
@@ -186,12 +198,12 @@ export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars['DateTime'];
   Group: Group;
   ID: Scalars['ID'];
+  Int: Scalars['Int'];
   Post: Post;
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   Profile: Profile;
   Query: {};
-  Int: Scalars['Int'];
   _Any: Scalars['_Any'];
   _Entity: ResolversParentTypes['Post'] | ResolversParentTypes['Profile'] | ResolversParentTypes['Group'];
   _Service: _Service;
@@ -207,7 +219,7 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type GroupResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Group'] = ResolversParentTypes['Group']> = ResolversObject<{
   groupId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
+  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType, RequireFields<GroupPostsArgs, 'take'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -227,7 +239,7 @@ export type PostResolvers<ContextType = IPrismaContext, ParentType extends Resol
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
+  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType, RequireFields<ProfilePostsArgs, 'take'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

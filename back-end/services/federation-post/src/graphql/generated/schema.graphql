@@ -38,12 +38,24 @@ type Post @key(fields: "postId") {
 
 extend type Profile @key(fields: "profileId") {
   profileId: ID! @external
-  posts: [Post]
+  posts(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int = 20
+  ): [Post]
 }
 
 extend type Group @key(fields: "groupId") {
   groupId: ID! @external
-  posts: [Post]
+  posts(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int = 20
+  ): [Post]
 }
 
 extend type Query {
