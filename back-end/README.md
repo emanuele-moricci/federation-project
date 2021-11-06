@@ -13,12 +13,6 @@
 - Install every dependency in every federation project using `yarn` (sometimes you may need to manually add the rover module with `yarn add @apollo/rover`)
 - Create the .env, .env.test and .env.docker.test files using the .env.example file and add the DB connection string to the `DATABASE_URL` key
 
-- Create a Model with the `federation-generator` command
-- Fire the command `npx prisma generate` to generate the Prisma client
-- Create the **"init"** migration running this command on the project root `yarn generate:migration`
-- Modify the seeder function under `./prisma/db/` and seed the database using the command `yarn generate:seed`
-- Modify the necessary resolvers for the model in its Model/ folder and service
-
 ### Gateway
 
 - Go to the root of the back-end side in the command line
@@ -38,7 +32,7 @@ rover subgraph publish the-federation@current \
 ## How to START
 
 - Fire up the command `yarn prisma:studio` to get the Prisma GUI OR use your **DBMS** of choice
-- Go to the root of the project and start the dockerized ecosystem with `yarn docker:up`
+- Go to the root of the project and start the dockerized ecosystem with `yarn docker:up` or the normal one with `yarn federation:dev`
 - [OPTIONAL] update the supergraph by running `yarn federation:publish`
 - Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
 
@@ -71,7 +65,10 @@ These are the currently available generators
 
 - Go to the root of the project and fire up the command `federation-generator`
 - Select the `service` generator and follow the GUI to create a new service
-- Follow the **'How to INITIALIZE'** section to initialize the service
+- Follow the ### INITIALISE => Database && Back-End ### sections to set-up the service
+- Fire up the `federation-generator` and create a `model`
+- Go to the gateway root and fire up the command `yarn federation:dev`
+- open another terminal and fire up the command `yarn federation:publish` (could fail, re-run it if it does)
 
 ---
 
