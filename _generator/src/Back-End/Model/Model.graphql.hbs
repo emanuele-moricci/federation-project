@@ -25,7 +25,7 @@ type {{ capital ModelName }} @key(fields: "{{ firstLower ModelName }}Id") {
 
 extend type Query {
   """
-  Get all {{ capital ModelName }}s query
+  Get all {{ capitalPlural ModelName }} query
   """
   {{ capital ModelName }}: [{{ capital ModelName }}]
 }

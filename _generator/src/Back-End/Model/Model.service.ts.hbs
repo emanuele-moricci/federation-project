@@ -2,13 +2,13 @@ import prismaContext from '@config/prisma/prismaContext';
 import { {{capital ModelName}} } from '@prisma/client';
 
 /**
- * Function that returns all of the {{capital ModelName}}s present in the database.
+ * Function that returns all of the {{capitalPlural ModelName}} present in the database.
  *
  * @async
- * @function getAll{{capital ModelName}}s.
+ * @function getAll{{ capitalPlural ModelName }}.
  * @returns {Promise<{{capital ModelName}}[]>} The {{capital ModelName}} List.
  */
-export const getAll{{capital ModelName}}s = async (): Promise<{{capital ModelName}}[]> => {
+export const getAll{{capitalPlural ModelName}} = async (): Promise<{{capital ModelName}}[]> => {
   return await prismaContext.prisma.{{firstLower ModelName}}.findMany();
 };
 

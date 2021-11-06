@@ -1,6 +1,6 @@
 import { {{ capital ModelName }} } from '@prisma/client';
 
-import { getAll{{ capital ModelName }}s, get{{capital ModelName}}ById } from '@src/services/{{ firstLower ModelName }}Service';
+import { getAll{{ capitalPlural ModelName }}, get{{capital ModelName}}ById } from '@src/services/{{ firstLower ModelName }}Service';
 
 interface I{{ capital ModelName }}Ref {
   __typename: '{{ capital ModelName }}';
@@ -10,7 +10,7 @@ interface I{{ capital ModelName }}Ref {
 const resolver = {
   Query: {
     {{ capital ModelName }}: async (_source, _args, _context, _info): Promise<{{ capital ModelName }}[]> => {
-      return await getAll{{ capital ModelName }}s();
+      return await getAll{{ capitalPlural ModelName }}();
     },
   },
   {{ capital ModelName }}: {

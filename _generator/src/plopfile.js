@@ -19,6 +19,18 @@ module.exports = function (plop) {
     return text.charAt(0).toLowerCase() + text.slice(1);
   });
 
+  plop.setHelper("capitalPlural", function (text) {
+    const pluralize = require("pluralize");
+    const pluarlized = pluralize(text);
+    return pluarlized.charAt(0).toUpperCase() + pluarlized.slice(1);
+  });
+
+  plop.setHelper("firstLowerPlural", function (text) {
+    const pluralize = require("pluralize");
+    const pluarlized = pluralize(text);
+    return pluarlized.charAt(0).toLowerCase() + pluarlized.slice(1);
+  });
+
   // CUSTOM ACTIONS
   plop.setActionType("prettify", (_, config) => {
     const shell = require("shelljs");
