@@ -3,9 +3,11 @@ schema: 'http://localhost:4004/graphql'
 generates:
   src/graphql/generated/graphql.ts:
     plugins:
+      - add:
+          content: 'import IPrismaContext from "@config/prismaConfig";'
       - 'typescript'
       - 'typescript-resolvers'
     config:
-      contextType: src/config/prismaConfig#IPrismaContext
+      contextType: IPrismaContext
       useIndexSignature: true
       federation: true

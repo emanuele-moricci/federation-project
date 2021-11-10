@@ -1,5 +1,5 @@
+import IPrismaContext from "@config/prismaConfig";
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { IPrismaContext } from 'src/config/prisma/IPrismaContext';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -16,6 +16,7 @@ export type Scalars = {
   DateTime: any;
   _Any: any;
 };
+
 
 
 
@@ -198,6 +199,10 @@ export type ResolversParentTypes = ResolversObject<{
   _Service: _Service;
 }>;
 
+export type AuthDirectiveArgs = {  };
+
+export type AuthDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
@@ -231,7 +236,7 @@ export type LanguageResolvers<ContextType = IPrismaContext, ParentType extends R
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   _entities?: Resolver<Array<Maybe<ResolversTypes['_Entity']>>, ParentType, ContextType, RequireFields<Query_EntitiesArgs, 'representations'>>;
   _service?: Resolver<ResolversTypes['_Service'], ParentType, ContextType>;
-  Country?: Resolver<Maybe<Array<Maybe<ResolversTypes['Country']>>>, ParentType, ContextType, RequireFields<QueryCountryArgs, never>>;
+  Country?: Resolver<Maybe<Array<Maybe<ResolversTypes['Country']>>>, ParentType, ContextType, RequireFields<QueryCountryArgs, 'take'>>;
   Language?: Resolver<Maybe<Array<Maybe<ResolversTypes['Language']>>>, ParentType, ContextType>;
 }>;
 
@@ -265,6 +270,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
  */
 export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
+  auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
 }>;
 
