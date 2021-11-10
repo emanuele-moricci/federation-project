@@ -1,7 +1,17 @@
-node_modules 
+# build folders&files
+node_modules
 dist
-coverage
-.env
-.env.docker.test
-.DS_Store
+lib
 *.tgz
+
+# testing
+coverage
+
+# enviroment
+.env
+.env.test
+.env.docker.test
+
+# other
+.DS_Store
+*.log

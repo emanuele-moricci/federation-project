@@ -1,0 +1,96 @@
+"""
+The User Model: stores a user's most important data.
+"""
+type User @key(fields: "userId") {
+  """
+  user id
+  """
+  userId: ID! @auth
+
+  """
+  user email
+  """
+  email: String! @auth
+
+  """
+  user password
+  """
+  password: String!
+
+  """
+  user auth token
+  """
+  token: String
+
+  """
+  is user active now?
+  """
+  active: Boolean!
+
+  """
+  user role
+  """
+  role: Role!
+
+  """
+  user language
+  """
+  language: Language
+
+  """
+  user country
+  """
+  country: Country
+
+  """
+  user security settings
+  """
+  security: Security
+
+  """
+  user profile
+  """
+  profile: Profile
+
+  """
+  user firstname
+  """
+  firstname: String!
+
+  """
+  user lastname
+  """
+  lastname: String!
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}
+
+extend type Query {
+  """
+  Get all Users query
+  """
+  User(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int = 100
+  ): [User]
+}

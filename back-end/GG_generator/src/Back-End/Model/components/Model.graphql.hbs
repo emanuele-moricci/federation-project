@@ -1,0 +1,56 @@
+"""
+The {{ capital ModelName }} Model: {{ ModelDescription }}
+"""
+type {{ capital ModelName }} @key(fields: "{{ firstLower ModelName }}Id") {
+  """
+  {{ firstLower ModelName }} id
+  """
+  {{ firstLower ModelName }}Id: ID!
+
+  """
+  created at
+  """
+  created_at: DateTime!
+
+  """
+  updated at
+  """
+  updated_at: DateTime!
+
+  """
+  deleted row
+  """
+  deleted: Boolean!
+}
+
+{{#if wantQuery}}
+
+extend type Query {
+  """
+  Get all {{ capitalPlural ModelName }} query
+  """
+  {{ capital ModelName }}: [{{ capital ModelName }}]
+}
+
+{{/if}}
+
+{{#if wantMutation}}
+
+extend type Mutation {
+  """
+  Create {{ capital ModelName }} mutation
+  """
+  create{{ capital ModelName }}(input: {{ firstLower ModelName }}Input): {{ capital ModelName }}
+}
+
+"""
+{{ capital ModelName }} input
+"""
+input {{ firstLower ModelName }}Input {
+  """
+  Add your input fields here
+  """
+  toChange: String
+}
+
+{{/if}}

@@ -1,0 +1,23 @@
+extend type Language @key(fields: "languageId") {
+  # the language id
+  languageId: ID! @external
+
+  # every user with a given language
+  users: [User]
+}
+
+extend type Country @key(fields: "countryId") {
+  # the country id
+  countryId: ID! @external
+
+  # every user with a given country
+  users: [User]
+}
+
+extend type Profile @key(fields: "profileId") {
+  # the profile id
+  profileId: ID! @external
+
+  # the associated user
+  user: User
+}
