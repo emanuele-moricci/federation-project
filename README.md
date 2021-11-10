@@ -50,7 +50,7 @@ This project is designed to provide real-world examples on how to use [GalactaGr
 </h3>
 <br />
 
-## What is Federation Project?
+## What is the Federation Project?
 
 ---
 
