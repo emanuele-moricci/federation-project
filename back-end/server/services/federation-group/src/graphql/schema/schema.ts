@@ -10,6 +10,7 @@ import {
   resolvers as customResolvers,
   authDirective,
   commonTypeDefs,
+  rateDirective,
 } from 'federation-utils';
 import { GraphQLSchema } from 'graphql';
 
@@ -37,5 +38,8 @@ let schema = buildSubgraphSchema({
 
 // DIRECTIVES
 schema = authDirective(schema) as unknown as GraphQLSchema;
+schema = rateDirective(schema) as unknown as GraphQLSchema;
 
-export default schema;
+const directedSchema = schema;
+
+export default directedSchema;
