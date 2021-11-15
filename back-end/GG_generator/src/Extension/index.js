@@ -2,11 +2,11 @@ const path = require("path");
 const fs = require("fs");
 
 const pluralize = require("pluralize");
-const { firstLower, capital } = require("../../Utils/formatUtils");
+const { firstLower, capital } = require("../Utils/formatUtils");
 const {
   listEveryModel,
   splitServiceFromModel,
-} = require("../../Utils/commonPrompts");
+} = require("../Utils/commonPrompts");
 
 module.exports = {
   description: "Add an empty Model",

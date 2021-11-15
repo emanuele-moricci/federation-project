@@ -1,10 +1,10 @@
 module.exports = function (plop) {
   // GENERATORS
-  let serviceGenerator = require("./Back-End/Service/index.js");
-  let modelGenerator = require("./Back-End/Model/index.js");
-  let extensionGenerator = require("./Back-End/Extension/index.js");
-  let queryGenerator = require("./Back-End/Query/index.js");
-  let mutationGenerator = require("./Back-End/Mutation/index.js");
+  let serviceGenerator = require("./Service/index.js");
+  let modelGenerator = require("./Model/index.js");
+  let extensionGenerator = require("./Extension/index.js");
+  let queryGenerator = require("./Query/index.js");
+  let mutationGenerator = require("./Mutation/index.js");
 
   plop.setGenerator("service", serviceGenerator);
   plop.setGenerator("model", modelGenerator);
