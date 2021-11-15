@@ -12,7 +12,6 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -25,7 +24,6 @@ module.exports = {
       'error',
       {
         endOfLine: 'auto',
-        bracket,
       },
     ],
     'import/extensions': 'off',
@@ -73,5 +71,6 @@ module.exports = {
     '**/package.json',
     '**/*.graphql',
     '**/*.prisma',
+    '**/*.md',
   ],
 };

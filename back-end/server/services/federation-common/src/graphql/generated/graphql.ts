@@ -23,6 +23,7 @@ export type Scalars = {
 
 
 
+
 /** The Country Model: stores the most important countries. */
 export type Country = {
   __typename?: 'Country';
@@ -207,6 +208,11 @@ export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
+export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
+  duration?: Scalars['Int']; };
+
+export type RateLimitDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
 export type CountryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = ResolversObject<{
   countryId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -272,6 +278,7 @@ export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
   auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
+  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 }>;
 
 

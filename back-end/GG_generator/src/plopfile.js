@@ -46,7 +46,6 @@ module.exports = function (plop) {
   plop.setHelper("eq", function (arg1, arg2) {
     return arg1 == arg2;
   });
-
   plop.setHelper("or", function () {
     return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
   });

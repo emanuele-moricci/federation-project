@@ -1,8 +1,5 @@
 const path = require("path");
-const fs = require("fs");
 
-const pluralize = require("pluralize");
-const { firstLower, capital } = require("../Utils/formatUtils");
 const {
   listEveryModel,
   splitServiceFromModel,

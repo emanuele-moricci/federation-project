@@ -1,0 +1,83 @@
+"""
+The authentication directive, responsable to check if a type needs authentication to be resolved.
+"""
+directive @auth on FIELD_DEFINITION
+
+"""Controls the rate of traffic."""
+directive @rateLimit(
+  """Number of occurrences allowed over duration."""
+  limit: Int! = 60
+
+  """Number of seconds before limit is reset."""
+  duration: Int! = 60
+) on OBJECT | FIELD_DEFINITION
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""The Group Model: Stores every group present in the project"""
+type Group @key(fields: "groupId") {
+  """group id"""
+  groupId: ID!
+
+  """name"""
+  name: String!
+
+  """bio"""
+  bio: String
+
+  """avatar"""
+  avatar: String!
+
+  """banner"""
+  banner: String
+
+  """created at"""
+  created_at: DateTime!
+
+  """updated at"""
+  updated_at: DateTime!
+
+  """deleted row"""
+  deleted: Boolean!
+}
+
+"""createGroup input"""
+input createGroupInput {
+  """The group name."""
+  name: String!
+
+  """The group bio."""
+  bio: String
+
+  """The group banner."""
+  banner: String
+}
+
+"""createGroup payload"""
+type createGroupPayload {
+  """The group id."""
+  groupId: Int
+}
+
+extend type Profile @key(fields: "profileId") {
+  profileId: ID! @external
+}
+
+extend type Query {
+  """Get all Groups query"""
+  Group(
+    """Starting record"""
+    skip: Int
+
+    """Records shown"""
+    take: Int = 25
+  ): [Group]
+}
+
+extend type Mutation {
+  """Creates a Group"""
+  createGroup(input: createGroupInput): createGroupPayload
+}

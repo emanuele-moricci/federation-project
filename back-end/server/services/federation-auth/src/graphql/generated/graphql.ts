@@ -1,5 +1,5 @@
+import IPrismaContext from "@config/prismaConfig";
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { IPrismaContext } from 'src/config/prismaConfig';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -16,6 +16,7 @@ export type Scalars = {
   DateTime: any;
   _Any: any;
 };
+
 
 
 
@@ -124,6 +125,8 @@ export type Security = {
 /** The User Model: stores a user's most important data. */
 export type User = {
   __typename?: 'User';
+  /** user language */
+  language?: Maybe<Language>;
   /** user id */
   userId: Scalars['ID'];
   /** user email */
@@ -136,8 +139,6 @@ export type User = {
   active: Scalars['Boolean'];
   /** user role */
   role: Role;
-  /** user language */
-  language?: Maybe<Language>;
   /** user country */
   country?: Maybe<Country>;
   /** user security settings */
@@ -157,7 +158,7 @@ export type User = {
 };
 
 
-export type _Entity = Security | User | Language | Country | Profile;
+export type _Entity = User | Security | Country | Profile | Language;
 
 export type _Service = {
   __typename?: '_Service';
@@ -297,7 +298,7 @@ export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Security'] | ResolversTypes['User'] | ResolversTypes['Language'] | ResolversTypes['Country'] | ResolversTypes['Profile'];
+  _Entity: ResolversTypes['User'] | ResolversTypes['Security'] | ResolversTypes['Country'] | ResolversTypes['Profile'] | ResolversTypes['Language'];
   _Service: ResolverTypeWrapper<_Service>;
   loginInput: LoginInput;
   loginPayload: ResolverTypeWrapper<LoginPayload>;
@@ -320,7 +321,7 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   User: User;
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Security'] | ResolversParentTypes['User'] | ResolversParentTypes['Language'] | ResolversParentTypes['Country'] | ResolversParentTypes['Profile'];
+  _Entity: ResolversParentTypes['User'] | ResolversParentTypes['Security'] | ResolversParentTypes['Country'] | ResolversParentTypes['Profile'] | ResolversParentTypes['Language'];
   _Service: _Service;
   loginInput: LoginInput;
   loginPayload: LoginPayload;
@@ -335,6 +336,11 @@ export type AuthDirectiveResolver<Result, Parent, ContextType = IPrismaContext, 
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
+  duration?: Scalars['Int']; };
+
+export type RateLimitDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type CountryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = ResolversObject<{
   countryId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -386,13 +392,13 @@ export type SecurityResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type UserResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
-  language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   security?: Resolver<Maybe<ResolversTypes['Security']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
@@ -409,7 +415,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Security' | 'User' | 'Language' | 'Country' | 'Profile', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'User' | 'Security' | 'Country' | 'Profile' | 'Language', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
@@ -452,6 +458,7 @@ export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
   auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
+  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 }>;
 
 

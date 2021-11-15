@@ -13,7 +13,83 @@ services:
     links:
       - db
     networks:
-      - test_vm
+      - dev_vm
+  federation-auth:
+    container_name: federation-auth
+    build:
+      context: './services/federation-auth'
+      target: base
+    ports:
+      - '4001:4001'
+    depends_on:
+      - db
+      - federation-gateway
+    links:
+      - db
+      - federation-gateway
+    networks:
+      - dev_vm
+  federation-common:
+    container_name: federation-common
+    build:
+      context: './services/federation-common'
+      target: base
+    ports:
+      - '4002:4002'
+    depends_on:
+      - db
+      - federation-gateway
+    links:
+      - db
+      - federation-gateway
+    networks:
+      - dev_vm
+  federation-profile:
+    container_name: federation-profile
+    build:
+      context: './services/federation-profile'
+      target: base
+    ports:
+      - '4003:4003'
+    depends_on:
+      - db
+      - federation-gateway
+    links:
+      - db
+      - federation-gateway
+    networks:
+      - dev_vm
+  federation-group:
+    container_name: federation-group
+    build:
+      context: './services/federation-group'
+      target: base
+    ports:
+      - '4004:4004'
+    depends_on:
+      - db
+      - federation-gateway
+    links:
+      - db
+      - federation-gateway
+    networks:
+      - dev_vm
+  federation-post:
+    container_name: federation-post
+    build:
+      context: './services/federation-post'
+      target: base
+    ports:
+      - '4005:4005'
+    depends_on:
+      - db
+      - federation-gateway
+    links:
+      - db
+      - federation-gateway
+    networks:
+      - dev_vm
+  # [ADD NEW DOCKER CONTAINERS HERE] <- DO NOT REMOVE - Needed for the generator to create micro-service commands seamlessly
   db:
     container_name: db
     image: postgres:13
@@ -27,8 +103,8 @@ services:
       POSTGRES_USER: ${POSTGRESQL_USER}
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
     networks:
-      - test_vm
+      - dev_vm
 networks:
-  test_vm:
-    name: test_vm
+  dev_vm:
+    name: dev_vm
     driver: bridge
