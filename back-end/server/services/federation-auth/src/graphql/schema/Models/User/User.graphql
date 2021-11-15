@@ -33,11 +33,6 @@ type User @key(fields: "userId") {
   role: Role!
 
   """
-  user language
-  """
-  language: Language
-
-  """
   user country
   """
   country: Country
