@@ -4,6 +4,11 @@ export interface IUserRef {
   languageId: string;
 }
 
+export interface ISecurityRef {
+  __typename: 'Security';
+  securityId: string;
+}
+
 export interface ILanguageRef {
   __typename: 'Language';
   languageId: string;
@@ -12,11 +17,6 @@ export interface ILanguageRef {
 export interface ICountryRef {
   __typename: 'Country';
   countryId: string;
-}
-
-export interface ISecurityRef {
-  __typename: 'Security';
-  securityId: string;
 }
 
 export interface IProfileRef {

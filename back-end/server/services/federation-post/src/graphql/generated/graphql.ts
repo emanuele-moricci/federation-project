@@ -51,12 +51,10 @@ export type MutationCreatePostArgs = {
 /** The Post Model: stores every post in the database */
 export type Post = {
   __typename?: 'Post';
+  group?: Maybe<Group>;
+  profile?: Maybe<Profile>;
   /** post id */
   postId: Scalars['ID'];
-  /** author of the post */
-  profile?: Maybe<Profile>;
-  /** group of the post */
-  group?: Maybe<Group>;
   /** post title */
   title: Scalars['String'];
   /** post description */
@@ -105,7 +103,7 @@ export type QueryPostArgs = {
 };
 
 
-export type _Entity = Post | Profile | Group;
+export type _Entity = Post | Group | Profile;
 
 export type _Service = {
   __typename?: '_Service';
@@ -224,7 +222,7 @@ export type ResolversTypes = ResolversObject<{
   Profile: ResolverTypeWrapper<Profile>;
   Query: ResolverTypeWrapper<{}>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['Post'] | ResolversTypes['Profile'] | ResolversTypes['Group'];
+  _Entity: ResolversTypes['Post'] | ResolversTypes['Group'] | ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
   createPostInput: CreatePostInput;
   createPostPayload: ResolverTypeWrapper<CreatePostPayload>;
@@ -243,7 +241,7 @@ export type ResolversParentTypes = ResolversObject<{
   Profile: Profile;
   Query: {};
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['Post'] | ResolversParentTypes['Profile'] | ResolversParentTypes['Group'];
+  _Entity: ResolversParentTypes['Post'] | ResolversParentTypes['Group'] | ResolversParentTypes['Profile'];
   _Service: _Service;
   createPostInput: CreatePostInput;
   createPostPayload: CreatePostPayload;
@@ -277,9 +275,9 @@ export type MutationResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type PostResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
-  postId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   group?: Resolver<Maybe<ResolversTypes['Group']>, ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  postId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -307,7 +305,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Post' | 'Profile' | 'Group', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Post' | 'Group' | 'Profile', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{

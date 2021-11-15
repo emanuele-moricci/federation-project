@@ -8,7 +8,7 @@ const resolver = {
   User: {
     language: ({ languageId }: IUserRef): Language => ({
       __typename: 'Language',
-      languageId: languageId,
+      languageId,
     }),
   },
   Language: {

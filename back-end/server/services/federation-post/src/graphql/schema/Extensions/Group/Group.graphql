@@ -1,0 +1,21 @@
+type Post @key(fields: "postId") {
+  # group of the post
+  group: Group
+}
+
+extend type Group @key(fields: "groupId") {
+  # the group id
+  groupId: ID! @external
+  # every group post
+  posts(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int = 20
+  ): [Post]
+}

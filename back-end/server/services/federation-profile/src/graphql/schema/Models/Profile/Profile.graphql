@@ -38,11 +38,6 @@ type Profile @key(fields: "profileId") {
   banner: String
 
   """
-  profile groups
-  """
-  groups: [Group]
-
-  """
   created at
   """
   created_at: DateTime!

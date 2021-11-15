@@ -19,14 +19,11 @@ scalar DateTime
 
 """The Post Model: stores every post in the database"""
 type Post @key(fields: "postId") {
-  """post id"""
-  postId: ID!
-
-  """author of the post"""
+  group: Group
   profile: Profile
 
-  """group of the post"""
-  group: Group
+  """post id"""
+  postId: ID!
 
   """post title"""
   title: String!
@@ -74,8 +71,8 @@ type createPostPayload {
   postId: Int
 }
 
-extend type Profile @key(fields: "profileId") {
-  profileId: ID! @external
+extend type Group @key(fields: "groupId") {
+  groupId: ID! @external
   posts(
     """Starting record"""
     skip: Int
@@ -85,8 +82,8 @@ extend type Profile @key(fields: "profileId") {
   ): [Post]
 }
 
-extend type Group @key(fields: "groupId") {
-  groupId: ID! @external
+extend type Profile @key(fields: "profileId") {
+  profileId: ID! @external
   posts(
     """Starting record"""
     skip: Int

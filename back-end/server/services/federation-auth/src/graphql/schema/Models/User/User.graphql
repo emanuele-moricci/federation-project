@@ -33,19 +33,9 @@ type User @key(fields: "userId") {
   role: Role!
 
   """
-  user country
-  """
-  country: Country
-
-  """
   user security settings
   """
   security: Security
-
-  """
-  user profile
-  """
-  profile: Profile
 
   """
   user firstname

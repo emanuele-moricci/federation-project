@@ -1,0 +1,14 @@
+type User @key(fields: "userId") {
+  """
+  user profile
+  """
+  profile: Profile
+}
+
+extend type Profile @key(fields: "profileId") {
+  # the profile id
+  profileId: ID! @external
+
+  # the associated user
+  user: User
+}

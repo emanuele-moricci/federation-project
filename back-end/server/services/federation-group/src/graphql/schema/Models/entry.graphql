@@ -1,4 +1,0 @@
-extend type Profile @key(fields: "profileId") {
-  # the profile id
-  profileId: ID! @external
-}

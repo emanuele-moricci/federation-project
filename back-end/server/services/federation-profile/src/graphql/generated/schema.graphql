@@ -19,6 +19,8 @@ scalar DateTime
 
 """The Profile Model: stores every secondary detail of a user"""
 type Profile @key(fields: "profileId") {
+  groups: [Group]
+
   """profile id"""
   profileId: ID!
 
@@ -39,9 +41,6 @@ type Profile @key(fields: "profileId") {
 
   """profile banner"""
   banner: String
-
-  """profile groups"""
-  groups: [Group]
 
   """created at"""
   created_at: DateTime!

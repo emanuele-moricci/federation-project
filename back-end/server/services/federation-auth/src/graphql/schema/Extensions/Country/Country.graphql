@@ -1,0 +1,14 @@
+type User @key(fields: "userId") {
+  """
+  user country
+  """
+  country: Country
+}
+
+extend type Country @key(fields: "countryId") {
+  # the country id
+  countryId: ID! @external
+
+  # every user with a given country
+  users: [User]
+}

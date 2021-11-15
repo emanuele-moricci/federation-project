@@ -9,14 +9,14 @@ import { ILanguageRef } from '@fed-schema/Utils/refs';
 const resolver = {
   Query: {
     Language: async (_source, _args, _context, _info): Promise<Language[]> => {
-      return await getAllLanguages();
+      return getAllLanguages();
     },
   },
   Language: {
     __resolveReference: async ({
       languageId,
     }: ILanguageRef): Promise<Language | null> =>
-      await getLanguageById(parseInt(languageId)),
+      getLanguageById(parseInt(languageId)),
   },
 };
 

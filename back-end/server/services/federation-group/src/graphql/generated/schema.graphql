@@ -62,10 +62,6 @@ type createGroupPayload {
   groupId: Int
 }
 
-extend type Profile @key(fields: "profileId") {
-  profileId: ID! @external
-}
-
 extend type Query {
   """Get all Groups query"""
   Group(

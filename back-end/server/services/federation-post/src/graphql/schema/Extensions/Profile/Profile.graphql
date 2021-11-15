@@ -1,0 +1,21 @@
+type Post @key(fields: "postId") {
+  # group of the post
+  profile: Profile
+}
+
+extend type Profile @key(fields: "profileId") {
+  # the profile id
+  profileId: ID! @external
+  # every profile post
+  posts(
+    """
+    Starting record
+    """
+    skip: Int
+
+    """
+    Records shown
+    """
+    take: Int = 20
+  ): [Post]
+}

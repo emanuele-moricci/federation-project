@@ -52,6 +52,7 @@ export type MutationJoinGroupArgs = {
 /** The Profile Model: stores every secondary detail of a user */
 export type Profile = {
   __typename?: 'Profile';
+  groups?: Maybe<Array<Maybe<Group>>>;
   /** profile id */
   profileId: Scalars['ID'];
   /** profile bio */
@@ -66,8 +67,6 @@ export type Profile = {
   avatar?: Maybe<Scalars['String']>;
   /** profile banner */
   banner?: Maybe<Scalars['String']>;
-  /** profile groups */
-  groups?: Maybe<Array<Maybe<Group>>>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -282,6 +281,7 @@ export type MutationResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = ResolversObject<{
+  groups?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType>;
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -289,7 +289,6 @@ export type ProfileResolvers<ContextType = IPrismaContext, ParentType extends Re
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   banner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  groups?: Resolver<Maybe<Array<Maybe<ResolversTypes['Group']>>>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;

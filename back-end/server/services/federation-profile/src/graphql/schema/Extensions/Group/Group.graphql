@@ -1,0 +1,11 @@
+type Profile @key(fields: "profileId") {
+  # profile groups
+  groups: [Group]
+}
+
+extend type Group @key(fields: "groupId") {
+  # the group id
+  groupId: ID! @external
+  # the subscribed members
+  members: [Profile]
+}

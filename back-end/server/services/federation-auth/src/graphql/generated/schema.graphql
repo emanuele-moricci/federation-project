@@ -32,8 +32,14 @@ enum Role {
 
 """The User Model: stores a user's most important data."""
 type User @key(fields: "userId") {
+  """user country"""
+  country: Country
+
   """user language"""
   language: Language
+
+  """user profile"""
+  profile: Profile
 
   """user id"""
   userId: ID!
@@ -53,14 +59,8 @@ type User @key(fields: "userId") {
   """user role"""
   role: Role!
 
-  """user country"""
-  country: Country
-
   """user security settings"""
   security: Security
-
-  """user profile"""
-  profile: Profile
 
   """user firstname"""
   firstname: String!
@@ -163,14 +163,14 @@ extend type Country @key(fields: "countryId") {
   users: [User]
 }
 
-extend type Profile @key(fields: "profileId") {
-  profileId: ID! @external
-  user: User
-}
-
 extend type Language @key(fields: "languageId") {
   languageId: ID! @external
   users: [User]
+}
+
+extend type Profile @key(fields: "profileId") {
+  profileId: ID! @external
+  user: User
 }
 
 extend type Query {

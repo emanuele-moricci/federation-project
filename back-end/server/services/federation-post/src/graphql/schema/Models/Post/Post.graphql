@@ -8,16 +8,6 @@ type Post @key(fields: "postId") {
   postId: ID!
 
   """
-  author of the post
-  """
-  profile: Profile
-
-  """
-  group of the post
-  """
-  group: Group
-
-  """
   post title
   """
   title: String!

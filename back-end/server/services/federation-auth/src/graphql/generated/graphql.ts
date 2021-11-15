@@ -125,8 +125,12 @@ export type Security = {
 /** The User Model: stores a user's most important data. */
 export type User = {
   __typename?: 'User';
+  /** user country */
+  country?: Maybe<Country>;
   /** user language */
   language?: Maybe<Language>;
+  /** user profile */
+  profile?: Maybe<Profile>;
   /** user id */
   userId: Scalars['ID'];
   /** user email */
@@ -139,12 +143,8 @@ export type User = {
   active: Scalars['Boolean'];
   /** user role */
   role: Role;
-  /** user country */
-  country?: Maybe<Country>;
   /** user security settings */
   security?: Maybe<Security>;
-  /** user profile */
-  profile?: Maybe<Profile>;
   /** user firstname */
   firstname: Scalars['String'];
   /** user lastname */
@@ -158,7 +158,7 @@ export type User = {
 };
 
 
-export type _Entity = User | Security | Country | Profile | Language;
+export type _Entity = User | Security | Country | Language | Profile;
 
 export type _Service = {
   __typename?: '_Service';
@@ -298,7 +298,7 @@ export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
   _Any: ResolverTypeWrapper<Scalars['_Any']>;
-  _Entity: ResolversTypes['User'] | ResolversTypes['Security'] | ResolversTypes['Country'] | ResolversTypes['Profile'] | ResolversTypes['Language'];
+  _Entity: ResolversTypes['User'] | ResolversTypes['Security'] | ResolversTypes['Country'] | ResolversTypes['Language'] | ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
   loginInput: LoginInput;
   loginPayload: ResolverTypeWrapper<LoginPayload>;
@@ -321,7 +321,7 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   User: User;
   _Any: Scalars['_Any'];
-  _Entity: ResolversParentTypes['User'] | ResolversParentTypes['Security'] | ResolversParentTypes['Country'] | ResolversParentTypes['Profile'] | ResolversParentTypes['Language'];
+  _Entity: ResolversParentTypes['User'] | ResolversParentTypes['Security'] | ResolversParentTypes['Country'] | ResolversParentTypes['Language'] | ResolversParentTypes['Profile'];
   _Service: _Service;
   loginInput: LoginInput;
   loginPayload: LoginPayload;
@@ -392,16 +392,16 @@ export type SecurityResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type UserResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
-  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   security?: Resolver<Maybe<ResolversTypes['Security']>, ParentType, ContextType>;
-  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
@@ -415,7 +415,7 @@ export interface _AnyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type _EntityResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Entity'] = ResolversParentTypes['_Entity']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'User' | 'Security' | 'Country' | 'Profile' | 'Language', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'User' | 'Security' | 'Country' | 'Language' | 'Profile', ParentType, ContextType>;
 }>;
 
 export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['_Service'] = ResolversParentTypes['_Service']> = ResolversObject<{
