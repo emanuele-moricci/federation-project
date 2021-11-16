@@ -30,13 +30,13 @@ const resolvers = loadFilesSync(path.join(__dirname, '.'), {
 const mergedResolvers = mergeResolvers([...resolvers, customResolvers]);
 
 // SCHEMA
-let schema = buildSubgraphSchema({
+const schema = buildSubgraphSchema({
   typeDefs: mergedTypeDefs,
   resolvers: mergedResolvers as GraphQLResolverMap<any>,
 });
 
 // DIRECTIVES
-schema = (authDirective(schema) as unknown) as GraphQLSchema;
+// schema = (authDirective(schema) as unknown) as GraphQLSchema;
 // schema = (rateDirective(schema) as unknown) as GraphQLSchema;
 
 const directedSchema = schema;
