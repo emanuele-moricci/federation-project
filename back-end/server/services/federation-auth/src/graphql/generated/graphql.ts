@@ -125,8 +125,6 @@ export type Security = {
 /** The User Model: stores a user's most important data. */
 export type User = {
   __typename?: 'User';
-  /** user country */
-  country?: Maybe<Country>;
   /** user language */
   language?: Maybe<Language>;
   /** user profile */
@@ -149,6 +147,8 @@ export type User = {
   firstname: Scalars['String'];
   /** user lastname */
   lastname: Scalars['String'];
+  /** user country */
+  country?: Maybe<Country>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -392,7 +392,6 @@ export type SecurityResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type UserResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
-  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -404,6 +403,7 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   security?: Resolver<Maybe<ResolversTypes['Security']>, ParentType, ContextType>;
   firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;

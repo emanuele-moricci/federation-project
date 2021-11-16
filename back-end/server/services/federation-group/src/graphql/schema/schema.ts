@@ -37,8 +37,8 @@ let schema = buildSubgraphSchema({
 });
 
 // DIRECTIVES
-schema = authDirective(schema) as unknown as GraphQLSchema;
-schema = rateDirective(schema) as unknown as GraphQLSchema;
+schema = (authDirective(schema) as unknown) as GraphQLSchema;
+schema = (rateDirective(schema) as unknown) as GraphQLSchema;
 
 const directedSchema = schema;
 

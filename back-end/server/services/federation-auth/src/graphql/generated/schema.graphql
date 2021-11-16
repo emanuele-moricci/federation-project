@@ -32,9 +32,6 @@ enum Role {
 
 """The User Model: stores a user's most important data."""
 type User @key(fields: "userId") {
-  """user country"""
-  country: Country
-
   """user language"""
   language: Language
 
@@ -67,6 +64,9 @@ type User @key(fields: "userId") {
 
   """user lastname"""
   lastname: String!
+
+  """user country"""
+  country: Country
 
   """created at"""
   created_at: DateTime!

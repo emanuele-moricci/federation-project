@@ -6,14 +6,14 @@ import { IGroupRef } from '@fed-schema/Utils/refs';
 const resolver = {
   Query: {
     Group: async (_source, args): Promise<Group[]> => {
-      return await getAllGroups(args);
+      return getAllGroups(args);
     },
   },
   Group: {
     __resolveReference: async ({
       groupId,
     }: IGroupRef): Promise<Group | null> => {
-      return await getGroupById(parseInt(groupId));
+      return getGroupById(parseInt(groupId));
     },
   },
 };
