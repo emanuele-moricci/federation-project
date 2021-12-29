@@ -54,7 +54,7 @@ This project is designed to provide real-world examples on how to use [GalactaGr
 
 ---
 
-The Federaiton-Project aims to provide a clear example on how to use the [GalactaGraph Boilerplate](https://github.com/emanuele-moricci/galactagraph-boilerplate)e to reduce the countless hours spent setting up and bootstrapping a NodeJS+GraphQL application with a Federated Schema.
+The Federaiton-Project aims to provide a clear example on how to use the [GalactaGraph Boilerplate](https://github.com/emanuele-moricci/galactagraph-boilerplate) to reduce the countless hours spent setting up and bootstrapping a NodeJS+GraphQL application with a Federated Schema.
 
 It is designed to be used with the [Prisma](https://www.prisma.io) ORM and multiple Postgres databases, and offers typescript generation at runtime using [GraphQL Codegen](https://www.graphql-code-generator.com/).
 
