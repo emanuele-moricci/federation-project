@@ -80,7 +80,7 @@ It is designed to be used with the [Prisma](https://www.prisma.io) ORM and multi
 - Go to the root of the `server/` in the command line
 - Follow the guide to register and run your gateway with all of the services through [Apollo Studio](https://www.apollographql.com/docs/federation/quickstart/); Register the API key, the subgraphs through the rover module and create your project in Apollo Studio with the **Managed Mode**. When prompted to publish your federated schema, fill the data in the micro-service and gateway `.env` files and do one of the following steps:
 
-  - **[ONLY FOR THE FIRST TIME]** Go to the `federation-auth` service, fire up the command `yarn dev`, then open up another terminal and fire up the command `yarn apollo:update`
+  - **[ONLY FOR THE FIRST TIME]** Go into every micro-service under the `/services` folder, fire up the command `yarn dev`, then open up another terminal and fire up the command `yarn apollo:update`
   - **[FOR EVERY OTHER TIME]** In the gateway `package.json` there are several commands powered by bash files that can help you with the setup. Fire up the `yarn federation:dev` command and the `yarn federation:publish` command on another terminal to start and update the entire supergraph on Apollo Studio.
 
 <br />
@@ -117,9 +117,9 @@ It is designed to be used with the [Prisma](https://www.prisma.io) ORM and multi
 
 ### Back-End
 
-- Go into the `env.test` and `env.docker.test` file and change the `DATABASE_URL` connection string. Add the database name to the `POSTGRESQL_DATABASES` key in the `.env.docker.test` file in the gateway
+- Go into the `env.test` file and change the `DATABASE_URL` connection string. Add the database name to the `POSTGRESQL_DATABASES` key in the `.env.docker.test` file in the gateway
 - Create your test under the micro-service folder `__tests__/(integration or unit)` with the pattern `*.test.ts or *.unit.test.ts`
-- Go to the root of the project and fire the testing command: `yarn federation:test` or `yarn federation:docker:test`
+- Go to the root of the project and fire the testing command: `yarn federation:test`
 
 <br />
 
