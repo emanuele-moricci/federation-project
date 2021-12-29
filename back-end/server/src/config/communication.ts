@@ -15,7 +15,7 @@ _________                                     .__               __  .__
  * 
  */
 import { RemoteGraphQLDataSource } from '@apollo/gateway';
-import { cryptObject, verifyToken } from 'federation-utils';
+import { cryptObject, verifyToken } from 'galactagraph-utils';
 
 /**
  * The function responsable to hash the context, crypt it and bounce it to the subgraphs.
@@ -51,7 +51,9 @@ export function bounceAuthToFederation(url) {
  * @function loadContext.
  * @returns {Promise<object | null>} The authentication context.
  */
-export const loadContext = async ({ req }): Promise<object | null> => {
+export const loadContext = async ({
+  req,
+}): Promise<Record<string, unknown> | null> => {
   const token = req?.headers?.authorization
     ? req.headers.authorization.split(' ')[1]
     : null;

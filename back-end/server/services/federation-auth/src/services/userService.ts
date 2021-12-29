@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { prismaContext } from '@config/prismaConfig';
 import { User } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from 'federation-utils';
+import { PaginationAndSearchArgs } from 'galactagraph-utils';
 
 /**
  * Function that returns all of the Users present in the database.

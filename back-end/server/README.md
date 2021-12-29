@@ -1,4 +1,23 @@
-# Welcome to the Back-End part of the Federation Project!
+<div align="center">
+  <h1>Welcome to the Back-End part of the Federation Project!</h1>
+  <h3>
+    This "Micro-Services Oriented" app was made using the <a href="https://github.com/emanuele-moricci/galactagraph-boilerplate">GalactaGraph Boilerplate</a>. Use those Docs for a full-overview of how everything works.
+  </h3>
+
+<br />
+
+![Apollo Badge](https://img.shields.io/badge/-Apollo-%23311C87?logo=apollo-graphql&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-GraphQL-%23E10098?logo=graphql&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-Node.js-%23339933?logo=node.js&logoColor=white&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-Typescript-%233178C6?logo=typescript&logoColor=white&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-Jest-%23C21325?logo=jest&logoColor=white&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-Docker-%232496ED?logo=docker&logoColor=white&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-Prisma-%232D3748?logo=prisma&logoColor=white&style=flat-square)
+![GraphQL Badge](https://img.shields.io/badge/-Postgres-%234169E1?logo=postgresql&logoColor=white&style=flat-square)
+
+<br />
+
+</div>
 
 ## How to INITIALIZE
 
@@ -25,32 +44,34 @@ rover subgraph publish the-federation@current \
   --routing-url http://localhost:4001/graphql
 ```
 
+- **IMPORTANT** > Go to every service under `/services`, fire up the command `yarn dev`, then open up another terminal and fire up the command `yarn apollo:update`.
 - In the gateway `package.json` there are several commands powered by bash files that can help you with the setup. Fire up the `yarn federation:dev` command and the `yarn federation:publish` command on another terminal to start and update the entire supergraph on Apollo Studio
 
 ---
 
 ## How to GENERATE
 
-This project comes with a handy micro-generator tool under `/_generator`. This tool helps generate some redundant and repetitive code to easy the DevX.
+---
+
+This project comes with a handy micro-generator tool under `/GG_generator`. This tool helps generate some redundant and repetitive code to improve your DevX and shorten the development time.
 
 The following steps are needed to install the utility:
 
-- open the terminal and go to `cd _generator`
+- open the terminal and go to `cd GG_generator`
 - Install [Plop](https://plopjs.com/) using `yarn global add plop`
 - Install the tool using `npm i -g`
 
-After succesfully installing the utility, go to the **root** of your federation micro-service and fire up the command `federation-generator` and follow the GUI to choose your code generator of choice.
+After succesfully installing the utility, go to the **root** of your federation micro-service or gateway and fire up the command `galactagraph-generator`. Follow the GUI to choose your code generator of choice.
 
 These are the currently available generators
 
-| Name     |           Description            | Root          |
-| -------- | :------------------------------: | ------------- |
-| Model    | Adds a Prisma model w/ resolvers | Micro-service |
-| Mutation | Adds a Prisma query w/ resolver  | Micro-service |
-| Query    |  Adds a Prisma mutation w/ res.  | Micro-service |
-| Service  |  Adds a new configured service   | Gateway       |
-
----
+| Name      |               Description               | Root          |
+| --------- | :-------------------------------------: | ------------- |
+| Model     |    Adds a Prisma model w/ resolvers     | Micro-service |
+| Extension | Links two model from different services | Gateway       |
+| Mutation  |     Adds a Prisma query w/ resolver     | Micro-service |
+| Query     |     Adds a Prisma mutation w/ res.      | Micro-service |
+| Service   |      Adds a new configured service      | Gateway       |
 
 ## How to CREATE A SERVICE
 
@@ -87,21 +108,19 @@ This project has a local package called `federation-utils`, under `_utilities`. 
 
 ## OPTIONAL
 
-- update the supergraph by running `yarn federation:publish`
+- Update the supergraph by running `yarn federation:publish`
 - Check your [Apollo Studio Web Environment](<[https://link](https://studio.apollographql.com/)>)
 
 ---
 
 ## How to TEST
 
+- Go into the `env.test` file and change the `DATABASE_URL` connection string
+- Create your test under the micro-service folder `__tests__/(integration or unit)` with the pattern `*.test.ts or *.unit.test.ts`
+- Go to the root of the project and fire the testing command: `yarn federation:test`
+
 ### Database
 
 - Install PostgresQL
 - Enter the env with the command `psql`
 - Create a database with the command `create database <DB_NAME>_test;`
-
-### Back-End
-
-- Go into the `env.test` and `env.docker.test` file and change the `DATABASE_URL` connection string
-- Create your test under the micro-service folder `__tests__/(integration or unit)` with the pattern `*.test.ts or *.unit.test.ts`
-- Go to the root of the project and fire the testing command: `yarn federation:test` or `yarn federation:test:docker`

@@ -22,8 +22,6 @@ export type Scalars = {
 
 
 
-
-
 /** A list of all the available authentication methods for the platform */
 export enum AuthType {
   Password = 'PASSWORD',
@@ -122,9 +120,11 @@ export type Security = {
   deleted: Scalars['Boolean'];
 };
 
-/** The User Model: stores a user's most important data. */
+/** The User Model: table that stores the user info. */
 export type User = {
   __typename?: 'User';
+  /** user country */
+  country?: Maybe<Country>;
   /** user language */
   language?: Maybe<Language>;
   /** user profile */
@@ -147,8 +147,6 @@ export type User = {
   firstname: Scalars['String'];
   /** user lastname */
   lastname: Scalars['String'];
-  /** user country */
-  country?: Maybe<Country>;
   /** created at */
   created_at: Scalars['DateTime'];
   /** updated at */
@@ -187,14 +185,8 @@ export type RegisterInput = {
   email: Scalars['String'];
   /** The user password. */
   password: Scalars['String'];
-  /** The language id. */
+  /** The user language. */
   languageId: Scalars['Int'];
-  /** The country id. */
-  countryId: Scalars['Int'];
-  /** The user first name. */
-  firstname: Scalars['String'];
-  /** The user last name. */
-  lastname: Scalars['String'];
 };
 
 /** Register payload */
@@ -329,18 +321,9 @@ export type ResolversParentTypes = ResolversObject<{
   registerPayload: RegisterPayload;
 }>;
 
-export type AuthDirectiveArgs = {  };
-
-export type AuthDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
-  duration?: Scalars['Int']; };
-
-export type RateLimitDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type CountryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = ResolversObject<{
   countryId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -392,6 +375,7 @@ export type SecurityResolvers<ContextType = IPrismaContext, ParentType extends R
 }>;
 
 export type UserResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -403,7 +387,6 @@ export type UserResolvers<ContextType = IPrismaContext, ParentType extends Resol
   security?: Resolver<Maybe<ResolversTypes['Security']>, ParentType, ContextType>;
   firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  country?: Resolver<Maybe<ResolversTypes['Country']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -456,9 +439,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
  */
 export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
-  auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
-  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 }>;
 
 

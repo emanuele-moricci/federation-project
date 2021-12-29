@@ -2,7 +2,7 @@ import { prismaContext } from '@config/prismaConfig';
 
 import { Post } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from 'federation-utils';
+import { PaginationAndSearchArgs } from 'galactagraph-utils';
 
 /**
  * Function that returns all of the Posts present in the database.
@@ -15,7 +15,7 @@ export const getAllPosts = async ({
   take,
   skip,
 }: PaginationAndSearchArgs): Promise<Post[]> => {
-  return await prismaContext.prisma.post.findMany({ take, skip });
+  return prismaContext.prisma.post.findMany({ take, skip });
 };
 
 /**
@@ -28,7 +28,7 @@ export const getAllPosts = async ({
  * @returns {Promise<Post | null>} The found Post.
  */
 export const getPostById = async (postId: number): Promise<Post | null> => {
-  return await prismaContext.prisma.post.findUnique({ where: { postId } });
+  return prismaContext.prisma.post.findUnique({ where: { postId } });
 };
 
 /**
@@ -41,13 +41,10 @@ export const getPostById = async (postId: number): Promise<Post | null> => {
  * @returns {Promise<Post[]>} The found Posts.
  */
 export const getPostsByProfileId = async (
-  profileId: number,
-  { take, skip }: PaginationAndSearchArgs
+  profileId: number
 ): Promise<Post[]> => {
-  return await prismaContext.prisma.post.findMany({
+  return prismaContext.prisma.post.findMany({
     where: { profileId },
-    take,
-    skip,
   });
 };
 
@@ -60,14 +57,9 @@ export const getPostsByProfileId = async (
  * @function getPostsByGroupId.
  * @returns {Promise<Post[]>} The found Posts.
  */
-export const getPostsByGroupId = async (
-  groupId: number,
-  { take, skip }: PaginationAndSearchArgs
-): Promise<Post[]> => {
-  return await prismaContext.prisma.post.findMany({
+export const getPostsByGroupId = async (groupId: number): Promise<Post[]> => {
+  return prismaContext.prisma.post.findMany({
     where: { groupId },
-    take,
-    skip,
   });
 };
 

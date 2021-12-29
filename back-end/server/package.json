@@ -1,21 +1,24 @@
 {
-  "name": "federation-auth",
+  "name": "galactagraph-example-gateway",
   "version": "1.0.0",
-  "description": "GQL microservice project structure with prisma, codegen, apolloserver and typescript",
+  "description": "GalactaGraph Example Project - The easiest and fastest way to build your world-dominating API Federation",
   "main": "gateway.ts",
-  "repository": "",
-  "author": "Emanuele Moricci",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/emanuele-moricci/galactagraph-boilerplate.git"
+  },
+  "author": "Emanuele Moricci <emanuele.moricci@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc -p tsconfig.json",
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/gateway.js",
     "format": "npx prettier --config .prettierrc --write . & npx eslint --config .eslintrc.js --fix .",
-    "docker:up": "docker-compose up -d --build && ./bin/federation-bash/prepare-federation-docker.sh",
+    "docker:up": "docker-compose --env-file ./.env.docker.test up -d --build && ./bin/galactagraph-bash/prepare-federation-docker.sh",
     "docker:down": "docker compose down",
-    "federation:dev": "./bin/federation-bash/start-federation-dev.sh",
-    "federation:test": "./bin/federation-bash/start-federation-test.sh",
-    "federation:publish": "./bin/federation-bash/publish-federation.sh"
+    "federation:dev": "./bin/galactagraph-bash/start-federation-dev.sh",
+    "federation:test": "./bin/galactagraph-bash/start-federation-test.sh",
+    "federation:publish": "./bin/galactagraph-bash/publish-federation.sh"
   },
   "lint-staged": {
     "*": [
@@ -70,11 +73,12 @@
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.5.1",
-    "federation-utils": "./bin/federation-utils/federation-utils-v1.0.34.tgz",
-    "graphql": "15.5.3",
+    "galactagraph-utils": "./bin/galactagraph-utils/galactagraph-utils-v2.0.1.tgz",
+    "graphql": "^15.7.0",
     "graphql-depth-limit": "^1.1.0",
     "graphql-middleware": "^6.1.10",
     "graphql-query-complexity": "^0.11.0",
+    "graphql-shield": "^7.5.0",
     "helmet": "^4.6.0",
     "helmet-csp": "^3.4.0",
     "hosted-git-info": "^2.8.9",

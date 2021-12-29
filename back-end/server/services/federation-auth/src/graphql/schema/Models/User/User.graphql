@@ -1,16 +1,16 @@
 """
-The User Model: stores a user's most important data.
+The User Model: table that stores the user info.
 """
 type User @key(fields: "userId") {
   """
   user id
   """
-  userId: ID! @auth
+  userId: ID!
 
   """
   user email
   """
-  email: String! @auth
+  email: String!
 
   """
   user password
@@ -21,27 +21,22 @@ type User @key(fields: "userId") {
   user auth token
   """
   token: String
-
   """
   is user active now?
   """
   active: Boolean!
-
   """
   user role
   """
   role: Role!
-
   """
   user security settings
   """
   security: Security
-
   """
   user firstname
   """
   firstname: String!
-
   """
   user lastname
   """
@@ -76,6 +71,6 @@ extend type Query {
     """
     Records shown
     """
-    take: Int = 100
+    take: Int = 25
   ): [User]
 }

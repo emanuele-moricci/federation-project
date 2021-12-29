@@ -23,8 +23,6 @@ export type Scalars = {
 
 
 
-
-
 export type Group = {
   __typename?: 'Group';
   groupId: Scalars['ID'];
@@ -40,7 +38,7 @@ export type GroupPostsArgs = {
 export type Mutation = {
   __typename?: 'Mutation';
   /** Creates a Post */
-  createPost?: Maybe<CreatePostPayload>;
+  createPost?: Maybe<Post>;
 };
 
 
@@ -123,13 +121,6 @@ export type CreatePostInput = {
   description: Scalars['String'];
   /** The post phone. */
   image?: Maybe<Scalars['String']>;
-};
-
-/** createPost payload */
-export type CreatePostPayload = {
-  __typename?: 'createPostPayload';
-  /** The post id. */
-  postId?: Maybe<Scalars['Int']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -225,7 +216,6 @@ export type ResolversTypes = ResolversObject<{
   _Entity: ResolversTypes['Post'] | ResolversTypes['Group'] | ResolversTypes['Profile'];
   _Service: ResolverTypeWrapper<_Service>;
   createPostInput: CreatePostInput;
-  createPostPayload: ResolverTypeWrapper<CreatePostPayload>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -244,21 +234,11 @@ export type ResolversParentTypes = ResolversObject<{
   _Entity: ResolversParentTypes['Post'] | ResolversParentTypes['Group'] | ResolversParentTypes['Profile'];
   _Service: _Service;
   createPostInput: CreatePostInput;
-  createPostPayload: CreatePostPayload;
 }>;
-
-export type AuthDirectiveArgs = {  };
-
-export type AuthDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
-  duration?: Scalars['Int']; };
-
-export type RateLimitDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
@@ -271,7 +251,7 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
 }>;
 
 export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createPost?: Resolver<Maybe<ResolversTypes['createPostPayload']>, ParentType, ContextType, RequireFields<MutationCreatePostArgs, never>>;
+  createPost?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<MutationCreatePostArgs, never>>;
 }>;
 
 export type PostResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
@@ -313,11 +293,6 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type CreatePostPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['createPostPayload'] = ResolversParentTypes['createPostPayload']> = ResolversObject<{
-  postId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
   Group?: GroupResolvers<ContextType>;
@@ -328,7 +303,6 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
-  createPostPayload?: CreatePostPayloadResolvers<ContextType>;
 }>;
 
 
@@ -338,9 +312,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
  */
 export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
-  auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
-  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 }>;
 
 

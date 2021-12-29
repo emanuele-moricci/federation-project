@@ -1,8 +1,8 @@
 import { prismaContext } from '@config/prismaConfig';
 import { Group } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from 'federation-utils';
-import { CreateGroupInput } from '@src/graphql/generated/graphql';
+import { PaginationAndSearchArgs } from 'galactagraph-utils';
+// import { CreateGroupInput } from '@src/graphql/generated/graphql';
 
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-jdenticon-sprites';
@@ -18,7 +18,7 @@ export const getAllGroups = async ({
   take,
   skip,
 }: PaginationAndSearchArgs): Promise<Group[]> => {
-  return await prismaContext.prisma.group.findMany({ take, skip });
+  return prismaContext.prisma.group.findMany({ take, skip });
 };
 
 /**
@@ -31,7 +31,7 @@ export const getAllGroups = async ({
  * @returns {Promise<Group | null>} The found Group.
  */
 export const getGroupById = async (groupId: number): Promise<Group | null> => {
-  return await prismaContext.prisma.group.findUnique({
+  return prismaContext.prisma.group.findUnique({
     where: {
       groupId,
     },
@@ -50,8 +50,8 @@ export const getGroupById = async (groupId: number): Promise<Group | null> => {
 export const createGroup = async ({
   banner,
   ...input
-}: CreateGroupInput): Promise<Group> => {
-  let imgData = createAvatar(style, {
+}: any): Promise<Group> => {
+  const imgData = createAvatar(style, {
     seed: `${input.name}`,
     dataUri: true,
   });

@@ -59,3 +59,36 @@ extend type Query {
     take: Int = 100
   ): [Post]
 }
+
+extend type Mutation {
+  """
+  Creates a Post
+  """
+  createPost(input: createPostInput): Post
+}
+
+"""
+createPost input
+"""
+input createPostInput {
+  """
+  The profile id.
+  """
+  profileId: Int!
+  """
+  The group id.
+  """
+  groupId: Int!
+  """
+  The post bio.
+  """
+  title: String!
+  """
+  The post username.
+  """
+  description: String!
+  """
+  The post phone.
+  """
+  image: String
+}

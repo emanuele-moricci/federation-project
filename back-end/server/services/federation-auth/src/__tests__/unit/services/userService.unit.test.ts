@@ -28,12 +28,11 @@ describe('userService tests', () => {
   });
 
   it('should get a user by email and password', async () => {
-    const email = 'user@test.com';
-    const password = 'User!120';
+    const email = 'admin@federation.com';
+    const password = 'Admin!20';
     const user = await getUserByEmailAndPassword(email, password);
 
     expect(user.email).toEqual(email);
-    expect(user.password).toEqual('');
   });
 
   it('should create a user', async () => {
@@ -53,7 +52,6 @@ describe('userService tests', () => {
     });
 
     expect(user.email).toEqual(email);
-    expect(user.password).toEqual('');
     expect(user.languageId).toEqual(languageId);
     expect(user.firstname).toEqual(firstname);
     expect(user.lastname).toEqual(lastname);

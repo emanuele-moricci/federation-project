@@ -1,18 +1,4 @@
 """
-The authentication directive, responsable to check if a type needs authentication to be resolved.
-"""
-directive @auth on FIELD_DEFINITION
-
-"""Controls the rate of traffic."""
-directive @rateLimit(
-  """Number of occurrences allowed over duration."""
-  limit: Int! = 60
-
-  """Number of seconds before limit is reset."""
-  duration: Int! = 60
-) on OBJECT | FIELD_DEFINITION
-
-"""
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
@@ -30,8 +16,11 @@ enum Role {
   ADMIN
 }
 
-"""The User Model: stores a user's most important data."""
+"""The User Model: table that stores the user info."""
 type User @key(fields: "userId") {
+  """user country"""
+  country: Country
+
   """user language"""
   language: Language
 
@@ -64,9 +53,6 @@ type User @key(fields: "userId") {
 
   """user lastname"""
   lastname: String!
-
-  """user country"""
-  country: Country
 
   """created at"""
   created_at: DateTime!
@@ -139,17 +125,8 @@ input registerInput {
   """The user password."""
   password: String!
 
-  """The language id."""
+  """The user language."""
   languageId: Int!
-
-  """The country id."""
-  countryId: Int!
-
-  """The user first name."""
-  firstname: String!
-
-  """The user last name."""
-  lastname: String!
 }
 
 """Register payload"""
@@ -180,7 +157,7 @@ extend type Query {
     skip: Int
 
     """Records shown"""
-    take: Int = 100
+    take: Int = 25
   ): [User]
 
   """Get me query"""

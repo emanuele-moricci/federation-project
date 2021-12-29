@@ -23,8 +23,6 @@ export type Scalars = {
 
 
 
-
-
 /** The Group Model: Stores every group present in the project */
 export type Group = {
   __typename?: 'Group';
@@ -49,7 +47,7 @@ export type Group = {
 export type Mutation = {
   __typename?: 'Mutation';
   /** Creates a Group */
-  createGroup?: Maybe<CreateGroupPayload>;
+  createGroup?: Maybe<Group>;
 };
 
 
@@ -93,13 +91,6 @@ export type CreateGroupInput = {
   bio?: Maybe<Scalars['String']>;
   /** The group banner. */
   banner?: Maybe<Scalars['String']>;
-};
-
-/** createGroup payload */
-export type CreateGroupPayload = {
-  __typename?: 'createGroupPayload';
-  /** The group id. */
-  groupId?: Maybe<Scalars['Int']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -193,7 +184,6 @@ export type ResolversTypes = ResolversObject<{
   _Entity: ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
   createGroupInput: CreateGroupInput;
-  createGroupPayload: ResolverTypeWrapper<CreateGroupPayload>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -210,21 +200,11 @@ export type ResolversParentTypes = ResolversObject<{
   _Entity: ResolversParentTypes['Group'];
   _Service: _Service;
   createGroupInput: CreateGroupInput;
-  createGroupPayload: CreateGroupPayload;
 }>;
-
-export type AuthDirectiveArgs = {  };
-
-export type AuthDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
-  duration?: Scalars['Int']; };
-
-export type RateLimitDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
@@ -243,7 +223,7 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
 }>;
 
 export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createGroup?: Resolver<Maybe<ResolversTypes['createGroupPayload']>, ParentType, ContextType, RequireFields<MutationCreateGroupArgs, never>>;
+  createGroup?: Resolver<Maybe<ResolversTypes['Group']>, ParentType, ContextType, RequireFields<MutationCreateGroupArgs, never>>;
 }>;
 
 export type QueryResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
@@ -265,11 +245,6 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type CreateGroupPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['createGroupPayload'] = ResolversParentTypes['createGroupPayload']> = ResolversObject<{
-  groupId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   DateTime?: GraphQLScalarType;
   Group?: GroupResolvers<ContextType>;
@@ -278,7 +253,6 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
-  createGroupPayload?: CreateGroupPayloadResolvers<ContextType>;
 }>;
 
 
@@ -288,9 +262,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
  */
 export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
-  auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
-  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 }>;
 
 

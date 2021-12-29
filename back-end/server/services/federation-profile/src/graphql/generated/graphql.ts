@@ -23,8 +23,6 @@ export type Scalars = {
 
 
 
-
-
 export type Group = {
   __typename?: 'Group';
   groupId: Scalars['ID'];
@@ -34,7 +32,7 @@ export type Group = {
 export type Mutation = {
   __typename?: 'Mutation';
   /** Creates a Profile */
-  createProfile?: Maybe<CreateProfilePayload>;
+  createProfile?: Maybe<Profile>;
   /** Allows a Profile into a group */
   joinGroup?: Maybe<JoinGroupPayload>;
 };
@@ -109,13 +107,6 @@ export type CreateProfileInput = {
   avatar?: Maybe<Scalars['String']>;
   /** The profile banner. */
   banner?: Maybe<Scalars['String']>;
-};
-
-/** createProfile payload */
-export type CreateProfilePayload = {
-  __typename?: 'createProfilePayload';
-  /** The profile id. */
-  profileId?: Maybe<Scalars['Int']>;
 };
 
 /** joinGroup input */
@@ -226,9 +217,8 @@ export type ResolversTypes = ResolversObject<{
   _Entity: ResolversTypes['Profile'] | ResolversTypes['Group'];
   _Service: ResolverTypeWrapper<_Service>;
   createProfileInput: CreateProfileInput;
-  createProfilePayload: ResolverTypeWrapper<CreateProfilePayload>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   joinGroupInput: JoinGroupInput;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   joinGroupPayload: ResolverTypeWrapper<JoinGroupPayload>;
 }>;
 
@@ -246,24 +236,14 @@ export type ResolversParentTypes = ResolversObject<{
   _Entity: ResolversParentTypes['Profile'] | ResolversParentTypes['Group'];
   _Service: _Service;
   createProfileInput: CreateProfileInput;
-  createProfilePayload: CreateProfilePayload;
-  Int: Scalars['Int'];
   joinGroupInput: JoinGroupInput;
+  Int: Scalars['Int'];
   joinGroupPayload: JoinGroupPayload;
 }>;
-
-export type AuthDirectiveArgs = {  };
-
-export type AuthDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type ExtendsDirectiveArgs = {  };
 
 export type ExtendsDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = ExtendsDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
-  duration?: Scalars['Int']; };
-
-export type RateLimitDirectiveResolver<Result, Parent, ContextType = IPrismaContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
@@ -276,7 +256,7 @@ export type GroupResolvers<ContextType = IPrismaContext, ParentType extends Reso
 }>;
 
 export type MutationResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createProfile?: Resolver<Maybe<ResolversTypes['createProfilePayload']>, ParentType, ContextType, RequireFields<MutationCreateProfileArgs, never>>;
+  createProfile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType, RequireFields<MutationCreateProfileArgs, never>>;
   joinGroup?: Resolver<Maybe<ResolversTypes['joinGroupPayload']>, ParentType, ContextType, RequireFields<MutationJoinGroupArgs, never>>;
 }>;
 
@@ -313,11 +293,6 @@ export type _ServiceResolvers<ContextType = IPrismaContext, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type CreateProfilePayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['createProfilePayload'] = ResolversParentTypes['createProfilePayload']> = ResolversObject<{
-  profileId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type JoinGroupPayloadResolvers<ContextType = IPrismaContext, ParentType extends ResolversParentTypes['joinGroupPayload'] = ResolversParentTypes['joinGroupPayload']> = ResolversObject<{
   profileId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   groupId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -333,7 +308,6 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
   _Any?: GraphQLScalarType;
   _Entity?: _EntityResolvers<ContextType>;
   _Service?: _ServiceResolvers<ContextType>;
-  createProfilePayload?: CreateProfilePayloadResolvers<ContextType>;
   joinGroupPayload?: JoinGroupPayloadResolvers<ContextType>;
 }>;
 
@@ -344,9 +318,7 @@ export type Resolvers<ContextType = IPrismaContext> = ResolversObject<{
  */
 export type IResolvers<ContextType = IPrismaContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = IPrismaContext> = ResolversObject<{
-  auth?: AuthDirectiveResolver<any, any, ContextType>;
   extends?: ExtendsDirectiveResolver<any, any, ContextType>;
-  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 }>;
 
 

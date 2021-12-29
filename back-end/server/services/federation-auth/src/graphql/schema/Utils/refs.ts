@@ -1,7 +1,9 @@
 export interface IUserRef {
   __typename: 'User';
   userId: string;
+  countryId: string;
   languageId: string;
+  profileId: string;
 }
 
 export interface ISecurityRef {

@@ -59,3 +59,28 @@ extend type Query {
     take: Int = 25
   ): [Group]
 }
+
+extend type Mutation {
+  """
+  Creates a Group
+  """
+  createGroup(input: createGroupInput): Group
+}
+
+"""
+createGroup input
+"""
+input createGroupInput {
+  """
+  The group name.
+  """
+  name: String!
+  """
+  The group bio.
+  """
+  bio: String
+  """
+  The group banner.
+  """
+  banner: String
+}

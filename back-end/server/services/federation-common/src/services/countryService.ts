@@ -1,7 +1,7 @@
 import { prismaContext } from '@config/prismaConfig';
 import { Country } from '@prisma/client';
 
-import { PaginationAndSearchArgs } from 'federation-utils';
+import { PaginationAndSearchArgs } from 'galactagraph-utils';
 
 /**
  * Function that returns all of the Countries present in the database.

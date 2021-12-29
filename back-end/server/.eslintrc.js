@@ -26,6 +26,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'class-methods-use-this': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'no-console': 'off',
@@ -49,6 +50,12 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-implicit-any': 'off',
     'no-implicit-any': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/prisma/db/seeders/*'] },
+    ],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
   },
   settings: {
     'import/parsers': {

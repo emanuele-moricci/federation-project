@@ -1,8 +1,22 @@
 version: '3.9'
 
 services:
-  server:
-    container_name: federation-gateway
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - '5435:5432'
+    volumes:
+      - ./bin/create-multiple-postgresql-databases:/docker-entrypoint-initdb.d
+    env_file:
+      - .env.docker.test
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: ${POSTGRESQL_DATABASES}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+    networks:
+      - dev_vm
+  federation-gateway:
     build:
       context: '.'
       target: base
@@ -10,12 +24,9 @@ services:
       - '4000:4000'
     depends_on:
       - db
-    links:
-      - db
     networks:
       - dev_vm
   federation-auth:
-    container_name: federation-auth
     build:
       context: './services/federation-auth'
       target: base
@@ -24,13 +35,9 @@ services:
     depends_on:
       - db
       - federation-gateway
-    links:
-      - db
-      - federation-gateway
     networks:
       - dev_vm
   federation-common:
-    container_name: federation-common
     build:
       context: './services/federation-common'
       target: base
@@ -39,13 +46,9 @@ services:
     depends_on:
       - db
       - federation-gateway
-    links:
-      - db
-      - federation-gateway
     networks:
       - dev_vm
   federation-profile:
-    container_name: federation-profile
     build:
       context: './services/federation-profile'
       target: base
@@ -54,13 +57,9 @@ services:
     depends_on:
       - db
       - federation-gateway
-    links:
-      - db
-      - federation-gateway
     networks:
       - dev_vm
   federation-group:
-    container_name: federation-group
     build:
       context: './services/federation-group'
       target: base
@@ -69,13 +68,9 @@ services:
     depends_on:
       - db
       - federation-gateway
-    links:
-      - db
-      - federation-gateway
     networks:
       - dev_vm
   federation-post:
-    container_name: federation-post
     build:
       context: './services/federation-post'
       target: base
@@ -84,26 +79,9 @@ services:
     depends_on:
       - db
       - federation-gateway
-    links:
-      - db
-      - federation-gateway
     networks:
       - dev_vm
   # [ADD NEW DOCKER CONTAINERS HERE] <- DO NOT REMOVE - Needed for the generator to create micro-service commands seamlessly
-  db:
-    container_name: db
-    image: postgres:13
-    restart: always
-    ports:
-      - '5435:5432'
-    volumes:
-      - ./bin/create-multiple-postgresql-databases:/docker-entrypoint-initdb.d
-    environment:
-      POSTGRES_MULTIPLE_DATABASES: ${POSTGRESQL_DATABASES}
-      POSTGRES_USER: ${POSTGRESQL_USER}
-      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
-    networks:
-      - dev_vm
 networks:
   dev_vm:
     name: dev_vm

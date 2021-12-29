@@ -54,7 +54,7 @@ export const getMembersOfGroup = async (
  * @returns {Promise<Profile>} The User.
  */
 export const createProfile = async (input): Promise<Profile> => {
-  let imgData = createAvatar(style, {
+  const imgData = createAvatar(style, {
     seed: `${input.username}`,
     dataUri: true,
   });

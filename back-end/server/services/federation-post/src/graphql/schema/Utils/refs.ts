@@ -1,6 +1,8 @@
 export interface IPostRef {
   __typename: 'Post';
   postId: string;
+  profileId: string;
+  groupId: string;
 }
 
 export interface IProfileRef {

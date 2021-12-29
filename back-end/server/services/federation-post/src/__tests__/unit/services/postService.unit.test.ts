@@ -22,14 +22,14 @@ describe('postService tests', () => {
 
   it('should get posts by profile id', async () => {
     const profileId = 1;
-    const posts = await getPostsByProfileId(profileId, {});
+    const posts = await getPostsByProfileId(profileId);
     expect(posts).toBeDefined();
     expect(posts.length).toBeGreaterThan(0);
   });
 
   it('should get posts by group id', async () => {
     const groupId = 1;
-    const posts = await getPostsByGroupId(groupId, {});
+    const posts = await getPostsByGroupId(groupId);
     expect(posts).toBeDefined();
     expect(posts.length).toBeGreaterThan(0);
   });

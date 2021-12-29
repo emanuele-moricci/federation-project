@@ -1,6 +1,7 @@
 import { getCountries } from 'node-countries';
 
 import { PrismaClient } from '@prisma/client';
+
 const prisma = new PrismaClient();
 
 async function seedCountries() {

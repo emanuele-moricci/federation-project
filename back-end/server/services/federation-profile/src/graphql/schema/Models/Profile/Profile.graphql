@@ -52,3 +52,40 @@ type Profile @key(fields: "profileId") {
   """
   deleted: Boolean!
 }
+
+extend type Mutation {
+  """
+  Creates a Profile
+  """
+  createProfile(input: createProfileInput): Profile
+}
+
+"""
+createProfile input
+"""
+input createProfileInput {
+  """
+  The profile bio.
+  """
+  bio: String
+  """
+  The profile username.
+  """
+  username: String
+  """
+  The profile phone.
+  """
+  phone: String
+  """
+  The profile address.
+  """
+  address: String
+  """
+  The profile avatar.
+  """
+  avatar: String
+  """
+  The profile banner.
+  """
+  banner: String
+}
