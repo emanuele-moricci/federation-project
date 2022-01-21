@@ -1,18 +1,12 @@
-import Head from "next/head";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  return (
-    <div className="container">
-      <Head>
-        <title>Federation Projects</title>
-        <meta
-          name="description"
-          content="The home of the GalactaGraph Boilerplate Example"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  const router = useRouter();
 
-      <main className="main"></main>
-    </div>
-  );
+  useEffect(() => {
+    router.push("/login");
+  }, [router]);
+
+  return <div className="container">Loading...</div>;
 }
