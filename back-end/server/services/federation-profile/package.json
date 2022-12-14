@@ -75,7 +75,7 @@
     "cli": "^1.0.0",
     "dotenv-cli": "^4.0.0",
     "dotenv-safe": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^5.5.3",
     "galactagraph-utils": "./bin/galactagraph-utils/galactagraph-utils-v2.0.1.tgz",
     "graphql": "^15.5.0",
